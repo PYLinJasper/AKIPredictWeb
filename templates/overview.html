@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <title>AKI Helper PredictPage</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href='/static/assets/css/main.css'>
+    <noscript><link rel="stylesheet" type="text/css" href="/static/assets/css/noscript.css" /></noscript>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+</head>
+<body class="is-preload">
+<div id="wrapper">
+<article>
+<div class="header" style="justify-content: center;vertical-align:center;">
+        <a class="home" href="/homepage/"style="height: 42px;text-align-all: center;"><i class="fa fa-home" style="margin-top:0px;color:white;font-size:42px" title="home"></i></a>
+    </div>
+<h1 align="center">Predict Result:</h1>
+<table class="content-table" id="datatable" border="1" style="overflow: scroll;font-size:20px;width: 100%">
+<thead>
+            <tr>
+                <th>aki or not</th>
+            </tr>
+        </thead>
+    <tbody>
+    {% for contact in contacts %}
+        {% if contact.aki == 1 %}
+            <td>AKI</td>
+        {% endif %}
+        {% if contact.aki == 0 %}
+            <td>NOAKI</td>
+        {% endif %}
+    {% endfor  %}
+    </tbody>
+</table>
+<div class="pagination"style="text-align: center;margin-bottom: 20px;size: 50px;">
+        <span class="step-links" >
+            {% if contacts.has_previous %}
+                <a href="?page=1"><i class="fa fa-arrow-circle-up"style="font-size:35px;color: #f9f9f9;alignment: center"></i></a>
+                <a href="?page={{ contacts.previous_page_number }}"><i class="fa fa-arrow-circle-left"style="font-size:35px;color: #f9f9f9;alignment: center"></i></a>
+            {% endif %}
+
+            <span class="current"style="font-size:35px;color: #919699;alignment: center">
+                Page {{ contacts.number }} of {{ contacts.paginator.num_pages }}
+            </span>
+
+            {% if contacts.has_next %}
+                <a href="?page={{ contacts.next_page_number }}"><i class="fa fa-arrow-circle-right"style="font-size:35px;color: #f9f9f9;alignment: center"></i></a>
+                <a href="?page={{ contacts.paginator.num_pages }}"><i class="fa fa-arrow-circle-down"style="font-size:35px;color: #f9f9f9;alignment: center"></i></a>
+            {% endif %}
+        </span>
+    </div>
+</article>
+</div>
+<footer id="footer">
+                <p class="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+            </footer>
+        </div>
+        <div id="bg"></div>
+		<!-- Scripts -->
+			<script src="/static/assets/js/jquery.min.js"></script>
+			<script src="/static/assets/js/browser.min.js"></script>
+			<script src="/static/assets/js/breakpoints.min.js"></script>
+			<script src="/static/assets/js/util.js"></script>
+			<script src="/static/assets/js/main.js"></script>
+</body>
+</html>

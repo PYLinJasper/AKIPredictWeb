@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset=”UTF-8">
+    <title>patient</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+    <style>
+        body {
+          margin: 0;
+          font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .header {
+        {# the top header #}
+            z-index: 1;
+            overflow: visible;
+            position:fixed;
+            top :0;
+            width:100%;
+            height: fit-content;
+            _position: absolute; /* position fixed for IE6 */
+            background-color: steelblue;
+
+          {#padding: 16px 10px;#}
+        }
+        * {
+          font-family: Palatino; /* Change your font family */
+        }
+
+
+        .header a {
+        {# home symbol #}
+            text-align: center;
+            float: left;
+            padding: 10px 10px;
+            size: A3;
+        }
+        .header a:hover{
+            background-color: lightskyblue;
+        }
+        .indent{
+
+            width: 100%;
+            min-height: 24px;
+
+        }
+
+        .but :hover{
+           background-color: lightskyblue;
+        }
+        .content-table {
+          border-collapse: collapse;
+          margin: 25px auto;
+          font-size: 0.9em;
+          min-width: 400px;
+          border-radius: 5px 5px 0 0;
+          overflow: visible;
+          box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .content-table thead tr {
+            overflow: fragments;
+            background-color: #009879;
+            color: #ffffff;
+            text-align: center;
+            font-weight: bold;
+            font-size: 25px;
+        }
+
+        .content-table th,
+        .content-table td {
+            padding: 12px 15px;
+            z-index: 1;
+            font-size: 22px;
+        }
+
+        .content-table tbody tr {
+            border-bottom: 1px solid #dddddd;
+        }
+
+        .content-table tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+
+        .content-table tbody tr:last-of-type {
+            border-bottom: 2px solid #009879;
+        }
+
+        .content-table tbody tr.active-row {
+            font-weight: bold;
+            color: #009879;
+        }
+        .content-table tbody tr:hover {
+            background-color:lemonchiffon;
+        }
+
+        .content-p {
+            font-weight: bold;
+            color: #009879;
+        }
+
+        .dropbtn {
+          background-color: #009879;
+          color: white;
+          padding: 2px;
+          font-size: 0.9em;
+          font-weight: bold;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+          display: none;
+          position: absolute;
+          background-color: mistyrose;
+          min-width: 160px;
+          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+          z-index: 1;
+        }
+
+        .dropdown-content a {
+          color: black;
+          padding: 6px 8px;
+          text-decoration: none;
+          display: block;
+        }
+
+        .dropdown-content a:hover {background-color: aliceblue;}
+
+        .dropdown:hover .dropdown-content {display: block;}
+
+        .dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+        .dropdown_header {
+            overflow: hidden;
+            float: right;
+        }
+
+        .dropdown_header .dropbtn_header {
+          font-size: 24px;
+          border: none;
+          outline: none;
+          color: white;
+          padding: 10px 16px;
+          background-color: inherit;
+          font-family: inherit;
+          margin: 0;
+        }
+
+        .haeder a:hover, .dropdown_header:hover .dropbtn_header {
+          background-color: lightskyblue;
+        }
+
+        .dropdown-content_header {
+          display: none;
+          position: absolute;
+          background-color: #f9f9f9;
+          min-width: 160px;
+          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+          z-index: 1;
+        }
+
+        .dropdown-content_header a {
+          float: none;
+          color: black;
+          padding: 6px 8px;
+          min-width: 150px;
+          text-decoration: none;
+          display: block;
+          text-align: left;
+            z-index: 1;
+        }
+
+        .dropdown-content_header a:hover {
+          background-color: #ddd;
+            z-index: 1;
+        }
+
+        .dropdown_header:hover .dropdown-content_header {
+          display: block;
+        }
+
+
+    </style>
+
+{#    <p align="left">現在時刻： <span id="datetime"></span></p>#}
+    <div class="header" style="justify-content: center;vertical-align:center;">
+        <a class="home" href="/patient/"style="height: 42px;text-align-all: center;"><i class="fa fa-home" style="margin-top:0px;color:white;font-size:42px" title="home"></i></a>
+        <a href="https://eicu-crd.mit.edu/" style="line-height:44px;height: 42px;justify-content: center;color:white;font-size:30px;text-decoration: none">eICU website</a>
+        <div class="dropdown_header" style="text-align-all: center;float: left">
+            <button class="dropbtn_header" style="line-height:42px;color:white;font-size:30px;text-decoration: none">Patients' Type
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content_header"style="width: 241px;">
+                <a href="/OnlyAKIPatient" style="font-size:30px;text-align: center;">AKI Patients</a>
+                <a href="/patient"style="font-size:30px;text-align: center;">All Patients</a>
+            </div>
+        </div>
+        <a href="/featureresult" style="line-height:44px;height: 42px;text-align-all: center;color:white;font-size:30px;text-decoration: none">Model's Feature</a>
+        <a href="/predict" style="line-height:44px;height: 42px;text-align-all: center;color:white;font-size:30px;text-decoration: none">Predict</a>
+        {% if user.is_authenticated %}
+            <a href="/logout" style="float:right;line-height:44px;height: 42px;text-align-all: center;color:white;font-size:30px;text-decoration: none">Logout</a>
+        {% endif %}
+
+    </div>
+
+    <p class="indent"></p>
+    <p class="indent"></p>
+
+
+    </div>
+
+    <form action="/predictresultforinput/" method="post">
+        <div class="center" style="width = 100%;alignment: center">
+            <p  style="text-align: center;width: 100%;">
+                <label for="Age" style="font-size: 30px;">Age:</label>
+                <input type="text" name="Age" placeholder="Years" style="size: 30px;text-align: center">
+                <label for="Weight" style="font-size: 30px;">Weight:</label>
+                <input type="text" name="Weight" placeholder="kg" style="size: 30px;text-align: center">
+                <label for="Gender" style="font-size: 30px;">Gender:</label>
+                <input type="text" name="Gender" placeholder="F / M" style="size: 30px;text-align: center">
+                <span class="but" style="align-items: center">
+                    <button type="submit" name="OnlyOneData" style="width: 50px;height:30px;alignment: center"><i class='fas fa-book-medical' style='font-size:24px'></i></button>
+                </span>
+            </p>
+
+            {% csrf_token %}
+            <table class="content-table" id="datatable" border="1" style="width: 100%">
+                <thead>
+                <tr>
+                    <th>feature</th>
+                    <th>24hrs~20hrs ago</th>
+                    <th>20hrs~16hrs ago</th>
+                    <th>16hrs~12hrs ago</th>
+                    <th>12hrs~8hrs ago</th>
+                    <th>8hrs~4hrs ago</th>
+                    <th>4hrs~0hrs ago</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Creatinine</td>
+                <td><input type="text" name="Crt_{{ 0 }}" placeholder="0.1~20(mg/dl)"></td>\
+                <td><input type="text" name="Crt_{{ 1 }}" placeholder="0.1~20(mg/dl)"></td>
+                <td><input type="text" name="Crt_{{ 2 }}" placeholder="0.1~20(mg/dl)"></td>
+                <td><input type="text" name="Crt_{{ 3 }}" placeholder="0.1~20(mg/dl)"></td>
+                <td><input type="text" name="Crt_{{ 4 }}" placeholder="0.1~20(mg/dl)"></td>
+                <td><input type="text" name="Crt_{{ 5 }}" placeholder="0.1~20(mg/dl)"></td>
+                    {% for i in ID %}
+                        <td><input type="text" name="Crt_{{ i }}" placeholder="0.1~20"></td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>Intake</td>
+                <td><input type="text" name="Intake_{{ 0 }}" placeholder="0~10000(ml)"></td>
+               <td><input type="text" name="Intake_{{ 1 }}" placeholder="0~10000(ml)"></td>
+                <td><input type="text" name="Intake_{{ 2 }}" placeholder="0~10000(ml)"></td>
+                <td><input type="text" name="Intake_{{ 3 }}" placeholder="0~10000(ml)"></td>
+                <td><input type="text" name="Intake_{{ 4 }}" placeholder="0~10000(ml)"></td>
+                <td><input type="text" name="Intake_{{ 5 }}" placeholder="0~10000(ml)"></td>
+                    {% for i in ID %}
+                        <td><input type="text" name="Intake_{{ i }}" placeholder="0~10000"></td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>Urine</td>
+                <td><input type="text" name="Urine_{{ 0 }}" placeholder="0~10000(ml)"></td>
+                <td><input type="text" name="Urine_{{ 1 }}" placeholder="0~10000(ml)"></td>
+                <td><input type="text" name="Urine_{{ 2 }}" placeholder="0~10000(ml)"></td>
+                <td><input type="text" name="Urine_{{ 3 }}" placeholder="0~10000(ml)"></td>
+                <td><input type="text" name="Urine_{{ 4 }}" placeholder="0~10000(ml)"></td>
+             <td><input type="text" name="Urine_{{ 5 }}" placeholder="0~10000(ml)"></td>
+                    {% for i in ID %}
+                        <td><input type="text" name="Urine_{{ i }}" placeholder="<3000"></td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>pH</td>
+                <td><input type="text" name="pH_{{ 0 }}" placeholder="6.8~7.8"></td>
+                <td><input type="text" name="pH_{{ 1 }}" placeholder="6.8~7.8"></td>
+                <td><input type="text" name="pH_{{ 2 }}" placeholder="6.8~7.8"></td>
+                <td><input type="text" name="pH_{{ 3 }}" placeholder="6.8~7.8"></td>
+                <td><input type="text" name="pH_{{ 4 }}" placeholder="6.8~7.8"></td>
+                <td><input type="text" name="pH_{{ 5 }}" placeholder="6.8~7.8"></td>
+                    {% for i in ID %}
+                        <td><input type="text" name="pH_{{ i }}" placeholder="6.8~7.8"></td>
+                    {% endfor %}
+
+            </tr>
+            <tr>
+                <td>Hct</td>
+            <td><input type="text" name="Hct_{{ 0 }}" placeholder="10~70(%)"></td>
+            <td><input type="text" name="Hct_{{ 1 }}" placeholder="10~70(%)"></td>
+            <td><input type="text" name="Hct_{{ 2 }}" placeholder="10~70(%)"></td>
+            <td><input type="text" name="Hct_{{ 3 }}" placeholder="10~70(%)"></td>
+            <td><input type="text" name="Hct_{{ 4 }}" placeholder="10~70(%)"></td>
+            <td><input type="text" name="Hct_{{ 5 }}" placeholder="10~70(%)"></td>
+                {% for i in ID %}
+                    <td><input type="text" name="Hct_{{ i }}" placeholder="10~70"></td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td>BUN</td>
+            <td><input type="text" name="BUN_{{ 0 }}" placeholder="0~60(mg/dl)"></td>
+            <td><input type="text" name="BUN_{{ 1 }}" placeholder="0~60(mg/dl)"></td>
+            <td><input type="text" name="BUN_{{ 2 }}" placeholder="0~60(mg/dl)"></td>
+            <td><input type="text" name="BUN_{{ 3 }}" placeholder="0~60(mg/dl)"></td>
+            <td><input type="text" name="BUN_{{ 4 }}" placeholder="0~60(mg/dl)"></td>
+            <td><input type="text" name="BUN_{{ 5 }}" placeholder="0~60(mg/dl)"></td>
+                {% for i in ID %}
+                    <td><input type="text" name="BUN_{{ i }}" placeholder="0~60"></td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td>Na</td>
+            <td><input type="text" name="Na_{{ 0 }}" placeholder="100~180(mmol/L)"></td>
+            <td><input type="text" name="Na_{{ 1 }}" placeholder="100~180(mmol/L)"></td>
+            <td><input type="text" name="Na_{{ 2 }}" placeholder="100~180(mmol/L)"></td>
+            <td><input type="text" name="Na_{{ 3 }}" placeholder="100~180(mmol/L)"></td>
+            <td><input type="text" name="Na_{{ 4 }}" placeholder="100~180(mmol/L)"></td>
+            <td><input type="text" name="Na_{{ 5 }}" placeholder="100~180(mmol/L)"></td>
+                {% for i in ID %}
+                    <td><input type="text" name="Na_{{ i }}" placeholder="100~180"></td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td>K</td>
+            <td><input type="text" name="K_{{ 0 }}" placeholder="1~9(mmol/L)"></td>
+            <td><input type="text" name="K_{{ 1 }}" placeholder="1~9(mmol/L)"></td>
+            <td><input type="text" name="K_{{ 2 }}" placeholder="1~9(mmol/L)"></td>
+            <td><input type="text" name="K_{{ 3 }}" placeholder="1~9(mmol/L)"></td>
+            <td><input type="text" name="K_{{ 4 }}" placeholder="1~9(mmol/L)"></td>
+            <td><input type="text" name="K_{{ 5 }}" placeholder="1~9(mmol/L)"></td>
+                {% for i in ID %}
+                    <td><input type="text" name="K_{{ i }}" placeholder="1~9"></td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td>Temperature</td>
+            <td><input type="text" name="TP_{{ 0 }}" placeholder="35~41(Celsius)"></td>
+            <td><input type="text" name="TP_{{ 1 }}" placeholder="35~41(Celsius)"></td>
+            <td><input type="text" name="TP_{{ 2 }}" placeholder="35~41(Celsius)"></td>
+            <td><input type="text" name="TP_{{ 3 }}" placeholder="35~41(Celsius)"></td>
+            <td><input type="text" name="TP_{{ 4 }}" placeholder="35~41(Celsius)"></td>
+            <td><input type="text" name="TP_{{ 5 }}" placeholder="35~41(Celsius)"></td>
+                {% for i in ID %}
+                    <td><input type="text" name="TP_{{ i }}" placeholder="35~41"></td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td>Systolic BP</td>
+            <td><input type="text" name="SystolicBP_{{ 0 }}" placeholder="<250(mmHg)"></td>
+            <td><input type="text" name="SystolicBP_{{ 1 }}" placeholder="<250(mmHg)"></td>
+            <td><input type="text" name="SystolicBP_{{ 2 }}" placeholder="<250(mmHg)"></td>
+            <td><input type="text" name="SystolicBP_{{ 3 }}" placeholder="<250mmHg)"></td>
+            <td><input type="text" name="SystolicBP_{{ 4 }}" placeholder="<250(mmHg)"></td>
+            <td><input type="text" name="SystolicBP_{{ 5 }}" placeholder="<250(mmHg)"></td>
+                {% for i in ID %}
+                    <td><input type="text" name="SystolicBP_{{ i }}" placeholder="<250"></td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td>Mean BP</td>
+            <td><input type="text" name="MeanBP_{{ 0 }}" placeholder="<200(mmHg)"></td>
+            <td><input type="text" name="MeanBP_{{ 1 }}" placeholder="<200(mmHg)"></td>
+            <td><input type="text" name="MeanBP_{{ 2 }}" placeholder="<200(mmHg)"></td>
+            <td><input type="text" name="MeanBP_{{ 3 }}" placeholder="<200(mmHg)"></td>
+            <td><input type="text" name="MeanBP_{{ 4 }}" placeholder="<200(mmHg)"></td>
+            <td><input type="text" name="MeanBP_{{ 5 }}" placeholder="<200(mmHg)"></td>
+                {% for i in ID %}
+                    <td><input type="text" name="MeanBP_{{ i }}" placeholder="<200"></td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td>MSI</td>
+            <td><input type="text" name="MSI_{{ 0 }}" placeholder="<230"></td>
+            <td><input type="text" name="MSI_{{ 1 }}" placeholder="<230"></td>
+            <td><input type="text" name="MSI_{{ 2 }}" placeholder="<230"></td>
+            <td><input type="text" name="MSI_{{ 3 }}" placeholder="<230"></td>
+            <td><input type="text" name="MSI_{{ 4 }}" placeholder="<230"></td>
+            <td><input type="text" name="MSI_{{ 5 }}" placeholder="<230"></td>
+                {% for i in ID %}
+                    <td><input type="text" name="MSI_{{ i }}" placeholder="<230"></td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td>eGFR</td>
+            <td><input type="text" name="eGFR_{{ 0 }}" placeholder="<230"></td>
+            <td><input type="text" name="eGFR_{{ 1 }}" placeholder="<230"></td>
+            <td><input type="text" name="eGFR_{{ 2 }}" placeholder="<230"></td>
+            <td><input type="text" name="eGFR_{{ 3 }}" placeholder="<230"></td>
+            <td><input type="text" name="eGFR_{{ 4 }}" placeholder="<230"></td>
+            <td><input type="text" name="eGFR_{{ 5 }}" placeholder="<230"></td>
+                {% for i in ID %}
+                    <td><input type="text" name="eGFR_{{ i }}" placeholder="<230"></td>
+                {% endfor %}
+            </tr>
+            </tbody>
+        </table>
+        <div class="center">
+            <p>
+                <label for="Age">Age(Years):</label>
+                <input type="text" name="Age">
+                <label for="Weight">Weight(kg):</label>
+                <input type="text" name="Weight">
+                <label for="Gender">Gender(F/M):</label>
+                <input type="text" name="Gender">
+                <input type="submit" value="Submit" name="OnlyOneData">
+            </p>
+        </div>
+    </form>
+
+
+    <form action="/predictresultforfile/" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="document">Upload File(csv files):</label>
+        <input type="file" name="document">
+        <button type="submit" name="Upload">Upload</button>
+
+    </form>
+
+
+</body>
+</html>

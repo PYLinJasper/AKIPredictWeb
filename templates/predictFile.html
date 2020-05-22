@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% load static %}
+		<title>AKI predictPage</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href='/static/assets/css/main.css'>
+		<noscript><link rel="stylesheet" type="text/css" href="/static/assets/css/noscript.css" /></noscript>
+    </head>
+    <body>
+        <form action="/predictresultforfile/" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="document">Upload File(csv files):</label>
+            <input type="file" name="document">
+            <button type="submit" name="Upload">Upload</button>
+        </form>
+    </body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <title>AKI Helper PredictPage</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href='/static/assets/css/main.css'>
+    <noscript><link rel="stylesheet" type="text/css" href="/static/assets/css/noscript.css" /></noscript>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+</head>
+<body class="is-preload">
+<div id="wrapper">
+<article>
+<div class="header" style="justify-content: center;vertical-align:center;">
+        <a class="home" href="/homepage/"style="height: 42px;text-align-all: center;"><i class="fa fa-home" style="margin-top:0px;color:white;font-size:42px" title="home"></i></a>
+    </div>
+    <h1 align="center">Predict Result:</h1>
+    {% for contact in contacts %}
+        {% if contact.aki == 1 %}
+            <h1 align="center">AKI</h1>
+        {% endif %}
+        {% if contact.aki == 0 %}
+            <h1 align="center">No AKI</h1>
+        {% endif %}
+    {% endfor  %}
+
+{% for contact in contacts %}
+    <p style="text-align: center;font-size: 30px">Age : {{ contact.age  }} (Years) , Weight : {{ contact.weight }} (kg) , Gender : {{ contact.gender }}</p>
+
+    {% endfor  %}
+    <table class="content-table" id="datatable" border="1" style="width: 100%">
+        <thead>
+            <tr>
+                <th>feature</th>
+                <th>24hrs~20hrs ago</th>
+                <th>20hrs~16hrs ago</th>
+                <th>16hrs~12hrs ago</th>
+                <th>12hrs~8hrs ago</th>
+                <th>8hrs~4hrs ago</th>
+                <th>4hrs~0hrs ago</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for contact in contacts %}
+            <tr>
+                <td>Creatinine (mg/dl)</td>
+                {% for data in contact.crt %}
+                    <td>{{ data }}</td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td>Intake (ml)</td>
+                {% for data in contact.intake %}
+                    <td>{{ data }}</td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td>Urine (ml)</td>
+                {% for data in contact.urine %}
+                    <td>{{ data }}</td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td>pH</td>
+                {% for data in contact.pH %}
+                    <td>{{ data }}</td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td>Hct (%)</td>
+                {% for data in contact.Hct %}
+                    <td>{{ data }}</td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td>BUN (mg/dl)</td>
+                {% for data in contact.BUN %}
+                    <td>{{ data }}</td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td>Na (mmol/L)</td>
+                {% for data in contact.Na %}
+                    <td>{{ data }}</td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td>K (mmol/L)</td>
+                {% for data in contact.K %}
+                    <td>{{ data }}</td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td>Temperature (Celsius)</td>
+                {% for data in contact.TP %}
+                    <td>{{ data }}</td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td>Systolic BP (mmHg)</td>
+                {% for data in contact.systolicBP %}
+                    <td>{{ data }}</td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td>Mean BP (mmHg)</td>
+                {% for data in contact.meanBP %}
+                    <td>{{ data }}</td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td>MSI</td>
+                 {% for data in contact.MSI %}
+                    <td>{{ data }}</td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td>eGFR</td>
+                {% for data in contact.eGFR %}
+                    <td>{{ data }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+<div class="pagination"style="text-align: center;margin-bottom: 20px;size: 50px;">
+        <span class="step-links" >
+            {% if contacts.has_previous %}
+                <a href="?page=1"><i class="fa fa-arrow-circle-up"style="font-size:35px;color: #f9f9f9;alignment: center"></i></a>
+                <a href="?page={{ contacts.previous_page_number }}"><i class="fa fa-arrow-circle-left"style="font-size:35px;color: #f9f9f9;alignment: center"></i></a>
+            {% endif %}
+
+            <span class="current"style="font-size:35px;color: #919699;alignment: center">
+                Page {{ contacts.number }} of {{ contacts.paginator.num_pages }}
+            </span>
+
+            {% if contacts.has_next %}
+                <a href="?page={{ contacts.next_page_number }}"><i class="fa fa-arrow-circle-right"style="font-size:35px;color: #f9f9f9;alignment: center"></i></a>
+                <a href="?page={{ contacts.paginator.num_pages }}"><i class="fa fa-arrow-circle-down"style="font-size:35px;color: #f9f9f9;alignment: center"></i></a>
+            {% endif %}
+        </span>
+    </div>
+</article>
+</div>
+</body>
+</html>
