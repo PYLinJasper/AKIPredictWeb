@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>LogoutPage</title>
+    <meta http-equiv="refresh" content="3;url=/login" />
+    <meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href='/static/assets/css/main.css'>
+		<noscript><link rel="stylesheet" type="text/css" href="/static/assets/css/noscript.css" /></noscript>
+</head>
+
+<body class="is-preload">
+    <div id="wrapper">
+        <div id="header" style="align-content: center;transform: translate(-1%, -300%)">
+       <span style=" color : cornsilk;text-valign: center;text-align: center;font-family: 手札體-繁; ">
+           <h1>GoodBye and wish you a Good Day</h1>
+           <h2> Redirect to Login Page in <span id="countdowntimer">3 </span> Seconds</h2>
+           <script type="text/javascript">
+               var timeleft = 3;
+               var downloadTimer = setInterval(function(){
+                   timeleft--;
+                   document.getElementById("countdowntimer").textContent = timeleft;
+                   if(timeleft <= 0)
+                       clearInterval(downloadTimer);},1000);
+           </script>
+       </span>
+            </div>
+        </div>
+
+<div id="bg"></div>
+		<!-- Scripts -->
+			<script src="/static/assets/js/jquery.min.js"></script>
+			<script src="/static/assets/js/browser.min.js"></script>
+			<script src="/static/assets/js/breakpoints.min.js"></script>
+			<script src="/static/assets/js/util.js"></script>
+			<script src="/static/assets/js/main.js"></script>
+
+</body>
+</html>

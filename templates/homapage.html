@@ -12,7 +12,9 @@
         <div id="wrapper">
             <header id="header">
                 <div class="logo">
-                    <span class="icon fa fa-stethoscope"></span>
+{#                    <span class="icon fa fa-stethoscope"></span>#}
+{#                    <span class="image main" style="left: 13rem;width: 20rem"><img src="/static/images/kidneyw.png" alt="" /></span>#}
+                    <img src="/static/images/kidneyw.png" alt="" style="width: 90%;margin-top:0.9rem"/>
                 </div>
                 <div class="content">
                     <div class="inner">
@@ -27,7 +29,7 @@
                         <li><a href="#Database">DataBase</a></li>
                         <li><a href="#aboutModel">Model</a></li>
                         <li><a href="#predict">predict</a></li>
-{#						<li><a href="#elements">Elements</a></li>#}
+						<li><a href="#logout">Logout</a></li>
                     </ul>
                 </nav>
             </header>
@@ -36,7 +38,30 @@
                 <!-- Intro -->
                 <article id="intro">
                     <h2 class="major">Intro</h2>
-                    <span class="image main"><img src="/static/images/money.jpeg" alt="" /></span>
+{#                    <span class="image main"><img src="/static/images/money.jpeg" alt="" /></span>#}
+                    <table class="content-table" id="datatable" border="1" style="overflow: scroll;padding: 5.5rem">
+                       <thead >
+                                <tr style="font-size: 1.5rem;">
+                                    <th style="text-align: center;">疾病名稱</th>
+                                    <th style="text-align: center;">慢性腎衰竭</th>
+                                    <th style="text-align: center;">牙齒相關疾病</th>
+                                    <th style="text-align: center;">糖尿病</th>
+                                    <th style="text-align: center;">高血壓</th>
+                                    <th style="text-align: center;">急性上呼吸道症候群</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td style="font-size: 1.5rem;text-align: center">健保點數（億點）</td>
+                                    <td style="font-size: 1.5rem;text-align: center">453</td>
+                                    <td style="font-size: 1.5rem;text-align: center">389</td>
+                                    <td style="font-size: 1.5rem;text-align: center">239</td>
+                                    <td style="font-size: 1.5rem;text-align: center">231</td>
+                                    <td style="font-size: 1.5rem;text-align: center">231</td>
+                                </tr>
+
+                    </table>
+                    <h3 style="text-align: right">資料來源 2014 健保署</h3>
                     <span style="font-family: 隸變;font-size: 1.2rem">
                         <p>&emsp;&emsp;據環保署統計，台灣2018年的洗腎人數突破9萬人，醫療費用一年需耗損約449億元，洗腎人口密度高居全球之冠，國人的腎臟問題不容忽視。
                         <br>&emsp;&emsp;腎臟問題牽扯的因子複雜、多樣化且參雜干擾性數據，我們以急性腎衰竭(Acute Kidney Injury, AKI)為目標，希望透過機器學習的方式訓練出一套模型能對AKI做時序性的預測，觀察病患在時間的推移下發生AKI的機率曲線分布，協助醫生做出判斷，達到爭取治療時間、降低治療成本以及提升整體醫療品質之目的。<br/>
@@ -47,17 +72,18 @@
                 <!-- Work -->
                 <article id="Database">
                     <h2 class="major">DataBase Introduction</h2>
-                    <span class="image main"><img src="/static/images/pic02.jpg" alt="" /></span>
-                    <p>Adipiscing magna sed dolor elit. Praesent eleifend dignissim arcu, at eleifend sapien imperdiet ac. Aliquam erat volutpat. Praesent urna nisi, fringila lorem et vehicula lacinia quam. Integer sollicitudin mauris nec lorem luctus ultrices.</p>
-                    <p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus pharetra. Pellentesque condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus amet feugiat tempus.</p>
-                    <p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus pharetra. Pellentesque condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus amet feugiat tempus.</p>
-                    <p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus pharetra. Pellentesque condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus amet feugiat tempus.</p>
-                    <p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus pharetra. Pellentesque condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus amet feugiat tempus.</p>
-                    <p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus pharetra. Pellentesque condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus amet feugiat tempus.</p>
-                    <p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus pharetra. Pellentesque condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus amet feugiat tempus.</p>
-                    <p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus pharetra. Pellentesque condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus amet feugiat tempus.</p>
-                    <p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus pharetra. Pellentesque condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus amet feugiat tempus.</p>
-                    <p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus pharetra. Pellentesque condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus amet feugiat tempus.</p>
+                    <p style="font-family: 隸變;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;為了增加模型的公信力與可信度，我們採用公開資料集MIMIC-III以及eICU Collaborative Research Database兩大急診室資料庫，從中提取出目標病患的檢測結果進行模型訓練，MIMIC-III是由麻省理工學院計算生理實驗室(LCP)所提供，
+                        eICU Collaborative Research Database則是由健康照護(Philips Healthcare)與麻省理工學院計算生理實驗室(LCP)共同合作提供，以下分別是兩個資料庫的簡介。</p>
+                    <span class="image main" style="left: 13rem;width: 20rem"><img src="/static/images/mimic.png" alt="" /></span>
+                    <a href="https://mimic.physionet.org/" ><h2>MIMIC-III Critical Care Database</h2></a>
+                    <p>MIMIC is an openly available dataset developed by the MIT Lab for Computational Physiology, comprising deidentified health data associated with ~60,000 intensive care unit admissions.</p>
+                    <p>The version we used is MIMIC-III , MIMIC-III (Medical Information Mart for Intensive Care III) is a large, freely-available database comprising deidentified health-related data associated with over forty thousand patients who stayed in critical care units of the Beth Israel Deaconess Medical Center between 2001 and 2012.</p>
+                    <p>The database includes information such as demographics, vital sign measurements made at the bedside (~1 data point per hour), laboratory test results, procedures, medications, caregiver notes, imaging reports, and mortality (both in and out of hospital).</p>
+                    <span class="image main"><img src="/static/images/eicu.png" alt="" /></span>
+                    <a href="https://eicu-crd.mit.edu/" ><h2>eICU Collaborative Research Database</h2></a>
+                    <p>The Philips eICU program is a transformational critical care telehealth program that delivers need-to-know information to caregivers, empowering them to care for the patients. It is a supplement — not a replacement — to the bedside team, and the data utilized by the remote care givers is archived for research purposes.</p>
+                    <p>Through this work, we have generated a large database which has potential for facilitating additional research initiatives on patient outcomes, trends, and other best practice protocols in use today at most healthcare facilities. The Philips eICU Research Institute (eRI), which maintains the data, has generously contributed the eICU Collaborative Research Database described here.</p>
+                    <p>The eICU Collaborative Research Database is populated with data from a combination of many critical care units throughout the continental United States. The data in the collaborative database covers patients who were admitted to critical care units in 2014 and 2015.</p>
                 </article>
 
                 <article id="aboutModel">
@@ -67,15 +93,24 @@
 
                 </article>
 
+                <article id="logout">
+                    <h2 class="major">Sure u want to Logout ?</h2>
+                    {% if user.is_authenticated %}
+                        <form action="/logout">
+                        <button href="/logout" style="line-height:44px;height: 42px;text-align-all: center;color:white;font-size:30px;text-decoration: none">Logout</button>
+                        </form>
+                    {% endif %}
+                </article>
+
                 <!-- Contact -->
                 <article id="predict">
                     <h2 class="major">Source</h2>
                     <form method="post" action="#">
-                        <ul class="actions" style="padding-left: 30%;">
+                        <ul class="actions" style="padding-left: 38%;">
                             <li><a href="#predictsingle" ><input type="button" value="Single Patient" class="primary" /></a></li>
                         </ul>
                     </form>
-                    <form method="post" action="#" style="padding-left: 30%;">
+                    <form method="post" action="#" style="padding-left: 38%;">
                         <ul class="actions">
                             <li><a href="#predictfile"><input type="button" value="Upload ur file" class="primary" /></a></li>
                         </ul>
@@ -120,7 +155,7 @@
 
                 <article id="predictsingle">
                 <h2 class="major">Predict</h2>
-                    <form action="/predictresultforinput/" method="post" style="height:450px;width: 100%;overflow: scroll;">
+                    <form action="/predictresultforinput/" method="post" style="height:550px;width: 100%;overflow: scroll;">
                             {% csrf_token %}
                         <div style="overflow: paged-y;">
                             <table class="content-table" id="datatable" border="1" style="overflow: scroll;width: 1420px;padding: 5.5rem">

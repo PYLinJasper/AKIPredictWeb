@@ -2,60 +2,29 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+    {% load static %}
     <title>LoginPage</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href='/static/assets/css/main.css'>
+		<noscript><link rel="stylesheet" type="text/css" href="/static/assets/css/noscript.css" /></noscript>
 </head>
-<body background="https://upload.cc/i1/2020/05/10/xDalSI.png"style="background-attachment: fixed;background-size: cover;background-position: center;background-repeat:no-repeat;">
-</body>
-<body>
-    <style>
-        input[type=text], input[type=password] {
-            width: 100%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
 
-        input[type=submit] {
-            width: 100%;
-            background-color: lightsteelblue;
-            color: white;
-            padding: 14px 20px;
-            margin: 8px 0;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+<body class="is-preload">
+    <div id="wrapper" >
+{#        <header id="header" style="">#}
+        <div class="logo" style="opacity: 20%;">
+                    <img src="/static/images/kidneyw.png"/>
+                </div>
+{#            </header>#}
+{#        <div id="header">#}
+{#        <article>#}
 
-        input[type=submit]:hover {
-            background-color: moccasin;
-        }
-
-        div {
-            align-content: center;
-            width: 400px;
-            border-radius: 8px;
-            background-color: lavenderblush;
-            padding: 10px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            margin-right: -50%;
-            transform: translate(-50%, -50%)
-
-        }
-    </style>
-    <div>
-    </div>
-
-    <div>
-        <form action="" method="post">
+        <form action="" method="post" style="position: fixed;margin-top: 15%;">
+            {% csrf_token %}
             <fieldset>
-                <legend><h1><span style="color: darkmagenta;text-align: center;font-family: 手札體-繁; ">智腎關鍵 AKI Helper</span></h1></legend>
-                <span style="text-align: center;color: navy;font-family: 宋體-繁; "><h3><label>人工智慧即時預測急性腎衰竭</label></h3></span>
+                <legend><h1><span style="text-align: center;font-family: 手札體-繁; ">智腎關鍵 AKI Helper</span></h1></legend>
+                <span style="text-align: center;color: navy;font-family: 宋體-繁; "><label>人工智慧即時預測急性腎衰竭</label></span>
                 <label for="username">用戶名稱:</label>
                 <input type="text" name="username" value="" id="username"> <br />
                 <label for="password">用戶密碼:</label>
@@ -63,23 +32,17 @@
                 <input type="submit" value="登入" style="font-size:20px"/>
             </fieldset>
         </form>
+{#            </article>#}
+{#            </div>#}
     </div>
-{#    </div>        #}
-{#        <form action="." method="post">#}
-{#            {% csrf_token %}#}
-{#            {{ form.username.label_tag }}#}
-{#            {{ form.username }}#}
-{##}
-{#            {{ form.password.label_tag }}#}
-{#            {{ form.password }}#}
-{##}
-{#            <input type="submit" value="login">#}
-{##}
-{#        </form>#}
-{#    </div>#}
-    <script>
+        <div id="bg"></div>
+		<!-- Scripts -->
+			<script src="/static/assets/js/jquery.min.js"></script>
+			<script src="/static/assets/js/browser.min.js"></script>
+			<script src="/static/assets/js/breakpoints.min.js"></script>
+			<script src="/static/assets/js/util.js"></script>
+			<script src="/static/assets/js/main.js"></script>
 
-    </script>
 </body>
 
 </html>
