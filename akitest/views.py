@@ -1,5 +1,4 @@
 import json
-from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.core.paginator import Paginator
 from django.db.models import Q
@@ -27,18 +26,39 @@ def ReplaceNan(l):
 
 
 # Create your views here.
+@login_required
 def homepage(req):
     return render(req, 'homapage.html')
 
+def login(request):
+    if request.user.is_authenticated:
+        return HttpResponseRedirect('/homepage/')
 
+    username = request.POST.get('username', '')
+    password = request.POST.get('password', '')
+
+    user = auth.authenticate(username=username, password=password)
+
+    if user is not None and user.is_active:
+        auth.login(request, user)
+        return HttpResponseRedirect('/homepage/')
+    else:
+        return render(request, "login.html")
+
+
+def logout(request):
+    auth.logout(request)
+    return render(request, "logout.html")
+
+@login_required
 def predictsingle(req):
     return render(req, 'predictSingle.html')
 
-
+@login_required
 def predictfile(req):
     return render(req, 'predictFile.html')
 
-
+@login_required
 def predict(request):
     Crt = []
     Intake = []
@@ -143,7 +163,7 @@ def predict(request):
     }
     return render(request, "prfip.html", context)
 
-
+@login_required
 def predictresultforinput(request):
     Crt = []
     Intake = []
@@ -249,7 +269,7 @@ def predictresultforinput(request):
     }
     return render(request, "PredictResultForInput.html", context)
 
-
+@login_required
 def predictresultforfile(request):
     # Xgb_model = xgb.Booster(model_file=filename)
     if request.method == 'POST':
@@ -313,6 +333,7 @@ def predictresultforfile(request):
     }
     return render(request, "PredictResultForFile.html", context)
 
+@login_required
 def overview(request):
     # Xgb_model = xgb.Booster(model_file=filename)
     if request.method == 'POST':

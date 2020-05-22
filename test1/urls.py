@@ -25,6 +25,8 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('login/', views.login),
+    path('logout/', views.logout),
     path('homepage/', views.homepage),
     path('predictsingle/', views.predictsingle),
     path('predictfile/', views.predictfile),
