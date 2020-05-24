@@ -26,9 +26,15 @@ def ReplaceNan(l):
 
 
 # Create your views here.
+def startpage(req):
+    return render(req, 'startPage.html')
+
+def testunflod(req):
+    return render(req, 'testUnflod.html')
+
 @login_required
 def homepage(req):
-    return render(req, 'homapage.html')
+    return render(req, 'homepage.html')
 
 def login(request):
     if request.user.is_authenticated:

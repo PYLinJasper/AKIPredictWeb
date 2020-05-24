@@ -646,7 +646,7 @@ input, select, textarea {
 
 		.image:before {
 			pointer-events: none;
-			background-image: url("/static/images/overlay.png");
+			/*background-image: url("/static/images/overlay.png");*/
 			background-color: rgba(19, 21, 25, 0.5);
 			border-radius: 4px;
 			content: '';
@@ -996,6 +996,7 @@ input, select, textarea {
 				border-top: 0;
 			}
 
+
 /* Button */
 
 	input[type="submit"],
@@ -1139,7 +1140,17 @@ input, select, textarea {
 			-webkit-transition-delay: 0.75s;
 			-ms-transition-delay: 0.75s;
 			transition-delay: 0.75s;
-			background-image: linear-gradient(to top, rgba(19, 21, 25, 0.5), rgba(19, 21, 25, 0.5)), url("/static/images/overlay.png");
+			/*background-image: linear-gradient(to top, rgba(19, 21, 25, 0.5), rgba(19, 21, 25, 0.5)), url("/static/images/overlay.png");*/
+			background-color: #A9C9FF;background-image: linear-gradient(180deg, #A9C9FF 0%, #FFBBEC 100%);
+			/*background: #C6FFDD;  !* fallback for old browsers *!background: -webkit-linear-gradient(to right, #f7797d, #FBD786, #C6FFDD);  !* Chrome 10-25, Safari 5.1-6 *!background: linear-gradient(to right, #f7797d, #FBD786, #C6FFDD); !* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ *!*/
+
+			/*background-color: #FEE140;background-image: linear-gradient(135deg, #FEE140 0%, #FA709A 100%);*/
+			/*background-image: linear-gradient(30deg, #4158D0 0%, #C850C0 46%, #FFCC70 80%), url("/static/images/overlay.png");*/
+			/*opacity: 110%;*/
+			/*background-color: #FAACA8;background-image: linear-gradient(104deg, #FAACA8 0%, #DDD6F3 100%);*/
+			/*background-color: #8EC5FC;background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);*/
+			background-color: #8EC5FC;
+background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
 			background-size: auto,
  256px 256px;
 			background-position: center,
@@ -1159,6 +1170,7 @@ input, select, textarea {
 			-ms-transition: -ms-transform 0.325s ease-in-out, -ms-filter 0.325s ease-in-out;
 			transition: transform 0.325s ease-in-out, filter 0.325s ease-in-out;
 			background-image: url("/static/images/bg.jpg");
+
 			background-position: center;
 			background-size: cover;
 			background-repeat: no-repeat;

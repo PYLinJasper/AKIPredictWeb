@@ -14,12 +14,12 @@
                 <div class="logo">
 {#                    <span class="icon fa fa-stethoscope"></span>#}
 {#                    <span class="image main" style="left: 13rem;width: 20rem"><img src="/static/images/kidneyw.png" alt="" /></span>#}
-                    <img src="/static/images/kidneyw.png" alt="" style="width: 90%;margin-top:0.9rem"/>
+                    <img src="/static/images/kidneyw.png" alt="" style="width: 70%;margin-top:1.3rem"/>
                 </div>
                 <div class="content">
                     <div class="inner">
-                        <h1 style="font-family: 宋體;font-size: 5.5rem; ">智腎關鍵</h1>
-                        <h1 style="font-family: 宋體;font-size: 3rem; ">AKI HELPER</h1>
+                        <h1 style="font-size: 6rem; ">智腎關鍵</h1>
+                        <h1 style="font-size: 4rem; ">AKI HELPER</h1>
                         <p style=" font-size: 1.2rem;">人工智慧即時預測急性腎衰竭 Real-time Acute Kidney Injury Prediction</p>
                     </div>
                 </div>
@@ -59,21 +59,21 @@
                                     <td style="font-size: 1.5rem;text-align: center">231</td>
                                     <td style="font-size: 1.5rem;text-align: center">231</td>
                                 </tr>
-
+                                </tbody>
                     </table>
                     <h3 style="text-align: right">資料來源 2014 健保署</h3>
-                    <span style="font-family: 隸變;font-size: 1.2rem">
-                        <p>&emsp;&emsp;據環保署統計，台灣2018年的洗腎人數突破9萬人，醫療費用一年需耗損約449億元，洗腎人口密度高居全球之冠，國人的腎臟問題不容忽視。
-                        <br>&emsp;&emsp;腎臟問題牽扯的因子複雜、多樣化且參雜干擾性數據，我們以急性腎衰竭(Acute Kidney Injury, AKI)為目標，希望透過機器學習的方式訓練出一套模型能對AKI做時序性的預測，觀察病患在時間的推移下發生AKI的機率曲線分布，協助醫生做出判斷，達到爭取治療時間、降低治療成本以及提升整體醫療品質之目的。<br/>
-                        &emsp;&emsp;我們將Feature切分為四個小時一個單位的時序性資料做LSTM模型的訓練，模型會根據現有病患資料預測24小時內發生AKI的機率，每四個小時輸出一個機率。最後以此時序性模型作為基礎，測試成大醫院所提供的資料以觀察模型泛用性和實用性，並架設網站呈現結果方便醫師用來輔助預測AKI。</p>
+                    <span style="font-size: 1.2rem">
+                        <p>&emsp;&emsp;據環保署統計，台灣2018年的洗腎人數突破9萬人，醫療費用一年需耗損約449億元，洗腎人口密度高居全球之冠，國人的腎臟問題不容忽視。</p>
+                        <p>&emsp;&emsp;腎臟問題牽扯的因子複雜、多樣化且參雜干擾性數據，我們以急性腎衰竭(Acute Kidney Injury, AKI)為目標，希望透過機器學習的方式訓練出一套模型能對AKI做時序性的預測，觀察病患在時間的推移下發生AKI的機率曲線分布，協助醫生做出判斷，達到爭取治療時間、降低治療成本以及提升整體醫療品質之目的。</p>
+                        <p>&emsp;&emsp;我們將Feature切分為四個小時一個單位的時序性資料做LSTM模型的訓練，模型會根據現有病患資料預測24小時內發生AKI的機率，每四個小時輸出一個機率。最後以此時序性模型作為基礎，測試成大醫院所提供的資料以觀察模型泛用性和實用性，並架設網站呈現結果方便醫師用來輔助預測AKI。</p>
                     </span>
                 </article>
 
                 <!-- Work -->
                 <article id="Database">
                     <h2 class="major">DataBase Introduction</h2>
-                    <p style="font-family: 隸變;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;為了增加模型的公信力與可信度，我們採用公開資料集MIMIC-III以及eICU Collaborative Research Database兩大急診室資料庫，從中提取出目標病患的檢測結果進行模型訓練，MIMIC-III是由麻省理工學院計算生理實驗室(LCP)所提供，
-                        eICU Collaborative Research Database則是由健康照護(Philips Healthcare)與麻省理工學院計算生理實驗室(LCP)共同合作提供，以下分別是兩個資料庫的簡介。</p>
+                    <p style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;為了增加模型的公信力與可信度，我們採用公開資料集 MIMIC-III 以及 eICU Collaborative Research Database 兩大急診室資料庫，從中提取出目標病患的檢測結果進行模型訓練，MIMIC-III是由麻省理工學院計算生理實驗室(Laboratory for Computational Physiology , LCP)所提供，
+                        eICU Collaborative Research Database則是由飛利浦健康照護(Philips Healthcare)與麻省理工學院計算生理實驗室(LCP)共同合作提供，以下分別是兩個資料庫的簡介。</p>
                     <span class="image main" style="left: 13rem;width: 20rem"><img src="/static/images/mimic.png" alt="" /></span>
                     <a href="https://mimic.physionet.org/" ><h2>MIMIC-III Critical Care Database</h2></a>
                     <p>MIMIC is an openly available dataset developed by the MIT Lab for Computational Physiology, comprising deidentified health data associated with ~60,000 intensive care unit admissions.</p>
@@ -87,9 +87,66 @@
                 </article>
 
                 <article id="aboutModel">
-                    <h2 class="major">DataBase Introduction</h2>
+                    <h2 class="major">Model Introduction</h2>
                     <span class="image main"><img src="/static/images/pic02.jpg" alt="" /></span>
-                    <p>Adipiscing magna sed dolor elit. Praesent eleifend dignissim arcu, at eleifend sapien imperdiet ac. Aliquam erat volutpat. Praesent urna nisi, fringila lorem et vehicula lacinia quam. Integer sollicitudin mauris nec lorem luctus ultrices.</p>
+                    <h3>Input Feature Introduction</h3>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本網頁提供兩種預測方式，其一為單位病人資料預測，透過填入&nbsp;Single Patient&nbsp;表單的方式，在送出表單後自動呈現預測結果，
+                        其二為以檔案輸入的方式，透過&nbsp;csv&nbsp;檔可一次預測多個病人，惟輸入之csv檔其欄位名稱以及時序性安排須遵照我們所提供的順序才能準確預測。</p>
+                    <details>
+                        <summary>欄位順序與詳細介紹</summary>
+                    <table class="content-table" id="datatable" border="1" style="width: 100%;">
+                       <thead >
+                                <tr style="font-size: 1.5rem;">
+                                    <th style="text-align: center;">Age</th>
+                                    <th style="text-align: center;">Weight</th>
+                                    <th style="text-align: center;">Gender</th>
+                                    <th style="text-align: center;">Creatinine</th>
+                                    <th style="text-align: center;">Urine</th>
+                                    <th style="text-align: center;">pH</th>
+                                    <th style="text-align: center;">Hct</th>
+                                </tr>
+                       </thead>
+                        <tbody style="width: 100%;">
+                        <tr >
+                            <td>年紀 (years)</td>
+                            <td>體重 (kg)</td>
+                            <td>性別 (Female 1, Male 0)</td>
+                            <td>肌酐酸 (mg/dl)</td>
+                            <td>尿量 (ml)</td>
+                            <td>酸鹼值</td>
+                            <td>血容比 (%)</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <table class="content-table" id="datatable" border="1" style="width: 100%;">
+                       <thead >
+                                <tr style="font-size: 1.5rem;">
+                                    <th style="text-align: center;">BUN</th>
+                                    <th style="text-align: center;">Na</th>
+                                    <th style="text-align: center;">K</th>
+                                    <th style="text-align: center;">TP</th>
+                                    <th style="text-align: center;">SBP</th>
+                                    <th style="text-align: center;">MAP</th>
+                                    <th style="text-align: center;">MSI</th>
+                                    <th style="text-align: center;">eGFR</th>
+                                </tr>
+                                </thead>
+                        <tbody>
+                        <tr>
+                            <td>血中尿素氮 (mgdl)</td>
+                            <td>血鈉(mg/dl)</td>
+                            <td>血鉀 (mg/dl)</td>
+                            <td>體溫 (°C)</td>
+                            <td>動脈收縮壓 (mmHg)</td>
+                            <td>平均動脈壓(mmHg)</td>
+                            <td>休克指數 (Shock Index)</td>
+                            <td>腎絲球過濾率(MDRD-Simplfy)</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </details>
+                    <button href="/static/XgboostTestData.csv" download="Example.csv" style="font-size: 1.2rem;float: right;">範例下載</button>
 
                 </article>
 
@@ -117,13 +174,17 @@
                     </form>
                 </article>
 
-                <article id="predictfile">
+                <article id="predictfile" style="height: 17rem;">
                     <label for="document"><h2 class="major">Upload File(csv files):</h2></label>
+                    <h3>Please Read the <a href="#aboutModel">Model Introduction</a> Before u Upload File !</h3>
+
+                   <span style="position: fixed;top: 13rem;">
                     <form action="/predictresultforfile/" method="post" action="#contact" enctype="multipart/form-data">
                         {% csrf_token %}
-                        <input type="file" name="document" style="font-family: 隸變;">
+                        <input type="file" name="document" >
                         <button type="submit" name="Upload">Upload</button>
                     </form>
+                        </span>
                 </article>
 
                 <article id="11">
@@ -153,12 +214,13 @@
 
 
 
-                <article id="predictsingle">
+                <article id="predictsingle" style="height: 50rem;">
                 <h2 class="major">Predict</h2>
-                    <form action="/predictresultforinput/" method="post" style="height:550px;width: 100%;overflow: scroll;">
+                    <form action="/predictresultforinput/" method="post" style="height:30rem;width: 100%;overflow: scroll;">
                             {% csrf_token %}
-                        <div style="overflow: paged-y;">
-                            <table class="content-table" id="datatable" border="1" style="overflow: scroll;width: 1420px;padding: 5.5rem">
+                        <span style="display: flex; flex-direction: column;">
+                        <span style="">
+                            <table class="content-table" id="datatable" border="1" style="overflow: scroll;width: 115rem;padding: 5.5rem">
                                 <thead >
                                 <tr style="font-size: 1.5rem;">
                                     <th >feature</th>
@@ -285,40 +347,43 @@
                                 </tr>
                                 <tr>
                                     <td style="font-size: 1.5rem">eGFR</td>
-                                    <td><input type="text" name="eGFR_{{ 0 }}" onfocus="this.placeholder='<230'"onblur="this.placeholder='Urine 24hrs~20hrs'" placeholder="eGFR 24hrs~20hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="eGFR_{{ 1 }}" onfocus="this.placeholder='<230'"onblur="this.placeholder='Urine 20hrs~16hrs'" placeholder="eGFR 20hrs~16hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="eGFR_{{ 2 }}" onfocus="this.placeholder='<230'"onblur="this.placeholder='Urine 20hrs~16hrs'" placeholder="eGFR 16hrs~12hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="eGFR_{{ 3 }}" onfocus="this.placeholder='<230'"onblur="this.placeholder='Urine 20hrs~16hrs'" placeholder="eGFR 12hrs~8hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="eGFR_{{ 4 }}" onfocus="this.placeholder='<230'"onblur="this.placeholder='Urine 8hrs~4hrs'" placeholder="eGFR 8hrs~4hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="eGFR_{{ 5 }}" onfocus="this.placeholder='<230'"onblur="this.placeholder='Urine 4hrs~0hrs'" placeholder="eGFR 4hrs~0hrs" style="text-align: center"></td>
+                                    <td><input type="text" name="eGFR_{{ 0 }}" onfocus="this.placeholder='<180'"onblur="this.placeholder='Urine 24hrs~20hrs'" placeholder="eGFR 24hrs~20hrs" style="text-align: center"></td>
+                                    <td><input type="text" name="eGFR_{{ 1 }}" onfocus="this.placeholder='<180'"onblur="this.placeholder='Urine 20hrs~16hrs'" placeholder="eGFR 20hrs~16hrs" style="text-align: center"></td>
+                                    <td><input type="text" name="eGFR_{{ 2 }}" onfocus="this.placeholder='<180'"onblur="this.placeholder='Urine 20hrs~16hrs'" placeholder="eGFR 16hrs~12hrs" style="text-align: center"></td>
+                                    <td><input type="text" name="eGFR_{{ 3 }}" onfocus="this.placeholder='<180'"onblur="this.placeholder='Urine 20hrs~16hrs'" placeholder="eGFR 12hrs~8hrs" style="text-align: center"></td>
+                                    <td><input type="text" name="eGFR_{{ 4 }}" onfocus="this.placeholder='<180'"onblur="this.placeholder='Urine 8hrs~4hrs'" placeholder="eGFR 8hrs~4hrs" style="text-align: center"></td>
+                                    <td><input type="text" name="eGFR_{{ 5 }}" onfocus="this.placeholder='<180'"onblur="this.placeholder='Urine 4hrs~0hrs'" placeholder="eGFR 4hrs~0hrs" style="text-align: center"></td>
                                 </tr>
                                 </tbody>
                             </table>
-                        </div>
+                        </span>
+                            <span style="position: fixed; bottom: 10px;">
                         <div class="row" style="content:''; display: table;clear: both;width: 100%;padding: 0.5rem;">
-                            <div class="column" style="float: left;width: 33.33%;padding: 0.5rem;">
+                            <div class="column" style="float: left;width: 32%;padding: 0.3rem;">
                                 <label for="Age" style="font-size: 1.2rem;">Age:</label>
                                 <input type="text" name="Age" placeholder="Years" style="size: 30px;text-align: center">
                             </div>
-                            <div class="column" style="float: left;width: 33.33%;padding: 0.5rem;">
+                            <div class="column" style="float: left;width: 32%;padding: 0.3rem;">
                                 <label for="Weight" style="font-size: 1.2rem;">Weight:</label>
                                 <input type="text" name="Weight" placeholder="kg" style="size: 30px;text-align: center">
                             </div>
-                            <div class="column" style="float: left;width: 33.33%;padding: 0.5rem;">
+                            <div class="column" style="float: left;width: 32%;padding: 0.3rem;">
                                 <label for="Gender" style="font-size: 1.2rem;">Gender:</label>
                                 <input type="text" name="Gender" placeholder="F / M" style="size: 30px;text-align: center">
                             </div>
                         </div>
-                <input type="submit" value="Submit" name="OnlyOneData"style="width: 100%; left: 250px;">
+                <input type="submit" value="Submit" name="OnlyOneData"style="width: 97%; left: 250px;">
 
+                            </span>
+</span>
     </form>
                 </article>
 
 {#                #end of article#}
             </div>
 
-            <footer id="footer">
-                <p class="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+            <footer id="footer" >
+                <p class="copyright"style="float: right">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
             </footer>
         </div>
         <div id="bg"></div>
@@ -329,4 +394,13 @@
 			<script src="/static/assets/js/util.js"></script>
 			<script src="/static/assets/js/main.js"></script>
     </body>
+
+<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+  $("tr.parent").click(function(){
+    $(this).toggleClass('selected').siblings('.child_'+this.id).toggle();
+  })
+})
+</script>
 </html>

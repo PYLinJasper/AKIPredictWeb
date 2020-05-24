@@ -10,7 +10,7 @@
 </head>
 <body class="is-preload">
 <div id="wrapper">
-<article>
+<article style="top: 20%;position: relative;height: 50rem; ">
 <div class="header" style="justify-content: center;vertical-align:center;">
         <a class="home" href="/homepage/"style="height: 42px;text-align-all: center;"><i class="fa fa-home" style="margin-top:0px;color:white;font-size:42px" title="home"></i></a>
     </div>
@@ -24,8 +24,8 @@
         {% endif %}
 
 <p style="text-align: center;font-size: 30px">Age : {{ Agestr }} (Years) , Weight : {{ Weightstr }} (kg) , Gender : {{ Genderstr }}</p>
-
-    <table class="content-table" id="datatable" border="1" style="font-size:20px;width: 100%">
+<details style="overflow: scroll;">
+    <table class="content-table" id="datatable" border="1" style="font-size:20px;width: 100%;overflow: scroll;">
         <thead>
             <tr>
                 <th>feature</th>
@@ -38,6 +38,7 @@
             </tr>
         </thead>
         <tbody>
+
             <tr>
                 <td>Creatinine (mg/dl)</td>
                 {% for data in Crt %}
@@ -170,7 +171,19 @@
             </tr>
         </tbody>
     </table>
+</details>
 </article>
 </div>
+<footer id="footer" >
+                <p class="copyright"style="float: right">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+            </footer>
+        </div>
+        <div id="bg"></div>
+		<!-- Scripts -->
+			<script src="/static/assets/js/jquery.min.js"></script>
+			<script src="/static/assets/js/browser.min.js"></script>
+			<script src="/static/assets/js/breakpoints.min.js"></script>
+			<script src="/static/assets/js/util.js"></script>
+			<script src="/static/assets/js/main.js"></script>
 </body>
 </html>

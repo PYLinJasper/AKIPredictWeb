@@ -4,36 +4,30 @@
 <head>
     {% load static %}
     <title>LoginPage</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" type="text/css" href='/static/assets/css/main.css'>
-		<noscript><link rel="stylesheet" type="text/css" href="/static/assets/css/noscript.css" /></noscript>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href='/static/assets/css/main.css'>
+    <noscript><link rel="stylesheet" type="text/css" href="/static/assets/css/noscript.css" /></noscript>
 </head>
 
 <body class="is-preload">
     <div id="wrapper" >
-{#        <header id="header" style="">#}
-        <div class="logo" style="opacity: 20%;">
-                    <img src="/static/images/kidneyw.png"/>
-                </div>
-{#            </header>#}
-{#        <div id="header">#}
-{#        <article>#}
+{#        <img src="/static/images/kidneyw.png" width="50"/>#}
 
         <form action="" method="post" style="position: fixed;margin-top: 15%;">
             {% csrf_token %}
             <fieldset>
-                <legend><h1><span style="text-align: center;font-family: 手札體-繁; ">智腎關鍵 AKI Helper</span></h1></legend>
-                <span style="text-align: center;color: navy;font-family: 宋體-繁; "><label>人工智慧即時預測急性腎衰竭</label></span>
+                <legend><h1><span style="text-align: center;font-family: 手札體-繁; ">智腎關鍵 AKI Helper  </span></h1></legend>
+                <span style="text-align: center;color: navy;font-family: 宋體-繁; "><h3>人工智慧即時預測急性腎衰竭</h3></span>
                 <label for="username">用戶名稱:</label>
                 <input type="text" name="username" value="" id="username"> <br />
                 <label for="password">用戶密碼:</label>
                 <input type="password" name="password" value="" id="password"> <br />
-                <input type="submit" value="登入" style="font-size:20px"/>
+                <input type="submit" value="登入" style="font-size:20px;"/>
+{#                <input type="image" src="/static/images/kidneyw.png" width="50" style="alignment: center" onClick="document.createEvent(onsubmit);"/>#}
             </fieldset>
         </form>
-{#            </article>#}
-{#            </div>#}
+
     </div>
         <div id="bg"></div>
 		<!-- Scripts -->
