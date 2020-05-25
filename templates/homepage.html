@@ -88,7 +88,17 @@
 
                 <article id="aboutModel">
                     <h2 class="major">Model Introduction</h2>
-                    <span class="image main"><img src="/static/images/pic02.jpg" alt="" /></span>
+                    <h3>XGBoost</h3>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;為Decision Tree之一種延伸，透過將許多弱分類器集合進行Boosting的強化模型訓練方式，將每次的結果進行殘差運算，
+                        針對殘差補入新的弱分類器強化，且不只運用一階線性關係，更透過微分進行泰勒展開，藉此導入梯度的概念，
+                        有目的且有效率的訓練出我們所需的模型。</p>
+                    <h3>LSTM</h3>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;為RNN模型之一種延伸，其擅長處理有時序關係的資料，
+                        原生的RNN模型在訓練的過程中過去的資料的重要性，會隨著時間演進而被淡忘，此現象稱為梯度消失，
+                        這對於尋找重要的特徵來賦予權重有不良的影響，而相較於原始RNN有梯度消失的問題，
+                        LSTM透過三個特殊的閘門Input Gate , Output Gate , Forget Gate來控制資料的取捨，使先前的記憶不會隨時間消失，
+                        而是被我們以特定條件所約束保留，解決了梯度消失的問題，對於處理食訊性問題，有著比原生RNN更好的表現。</p>
+{#                    <span class="image main"><img src="/static/images/pic02.jpg" alt="" /></span>#}
                     <h3>Input Feature Introduction</h3>
                     <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本網頁提供兩種預測方式，其一為單位病人資料預測，透過填入&nbsp;Single Patient&nbsp;表單的方式，在送出表單後自動呈現預測結果，
                         其二為以檔案輸入的方式，透過&nbsp;csv&nbsp;檔可一次預測多個病人，惟輸入之csv檔其欄位名稱以及時序性安排須遵照我們所提供的順序才能準確預測。</p>
