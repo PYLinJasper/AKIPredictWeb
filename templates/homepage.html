@@ -17,10 +17,10 @@
                     <img src="/static/images/kidneyw.png" alt="" style="width: 70%;margin-top:1.3rem"/>
                 </div>
                 <div class="content">
-                    <div class="inner">
+                    <div class="inner" style="font-family: 蘋方-繁;">
                         <h1 style="font-size: 6rem; ">智腎關鍵</h1>
                         <h1 style="font-size: 4rem; ">AKI HELPER</h1>
-                        <p style=" font-size: 1.2rem;">人工智慧即時預測急性腎衰竭 Real-time Acute Kidney Injury Prediction</p>
+                        <h3 style=" font-size: 1.2rem;">人工智慧即時預測急性腎衰竭 Real-time Acute Kidney Injury Prediction</h3>
                     </div>
                 </div>
                 <nav>
@@ -156,12 +156,13 @@
                         </tbody>
                     </table>
                 </details>
-                    <button href="/static/XgboostTestData.csv" download="Example.csv" style="font-size: 1.2rem;float: right;">範例下載</button>
-
+                    <form class="button" style="font-size: 1.2rem; float: right">
+                    <a href="/static/XgboostTestData.csv" download="Example.csv ">範例下載</a>
+                    </form>
                 </article>
 
                 <article id="logout">
-                    <h2 class="major">Sure u want to Logout ?</h2>
+                    <h2 class="major" style="font-family: Palatino">Want to Logout ?</h2>
                     {% if user.is_authenticated %}
                         <form action="/logout">
                         <button href="/logout" style="line-height:44px;height: 42px;text-align-all: center;color:white;font-size:30px;text-decoration: none">Logout</button>
@@ -186,7 +187,7 @@
 
                 <article id="predictfile" style="height: 17rem;">
                     <label for="document"><h2 class="major">Upload File(csv files):</h2></label>
-                    <h3>Please Read the <a href="#aboutModel">Model Introduction</a> Before u Upload File !</h3>
+                    <h3>Please Read the <a href="#aboutModel">Model Introduction</a> Before you Upload File !</h3>
 
                    <span style="position: fixed;top: 13rem;">
                     <form action="/predictresultforfile/" method="post" action="#contact" enctype="multipart/form-data">
