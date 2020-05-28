@@ -10,10 +10,10 @@
 </head>
 <body class="is-preload">
 <div id="wrapper">
-<article style="top: 20%;position: relative;height: 50rem; ">
-<div class="header" style="justify-content: center;vertical-align:center;">
+<div class="header" style="position:relative;top: 17%;justify-content: center;vertical-align:center;">
         <a class="home" href="/homepage/"style="height: 42px;text-align-all: center;"><i class="fa fa-home" style="margin-top:0px;color:white;font-size:42px" title="home"></i></a>
     </div>
+<article style="top: 20%;position: relative;height: 50rem; ">
 
     <h1 align="center">Predict Result:</h1>
         {% if aki == 1 %}
@@ -26,7 +26,7 @@
 <p style="text-align: center;font-size: 30px">Age : {{ Agestr }} (Years) , Weight : {{ Weightstr }} (kg) , Gender : {{ Genderstr }}</p>
 <details style="overflow: scroll;">
 <summary>病患詳細檢測資料</summary>
-    <table class="content-table" id="datatable" border="1" style="font-size:20px;width: 100%;overflow: scroll;">
+    <table class="content-table" id="datatable" border="1" style="background-color: rgba(129,199,212,55);font-size:20px;width: 100%;overflow: scroll;">
         <thead>
             <tr>
                 <th>feature</th>

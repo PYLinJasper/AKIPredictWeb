@@ -175,7 +175,7 @@ input, select, textarea {
 	}
 
 	h1, h2, h3, h4, h5, h6 {
-		color: #ffffff;
+		color: #FFFFEE;
 		font-weight: 600;
 		line-height: 1.5;
 		margin: 0 0 1rem 0;
@@ -202,6 +202,7 @@ input, select, textarea {
 		font-size: 2.25rem;
 		line-height: 1.3;
 		letter-spacing: 0.5rem;
+		color: inherit;
 	}
 
 	h2 {
@@ -1141,19 +1142,10 @@ input, select, textarea {
 			-ms-transition-delay: 0.75s;
 			transition-delay: 0.75s;
 			/*background-image: linear-gradient(to top, rgba(19, 21, 25, 0.5), rgba(19, 21, 25, 0.5)), url("/static/images/overlay.png");*/
-			background-color: #A9C9FF;background-image: linear-gradient(180deg, #A9C9FF 0%, #FFBBEC 100%);
-			/*background: #C6FFDD;  !* fallback for old browsers *!background: -webkit-linear-gradient(to right, #f7797d, #FBD786, #C6FFDD);  !* Chrome 10-25, Safari 5.1-6 *!background: linear-gradient(to right, #f7797d, #FBD786, #C6FFDD); !* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ *!*/
-
-			/*background-color: #FEE140;background-image: linear-gradient(135deg, #FEE140 0%, #FA709A 100%);*/
-			background-image: linear-gradient(30deg, #4158D0 0%, #C850C0 46%, #FFCC70 80%), url("/static/images/overlay.png");
-			background-color: #39aef3;background-image: linear-gradient(150deg, #39aef3 0%, #89e9de 50%, #ffffff 100%);
-			/*opacity: 110%;*/
-			/*background-color: #FAACA8;background-image: linear-gradient(104deg, #FAACA8 0%, #DDD6F3 100%);*/
-			/*background-color: #8EC5FC;background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);*/
-			/*background-color: #8EC5FC;*/
-/*background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);*/
-			background-size: auto,
- 256px 256px;
+			/**/
+			/*background-color: #39aef3;background-image: linear-gradient(150deg, #39aef3 0%, #89e9de 50%, #ffffff 100%);*/
+			background-size: auto, 256px 256px;
+			background-color: #8bc2f5;background-image: linear-gradient(0deg, #8bc2f5 25%, #ccffc1 100%);
 			background-position: center,
  center;
 			background-repeat: no-repeat,
@@ -1560,7 +1552,9 @@ input, select, textarea {
 			position: relative;
 			width: 50rem;
 			max-width: 100%;
-			background-color: rgba(27, 31, 34, 0.85);
+			/*background-color: rgba(27, 31, 34, 0.85);*/
+			/*background-color: rgba(123, 162, 23, 0.35);*/
+			background-color: rgba(134, 193, 102, 0.85);
 			border-radius: 4px;
 			opacity: 0;
 		}

@@ -11,10 +11,42 @@
 </head>
 <body class="is-preload">
 <div id="wrapper" >
-<article style="top: 20%;position: relative;height: 50rem;">
 <div class="header" style="justify-content: center;vertical-align:center;">
         <a class="home" href="/homepage/"style="height: 42px;text-align-all: center;"><i class="fa fa-home" style="margin-top:0px;color:white;font-size:42px" title="home"></i></a>
     </div>
+<article style="height: 20rem;width: 65rem;">
+    <details>
+<summary style="font-size: 2rem;">病患資料一覽表</summary>
+    <div style="height: 17rem;overflow: scroll;">
+<table class="content-table" id="datatable" border="1" style="background-color: rgba(168,216,185,85);font-size:20px;overflow: scroll;">
+        <thead>
+            <tr>
+                <th>Patient order</th>
+                <th>Predict Result</th>
+                <th>Patient order</th>
+                <th>Predict Result</th>
+                <th>Patient order</th>
+                <th>Predict Result</th>
+                <th>Patient order</th>
+                <th>Predict Result</th>
+            </tr>
+        </thead>
+    <tbody>
+    {% for data in count %}
+        <tr>
+        {% for unit in data %}
+        <td style="text-align: center;">{{ unit }}</td>
+        {% endfor %}
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+    </div>
+</details>
+</article>
+<article style="top: 15%;position: relative;height: 50rem;width: 65rem;">
+<details>
+<summary style="font-size: 2rem;">個別病患資料</summary>
     <h1 align="center">Predict Result:</h1>
     {% for contact in contacts %}
         {% if contact.aki == 1 %}
@@ -29,6 +61,7 @@
     <p style="text-align: center;font-size: 30px">Age : {{ contact.age  }} (Years) , Weight : {{ contact.weight }} (kg) , Gender : {{ contact.gender }}</p>
 
     {% endfor  %}
+
 <div class="pagination"style="text-align: center;margin-bottom: 20px;size: 50px;">
         <span class="step-links" >
             {% if contacts.has_previous %}
@@ -47,8 +80,8 @@
         </span>
     </div>
 <details>
-<summary>病患詳細檢測資料</summary>
-    <table class="content-table" id="datatable" border="1" style="width: 100%">
+<summary style="font-size: 2rem;">病患詳細檢測資料</summary>
+    <table class="content-table" id="datatable" border="1" style="background-color: rgba(129,199,212,55);width: 100%">
         <thead>
             <tr>
                 <th>feature</th>
@@ -143,6 +176,7 @@
         {% endfor %}
         </tbody>
     </table>
+</details>
 </details>
 </article>
 </div>

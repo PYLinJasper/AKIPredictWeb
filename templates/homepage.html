@@ -9,17 +9,17 @@
 		<noscript><link rel="stylesheet" type="text/css" href="/static/assets/css/noscript.css" /></noscript>
 	</head>
     <body class="is-preload">
-        <div id="wrapper">
+        <div id="wrapper" style="width: 100%;">
             <header id="header">
-                <div class="logo">
+                <div class="logo" style="background-color: transparent;">
 {#                    <span class="icon fa fa-stethoscope"></span>#}
 {#                    <span class="image main" style="left: 13rem;width: 20rem"><img src="/static/images/kidneyw.png" alt="" /></span>#}
-                    <img src="/static/images/kidneyw.png" alt="" style="width: 70%;margin-top:1.3rem"/>
+                    <img src="/static/images/kidneyS.png" alt="" style="background-color:transparent;width: 90%;margin-top:0.8rem"/>
                 </div>
                 <div class="content">
-                    <div class="inner" style="font-family: 蘋方-繁;">
-                        <h1 style="font-size: 6rem; ">智腎關鍵</h1>
-                        <h1 style="font-size: 4rem; ">AKI HELPER</h1>
+                    <div class="inner" style="font-family: Helvetica;">
+                        <h1 style="font-weight: normal;font-size: 7rem; ">智腎關鍵</h1>
+                        <h1 style="font-weight: normal;font-size: 4rem; ">AKI HELPER</h1>
                         <h3 style=" font-size: 1.2rem;">人工智慧即時預測急性腎衰竭 Real-time Acute Kidney Injury Prediction</h3>
                     </div>
                 </div>
@@ -71,19 +71,19 @@
 
                 <!-- Work -->
                 <article id="Database">
-                    <h2 class="major">DataBase Introduction</h2>
+                    <h2 class="major">Database Introduction</h2>
                     <p style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;為了增加模型的公信力與可信度，我們採用公開資料集 MIMIC-III 以及 eICU Collaborative Research Database 兩大急診室資料庫，從中提取出目標病患的檢測結果進行模型訓練，MIMIC-III是由麻省理工學院計算生理實驗室(Laboratory for Computational Physiology , LCP)所提供，
                         eICU Collaborative Research Database則是由飛利浦健康照護(Philips Healthcare)與麻省理工學院計算生理實驗室(LCP)共同合作提供，以下分別是兩個資料庫的簡介。</p>
-                    <span class="image main" style="left: 13rem;width: 20rem"><img src="/static/images/mimic.png" alt="" /></span>
+                    <span class="image main" style="background-color:transparent;left: 13rem;width: 20rem"><img src="/static/images/mimic.png" alt="" /></span>
                     <a href="https://mimic.physionet.org/" ><h2>MIMIC-III Critical Care Database</h2></a>
-                    <p>MIMIC is an openly available dataset developed by the MIT Lab for Computational Physiology, comprising deidentified health data associated with ~60,000 intensive care unit admissions.</p>
-                    <p>The version we used is MIMIC-III , MIMIC-III (Medical Information Mart for Intensive Care III) is a large, freely-available database comprising deidentified health-related data associated with over forty thousand patients who stayed in critical care units of the Beth Israel Deaconess Medical Center between 2001 and 2012.</p>
-                    <p>The database includes information such as demographics, vital sign measurements made at the bedside (~1 data point per hour), laboratory test results, procedures, medications, caregiver notes, imaging reports, and mortality (both in and out of hospital).</p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MIMIC 資料集是由麻省理工學院計算生理實驗室開發的公開資料集，其中包含去識別化後約60000例於重症加護病房的病人之健康數據。</p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;目前最新可取用的版本是MIMIC-III（Medical Information Mart for Intensive Care III），此資料由貝斯以色列女執事醫療中心「Beth Israel Deaconess Medical Center (BIDMC)」提供，其中包含去識別化後約40000例，時間介於2001到2012年於重症加護病房的病人之健康數據。</p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;此資料集包含人口統計資訊、病人之生命徵象測量值（約每小時一組數據）、實驗室化驗結果、治療方式、服用藥物、護理人員照護紀錄、影像報告、死亡率（入出院）等。</p>
                     <span class="image main"><img src="/static/images/eicu.png" alt="" /></span>
                     <a href="https://eicu-crd.mit.edu/" ><h2>eICU Collaborative Research Database</h2></a>
-                    <p>The Philips eICU program is a transformational critical care telehealth program that delivers need-to-know information to caregivers, empowering them to care for the patients. It is a supplement — not a replacement — to the bedside team, and the data utilized by the remote care givers is archived for research purposes.</p>
-                    <p>Through this work, we have generated a large database which has potential for facilitating additional research initiatives on patient outcomes, trends, and other best practice protocols in use today at most healthcare facilities. The Philips eICU Research Institute (eRI), which maintains the data, has generously contributed the eICU Collaborative Research Database described here.</p>
-                    <p>The eICU Collaborative Research Database is populated with data from a combination of many critical care units throughout the continental United States. The data in the collaborative database covers patients who were admitted to critical care units in 2014 and 2015.</p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;飛利浦eICU計畫是一個經過改變後生成的重症遠距離醫護計畫，此計畫為醫護人員提供他們必須之訊息，使他們能有足夠的資訊照顧病患。這是一個增進醫療品質而非取代的方法，其中所存之醫療訊息將被存檔且提供其他人研究。</p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;過這項工作，我們已經建立了一個龐大的資料集，此資料集具有促進更多的研究透過不同的管道，一同實現醫療進步的目標，負責維護此資料集的飛利浦eICU研究所(eRI)慷慨的貢獻出此資料集(eICU Collaborative Research Databas)供研究者取用。</p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;此資料集(eICU Collaborative Research Database)美國全境眾多，時間介於2014到2015年間重症加護病房的病人之健康數據。</p>
                 </article>
 
                 <article id="aboutModel">
@@ -172,15 +172,15 @@
 
                 <!-- Contact -->
                 <article id="predict">
-                    <h2 class="major">Source</h2>
+                    <h2 class="major" style="text-transform: initial;">Source</h2>
                     <form method="post" action="#">
-                        <ul class="actions" style="padding-left: 38%;">
-                            <li><a href="#predictsingle" ><input type="button" value="Single Patient" class="primary" /></a></li>
+                        <ul class="actions" style="padding-left: 35%;">
+                            <li><a href="#predictsingle" ><input type="button" value="Single Patient" style="font-size: 1.5rem;" class="primary" /></a></li>
                         </ul>
                     </form>
-                    <form method="post" action="#" style="padding-left: 38%;">
+                    <form method="post" action="#" style="padding-left: 35%;">
                         <ul class="actions">
-                            <li><a href="#predictfile"><input type="button" value="Upload ur file" class="primary" /></a></li>
+                            <li><a href="#predictfile"><input style="font-size: 1.5rem;" type="button" value="&nbsp;Upload&nbsp;&nbsp; File&nbsp;" class="primary" /></a></li>
                         </ul>
                     </form>
                 </article>
@@ -225,151 +225,442 @@
 
 
 
-                <article id="predictsingle" style="height: 50rem;">
+                <article id="predictsingle" style="height: 45rem;">
                 <h2 class="major">Predict</h2>
-                    <form action="/predictresultforinput/" method="post" style="height:30rem;width: 100%;overflow: scroll;">
-                            {% csrf_token %}
-                        <span style="display: flex; flex-direction: column;">
-                        <span style="">
-                            <table class="content-table" id="datatable" border="1" style="overflow: scroll;width: 115rem;padding: 5.5rem">
+                    <form action="/predictresultforinput/" method="post" style="height:25rem;width: 100%;overflow: scroll;">
+                       {% csrf_token %}
+                       <div style="display: flex;">
+                       <details>
+                           <summary style="font-size: 1.2rem;">24~20hrs ago</summary>
+                       <span style="display: flex; flex-direction: column;">
+                           <div style="height: 23rem;overflow: scroll;">
+                       <table class="content-table" id="datatable" border="1" style="overflow: scroll;width: 15rem;padding: 5.5rem">
+                           <thead >
+                           <tr style="font-size: 1.5rem;">
+                               <th >feature</th>
+                               <th>24hrs~20hrs ago</th>
+                           </tr>
+                           </thead>
+                           <tbody>
+                           <tr>
+                               <td style="font-size: 1.5rem">Creatinine</td>
+                               <td><input type="text" name="Crt_{{ 0 }}" onfocus="this.placeholder='0.1~20(mg/dl)'" onblur="this.placeholder='Creatinine 24hrs~20hrs'" placeholder="Creatinine 24hrs~20hrs" style="width:10rem;text-align: center"></td>
+                           </tr>
+                           <tr>
+                               <td style="font-size: 1.5rem">Intake</td>
+                               <td><input type="text" name="Intake_{{ 0 }}" onfocus="this.placeholder='0~10000(ml)'"onblur="this.placeholder='Intake 24hrs~20hrs'" placeholder="Intake 24hrs~20hrs" style="width:10rem;text-align: center"></td>
+                           </tr>
+                           <tr>
+                               <td style="font-size: 1.5rem">Urine</td>
+                               <td><input type="text" name="Urine_{{ 0 }}" onfocus="this.placeholder='0~10000(ml)'"onblur="this.placeholder='Urine 24hrs~20hrs'" placeholder="Urine 24hrs~20hrs" style="width:10rem;text-align: center"></td>
+                           </tr>
+                           <tr>
+                               <td style="font-size: 1.5rem">pH</td>
+                               <td><input type="text" name="pH_{{ 0 }}" onfocus="this.placeholder='6.8~7.8'"onblur="this.placeholder='pH 24hrs~20hrs'" placeholder="pH 24hrs~20hrs" style="width:10rem;text-align: center"></td>
+                           </tr>
+                           <tr>
+                               <td style="font-size: 1.5rem">Hct</td>
+                               <td><input type="text" name="Hct_{{ 0 }}" onfocus="this.placeholder='10~70(%)'"onblur="this.placeholder='Hct 24hrs~20hrs'" placeholder="Hct 24hrs~20hrs" style="width:10rem;text-align: center"></td>
+                           </tr>
+                           <tr>
+                               <td style="font-size: 1.5rem">BUN</td>
+                               <td><input type="text" name="BUN_{{ 0 }}" onfocus="this.placeholder='0~60(mg/dl)'"onblur="this.placeholder='BUN 24hrs~20hrs'" placeholder="BUN 24hrs~20hrs" style="width:10rem;text-align: center"></td>                            </tr>
+                                <tr>
+                                    <td style="font-size: 1.5rem">Na</td>
+                                    <td><input type="text" name="Na_{{ 0 }}" onfocus="this.placeholder='100~180(mmol/L)'"onblur="this.placeholder='Na 24hrs~20hrs'" placeholder="Na 24hrs~20hrs" style="width:10rem;text-align: center"></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 1.5rem">K</td>
+                                    <td><input type="text" name="K_{{ 0 }}" onfocus="this.placeholder='1~9(mmol/L)'"onblur="this.placeholder='K 24hrs~20hrs'" placeholder="K 24hrs~20hrs" style="width:10rem;text-align: center"></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 1.5rem">Temperature</td>
+                                    <td><input type="text" name="TP_{{ 0 }}" onfocus="this.placeholder='35~41(Celsius)'"onblur="this.placeholder='Temperature 24hrs~20hrs'" placeholder="Temperature 24hrs~20hrs" style="width:10rem;text-align: center"></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 1.5rem">Systolic BP</td>
+                                    <td><input type="text" name="SystolicBP_{{ 0 }}" onfocus="this.placeholder='<250(mmHg)'"onblur="this.placeholder='Systolic BP 24hrs~20hrs'" placeholder="Systolic BP 24hrs~20hrs" style="width:10rem;text-align: center"></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 1.5rem">Mean BP</td>
+                                    <td><input type="text" name="MeanBP_{{ 0 }}" onfocus="this.placeholder='<200(mmHg)'"onblur="this.placeholder='Mean BP 24hrs~20hrs'" placeholder="Mean BP 24hrs~20hrs" style="width:10rem;text-align: center"></td>
+
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 1.5rem">MSI</td>
+                                    <td><input type="text" name="MSI_{{ 0 }}" onfocus="this.placeholder='<230'"onblur="this.placeholder='MSI 24hrs~20hrs'" placeholder="MSI 24hrs~20hrs" style="width:10rem;text-align: center"></td>
+
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 1.5rem">eGFR</td>
+                                    <td><input type="text" name="eGFR_{{ 0 }}" onfocus="this.placeholder='<180'"onblur="this.placeholder='Urine 24hrs~20hrs'" placeholder="eGFR 24hrs~20hrs" style="width:10rem;text-align: center"></td>
+                                </tr>
+                                </tbody>
+                       </table>
+                               </div>
+                       </span>
+                       </details>
+                           <details>
+                               <summary style="font-size: 1.2rem;">20~16hrs ago</summary>
+                               <span style="display: flex; flex-direction: column;">
+                                   <div style="height: 23rem;overflow: scroll;">
+                                   <table class="content-table" id="datatable" border="1" style="overflow: scroll;width: 15rem;padding: 5.5rem">
+                                       <thead >
+                                       <tr style="font-size: 1.5rem;">
+                                           <th >feature</th>
+                                           <th>20hrs~16hrs ago</th>
+                                       </tr>
+                                       </thead>
+                                       <tbody>
+                                       <tr>
+                                           <td style="font-size: 1.5rem">Creatinine</td>
+                                           <td><input type="text" name="Crt_{{ 1 }}" onfocus="this.placeholder='0.1~20(mg/dl)'" onblur="this.placeholder='Creatinine 20hrs~16hrs'" placeholder="Creatinine 20hrs~16hrs" style="width:10rem;text-align: center"></td>
+                                       </tr>
+                                       <tr>
+                                           <td style="font-size: 1.5rem">Intake</td>
+                                           <td><input type="text" name="Intake_{{ 1 }}" onfocus="this.placeholder='0~10000(ml)'"onblur="this.placeholder='Intake 20hrs~16hrs'" placeholder="Intake 20hrs~16hrs" style="width:10rem;text-align: center"></td>
+                                       </tr>
+                                       <tr>
+                                           <td style="font-size: 1.5rem">Urine</td>
+                                           <td><input type="text" name="Urine_{{ 1 }}" onfocus="this.placeholder='0~10000(ml)'"onblur="this.placeholder='Urine 20hrs~16hrs'" placeholder="Urine 20hrs~16hrs" style="width:10rem;text-align: center"></td>
+                                       </tr>
+                                       <tr>
+                                           <td style="font-size: 1.5rem">pH</td>
+                                           <td><input type="text" name="pH_{{ 1 }}" onfocus="this.placeholder='6.8~7.8'"onblur="this.placeholder='pH 20hrs~16hrs'" placeholder="pH 20hrs~16hrs" style="width:10rem;text-align: center"></td>
+                                       </tr>
+                                       <tr>
+                                           <td style="font-size: 1.5rem">Hct</td>
+                                           <td><input type="text" name="Hct_{{ 1 }}" onfocus="this.placeholder='10~70(%)'"onblur="this.placeholder='Hct 20hrs~16hrs'" placeholder="Hct 20hrs~16hrs" style="width:10rem;text-align: center"></td>
+                                       </tr>
+                                       <tr>
+                                           <td style="font-size: 1.5rem">BUN</td>
+                                           <td><input type="text" name="BUN_{{ 1 }}" onfocus="this.placeholder='0~60(mg/dl)'"onblur="this.placeholder='BUN 20hrs~16hrs'" placeholder="BUN 20hrs~16hrs" style="width:10rem;text-align: center"></td>
+                                       </tr>
+                                       <tr>
+                                           <td style="font-size: 1.5rem">Na</td>
+                                           <td><input type="text" name="Na_{{ 1 }}" onfocus="this.placeholder='100~180(mmol/L)'"onblur="this.placeholder='Na 20hrs~16hrs'" placeholder="Na 20hrs~16hrs" style="width:10rem;text-align: center"></td>
+                                       </tr>
+                                       <tr>
+                                           <td style="font-size: 1.5rem">K</td>
+                                           <td><input type="text" name="K_{{ 1 }}" onfocus="this.placeholder='1~9(mmol/L)'"onblur="this.placeholder='K 20hrs~16hrs'" placeholder="K 20hrs~16hrs" style="width:10rem;text-align: center"></td>
+                                       </tr>
+                                       <tr>
+                                           <td style="font-size: 1.5rem">Temperature</td>
+                                           <td><input type="text" name="TP_{{ 1 }}" onfocus="this.placeholder='35~41(Celsius)'"onblur="this.placeholder='Temperature 20hrs~16hrs'" placeholder="Temperature 20hrs~16hrs" style="width:10rem;text-align: center"></td>
+                                       </tr>
+                                       <tr>
+                                           <td style="font-size: 1.5rem">Systolic BP</td>
+                                           <td><input type="text" name="SystolicBP_{{ 1 }}" onfocus="this.placeholder='<250(mmHg)'"onblur="this.placeholder='Systolic BP 20hrs~16hrs'" placeholder="Systolic BP 20hrs~16hrs" style="width:10rem;text-align: center"></td>
+                                       </tr>
+                                       <tr>
+                                           <td style="font-size: 1.5rem">Mean BP</td>
+                                           <td><input type="text" name="MeanBP_{{ 1 }}" onfocus="this.placeholder='<200(mmHg)'"onblur="this.placeholder='Mean BP 20hrs~16hrs'" placeholder="Mean BP 20hrs~16hrs" style="width:10rem;text-align: center"></td>
+                                       </tr>
+                                       <tr>
+                                           <td style="font-size: 1.5rem">MSI</td>
+                                           <td><input type="text" name="MSI_{{ 1 }}" onfocus="this.placeholder='<230'"onblur="this.placeholder='MSI 20hrs~16hrs'" placeholder="MSI 20hrs~16hrs" style="width:10rem;text-align: center"></td>
+                                       </tr>
+                                       <tr>
+                                           <td style="font-size: 1.5rem">eGFR</td>
+                                           <td><input type="text" name="eGFR_{{ 1 }}" onfocus="this.placeholder='<180'"onblur="this.placeholder='Urine 20hrs~16hrs'" placeholder="eGFR 20hrs~16hrs" style="width:10rem;text-align: center"></td>
+                                       </tr>
+                                       </tbody>
+                                   </table>
+                                   </div>
+                               </span>
+                           </details>
+                           <details>
+                               <summary style="font-size: 1.2rem;">16~12hrs ago</summary>
+                               <span style="display: flex; flex-direction: column;">
+                                   <div style="height: 23rem;overflow: scroll;">
+                                   <table class="content-table" id="datatable" border="1" style="overflow: scroll;width: 15rem;padding: 5.5rem">
+                                       <thead >
+                                       <tr style="font-size: 1.5rem;">
+                                           <th >feature</th>
+                                           <th>16hrs~12hrs ago</th>
+                                       </tr>
+                                       </thead>
+                                       <tbody>
+                                       <tr>
+                                           <td style="font-size: 1.5rem">Creatinine</td>
+                                           <td><input type="text" name="Crt_{{ 2 }}" onfocus="this.placeholder='0.1~20(mg/dl)'" onblur="this.placeholder='Creatinine 20hrs~16hrs'" placeholder="Creatinine 16hrs~12hrs" style="width:10rem;text-align: center"></td>
+                                       </tr>
+                                       <tr>
+                                           <td style="font-size: 1.5rem">Intake</td>
+                                           <td><input type="text" name="Intake_{{ 2 }}" onfocus="this.placeholder='0~10000(ml)'"onblur="this.placeholder='Intake 20hrs~16hrs'" placeholder="Intake 16hrs~12hrs" style="width:10rem;text-align: center"></td>
+                                       </tr>
+                                       <tr>
+                                           <td style="font-size: 1.5rem">Urine</td>
+                                    <td><input type="text" name="Urine_{{ 2 }}" onfocus="this.placeholder='0~10000(ml)'"onblur="this.placeholder='Urine 20hrs~16hrs'" placeholder="Urine 16hrs~12hrs" style="width:10rem;text-align: center"></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 1.5rem">pH</td>
+                                    <td><input type="text" name="pH_{{ 2 }}" onfocus="this.placeholder='6.8~7.8'"onblur="this.placeholder='pH 20hrs~16hrs'" placeholder="pH 16hrs~12hrs" style="width:10rem;text-align: center"></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 1.5rem">Hct</td>
+                                    <td><input type="text" name="Hct_{{ 2 }}" onfocus="this.placeholder='10~70(%)'"onblur="this.placeholder='Hct 20hrs~16hrs'" placeholder="Hct 16hrs~12hrs" style="width:10rem;text-align: center"></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 1.5rem">BUN</td>
+                                    <td><input type="text" name="BUN_{{ 2 }}" onfocus="this.placeholder='0~60(mg/dl)'"onblur="this.placeholder='BUN 20hrs~16hrs'" placeholder="BUN 16hrs~12hrs" style="width:10rem;text-align: center"></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 1.5rem">Na</td>
+                                    <td><input type="text" name="Na_{{ 2 }}" onfocus="this.placeholder='100~180(mmol/L)'"onblur="this.placeholder='Na 20hrs~16hrs'" placeholder="Na 16hrs~12hrs" style="width:10rem;text-align: center"></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 1.5rem">K</td>
+                                    <td><input type="text" name="K_{{ 2 }}" onfocus="this.placeholder='1~9(mmol/L)'"onblur="this.placeholder='K 20hrs~16hrs'" placeholder="K 16hrs~12hrs" style="width:10rem;text-align: center"></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 1.5rem">Temperature</td>
+                                    <td><input type="text" name="TP_{{ 2 }}" onfocus="this.placeholder='35~41(Celsius)'"onblur="this.placeholder='Temperature 20hrs~16hrs'" placeholder="Temperature 16hrs~12hrs" style="width:10rem;text-align: center"></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 1.5rem">Systolic BP</td>
+                                    <td><input type="text" name="SystolicBP_{{ 2 }}" onfocus="this.placeholder='<250(mmHg)'"onblur="this.placeholder='Systolic BP 20hrs~16hrs'" placeholder="Systolic BP 16hrs~12hrs" style="width:10rem;text-align: center"></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 1.5rem">Mean BP</td>
+                                    <td><input type="text" name="MeanBP_{{ 2 }}" onfocus="this.placeholder='<200(mmHg)'"onblur="this.placeholder='Mean BP 20hrs~16hrs'" placeholder="Mean BP 16hrs~12hrs" style="width:10rem;text-align: center"></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 1.5rem">MSI</td>
+                                    <td><input type="text" name="MSI_{{ 2 }}" onfocus="this.placeholder='<230'"onblur="this.placeholder='MSI 20hrs~16hrs'" placeholder="MSI 16hrs~12hrs" style="width:10rem;text-align: center"></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 1.5rem">eGFR</td>
+                                    <td><input type="text" name="eGFR_{{ 2 }}" onfocus="this.placeholder='<180'"onblur="this.placeholder='Urine 20hrs~16hrs'" placeholder="eGFR 16hrs~12hrs" style="width:10rem;text-align: center"></td>
+                                </tbody>
+                            </table>
+                       </table>
+                                   </div>
+                       </span>
+                           </details>
+                           <details>
+                           <summary style="font-size: 1.2rem;">12~8hrs ago</summary>
+                       <span style="display: flex; flex-direction: column;">
+                           <div style="height: 23rem;overflow: scroll;">
+                       <table class="content-table" id="datatable" border="1" style="overflow: scroll;width: 15rem;padding: 5.5rem">
                                 <thead >
                                 <tr style="font-size: 1.5rem;">
                                     <th >feature</th>
-                                    <th>24hrs~20hrs ago</th>
-                                    <th>20hrs~16hrs ago</th>
-                                    <th>16hrs~12hrs ago</th>
                                     <th>12hrs~8hrs ago</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td style="font-size: 1.5rem">Creatinine</td>
+                                    <td><input type="text" name="Crt_{{ 3 }}" onfocus="this.placeholder='0.1~20(mg/dl)'" onblur="this.placeholder='Creatinine 20hrs~16hrs'" placeholder="Creatinine 12hrs~8hrs" style="width:10rem;text-align: center"></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 1.5rem">Intake</td>
+                                    <td><input type="text" name="Intake_{{ 3 }}" onfocus="this.placeholder='0~10000(ml)'"onblur="this.placeholder='Intake 20hrs~16hrs'" placeholder="Intake 12hrs~8hrs" style="width:10rem;text-align: center"></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 1.5rem">Urine</td>
+                                    <td><input type="text" name="Urine_{{ 3 }}" onfocus="this.placeholder='0~10000(ml)'"onblur="this.placeholder='Urine 20hrs~16hrs'" placeholder="Urine 12hrs~8hrs" style="width:10rem;text-align: center"></td>
+
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 1.5rem">pH</td>
+                                    <td><input type="text" name="pH_{{ 3 }}" onfocus="this.placeholder='6.8~7.8'"onblur="this.placeholder='pH 20hrs~16hrs'" placeholder="pH 12hrs~8hrs" style="width:10rem;text-align: center"></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 1.5rem">Hct</td>
+                                    <td><input type="text" name="Hct_{{ 3 }}" onfocus="this.placeholder='10~70(%)'"onblur="this.placeholder='Hct 20hrs~16hrs'" placeholder="Hct 12hrs~8hrs" style="width:10rem;text-align: center"></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 1.5rem">BUN</td>
+                                    <td><input type="text" name="BUN_{{ 3 }}" onfocus="this.placeholder='0~60(mg/dl)'"onblur="this.placeholder='BUN 20hrs~16hrs'" placeholder="BUN 12hrs~8hrs" style="width:10rem;text-align: center"></td>
+
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 1.5rem">Na</td>
+                                    <td><input type="text" name="Na_{{ 3 }}" onfocus="this.placeholder='100~180(mmol/L)'"onblur="this.placeholder='Na 20hrs~16hrs'" placeholder="Na 12hrs~8hrs" style="width:10rem;text-align: center"></td>
+                                    </tr>
+                                <tr>
+                                    <td style="font-size: 1.5rem">K</td>
+                                    <td><input type="text" name="K_{{ 3 }}" onfocus="this.placeholder='1~9(mmol/L)'"onblur="this.placeholder='K 20hrs~16hrs'" placeholder="K 12hrs~8hrs" style="width:10rem;text-align: center"></td>
+                                    </tr>
+                                <tr>
+                                    <td style="font-size: 1.5rem">Temperature</td>
+                                     <td><input type="text" name="TP_{{ 3 }}" onfocus="this.placeholder='35~41(Celsius)'"onblur="this.placeholder='Temperature 20hrs~16hrs'" placeholder="Temperature 12hrs~8hrs" style="width:10rem;text-align: center"></td>
+                                    </tr>
+                                <tr>
+                                    <td style="font-size: 1.5rem">Systolic BP</td>
+                                    <td><input type="text" name="SystolicBP_{{ 3 }}" onfocus="this.placeholder='<250mmHg)'"onblur="this.placeholder='Systolic BP 20hrs~16hrs'" placeholder="Systolic BP 12hrs~8hrs" style="width:10rem;text-align: center"></td>
+                                    </tr>
+                                <tr>
+                                    <td style="font-size: 1.5rem">Mean BP</td>
+                                    <td><input type="text" name="MeanBP_{{ 3 }}" onfocus="this.placeholder='<200(mmHg)'"onblur="this.placeholder='Mean BP 20hrs~16hrs'" placeholder="Mean BP 12hrs~8hrs" style="width:10rem;text-align: center"></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 1.5rem">MSI</td>
+                                    <td><input type="text" name="MSI_{{ 3 }}" onfocus="this.placeholder='<230'"onblur="this.placeholder='MSI 20hrs~16hrs'" placeholder="MSI 12hrs~8hrs" style="width:10rem;text-align: center"></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 1.5rem">eGFR</td>
+                                    <td><input type="text" name="eGFR_{{ 3 }}" onfocus="this.placeholder='<180'"onblur="this.placeholder='Urine 20hrs~16hrs'" placeholder="eGFR 12hrs~8hrs" style="width:10rem;text-align: center"></td>
+
+                                </tr>
+                                </tbody>
+                            </table>
+                       </table>
+                           </div>
+                       </span>
+                           </details>
+                           <details>
+                           <summary style="font-size: 1.2rem;">8~4hrs ago</summary>
+                       <span style="display: flex; flex-direction: column;">
+                           <div style="height: 23rem;overflow: scroll;">
+                       <table class="content-table" id="datatable" border="1" style="overflow: scroll;width: 15rem;padding: 5.5rem">
+                                <thead >
+                                <tr style="font-size: 1.5rem;">
+                                    <th >feature</th>
                                     <th>8hrs~4hrs ago</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td style="font-size: 1.5rem">Creatinine</td>
+                                    <td><input type="text" name="Crt_{{ 4 }}" onfocus="this.placeholder='0.1~20(mg/dl)'" onblur="this.placeholder='Creatinine 8hrs~4hrs'" placeholder="Creatinine 8hrs~4hrs" style="width:10rem;text-align: center"></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 1.5rem">Intake</td>
+                                    <td><input type="text" name="Intake_{{ 4 }}" onfocus="this.placeholder='0~10000(ml)'"onblur="this.placeholder='Intake 8hrs~4hrs'" placeholder="Intake 8hrs~4hrs" style="width:10rem;text-align: center"></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 1.5rem">Urine</td>
+                                    <td><input type="text" name="Urine_{{ 4 }}" onfocus="this.placeholder='0~10000(ml)'"onblur="this.placeholder='Urine 8hrs~4hrs'" placeholder="Urine 8hrs~4hrs" style="width:10rem;text-align: center"></td>
+
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 1.5rem">pH</td>
+                                    <td><input type="text" name="pH_{{ 4 }}" onfocus="this.placeholder='6.8~7.8'"onblur="this.placeholder='pH 8hrs~4hrs'" placeholder="pH 8hrs~4hrs" style="width:10rem;text-align: center"></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 1.5rem">Hct</td>
+                                   <td><input type="text" name="Hct_{{ 4 }}" onfocus="this.placeholder='10~70(%)'"onblur="this.placeholder='Hct 8hrs~4hrs'" placeholder="Hct 8hrs~4hrs" style="width:10rem;text-align: center"></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 1.5rem">BUN</td>
+                                    <td><input type="text" name="BUN_{{ 4 }}" onfocus="this.placeholder='0~60(mg/dl)'"onblur="this.placeholder='BUN 8hrs~4hrs'" placeholder="BUN 8hrs~4hrs" style="width:10rem;text-align: center"></td>
+
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 1.5rem">Na</td>
+                                    <td><input type="text" name="Na_{{ 4 }}" onfocus="this.placeholder='100~180(mmol/L)'"onblur="this.placeholder='Na 8hrs~4hrs'" placeholder="Na 8hrs~4hrs" style="width:10rem;text-align: center"></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 1.5rem">K</td>
+                                    <td><input type="text" name="K_{{ 4 }}" onfocus="this.placeholder='1~9(mmol/L)'"onblur="this.placeholder='K 8hrs~4hrs'" placeholder="K 8hrs~4hrs" style="width:10rem;text-align: center"></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 1.5rem">Temperature</td>
+                                    <td><input type="text" name="TP_{{ 4 }}" onfocus="this.placeholder='35~41(Celsius)'"onblur="this.placeholder='Temperature 8hrs~4hrs'" placeholder="Temperature 8hrs~4hrs" style="width:10rem;text-align: center"></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 1.5rem">Systolic BP</td>
+                                    <td><input type="text" name="SystolicBP_{{ 4 }}" onfocus="this.placeholder='<250(mmHg)'"onblur="this.placeholder='Systolic BP 8hrs~4hrs'" placeholder="Systolic BP 8hrs~4hrs" style="width:10rem;text-align: center"></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 1.5rem">Mean BP</td>
+                                    <td><input type="text" name="MeanBP_{{ 4 }}" onfocus="this.placeholder='<200(mmHg)'"onblur="this.placeholder='Mean BP 8hrs~4hrs'" placeholder="Mean BP 8hrs~4hrs" style="width:10rem;text-align: center"></td>
+
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 1.5rem">MSI</td>
+                                    <td><input type="text" name="MSI_{{ 4 }}" onfocus="this.placeholder='<230'"onblur="this.placeholder='MSI 8hrs~4hrs'" placeholder="MSI 8hrs~4hrs" style="width:10rem;text-align: center"></td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 1.5rem">eGFR</td>
+                                    <td><input type="text" name="eGFR_{{ 4 }}" onfocus="this.placeholder='<180'"onblur="this.placeholder='Urine 8hrs~4hrs'" placeholder="eGFR 8hrs~4hrs" style="width:10rem;text-align: center"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                       </table>
+                           </div>
+                       </span>
+                           </details>
+                           <details>
+                           <summary style="font-size: 1.2rem;">4~0hrs ago</summary>
+                       <span style="display: flex; flex-direction: column;">
+                           <div style="height: 23rem;overflow: scroll;">
+                       <table class="content-table" id="datatable" border="1" style="overflow: scroll;width: 15rem;padding: 5.5rem">
+                                <thead >
+                                <tr style="font-size: 1.5rem;">
+                                    <th >feature</th>
                                     <th>4hrs~0hrs ago</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
                                     <td style="font-size: 1.5rem">Creatinine</td>
-                                    <td><input type="text" name="Crt_{{ 0 }}" onfocus="this.placeholder='0.1~20(mg/dl)'" onblur="this.placeholder='Creatinine 24hrs~20hrs'" placeholder="Creatinine 24hrs~20hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="Crt_{{ 1 }}" onfocus="this.placeholder='0.1~20(mg/dl)'" onblur="this.placeholder='Creatinine 20hrs~16hrs'" placeholder="Creatinine 20hrs~16hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="Crt_{{ 2 }}" onfocus="this.placeholder='0.1~20(mg/dl)'" onblur="this.placeholder='Creatinine 20hrs~16hrs'" placeholder="Creatinine 16hrs~12hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="Crt_{{ 3 }}" onfocus="this.placeholder='0.1~20(mg/dl)'" onblur="this.placeholder='Creatinine 20hrs~16hrs'" placeholder="Creatinine 12hrs~8hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="Crt_{{ 4 }}" onfocus="this.placeholder='0.1~20(mg/dl)'" onblur="this.placeholder='Creatinine 8hrs~4hrs'" placeholder="Creatinine 8hrs~4hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="Crt_{{ 5 }}" onfocus="this.placeholder='0.1~20(mg/dl)'" onblur="this.placeholder='Creatinine 4hrs~0hrs'" placeholder="Creatinine 4hrs~0hrs" style="text-align: center"></td>
+                                    <td><input type="text" name="Crt_{{ 5 }}" onfocus="this.placeholder='0.1~20(mg/dl)'" onblur="this.placeholder='Creatinine 4hrs~0hrs'" placeholder="Creatinine 4hrs~0hrs" style="width:10rem;text-align: center"></td>
                                 </tr>
                                 <tr>
                                     <td style="font-size: 1.5rem">Intake</td>
-                                    <td><input type="text" name="Intake_{{ 0 }}" onfocus="this.placeholder='0~10000(ml)'"onblur="this.placeholder='Intake 24hrs~20hrs'" placeholder="Intake 24hrs~20hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="Intake_{{ 1 }}" onfocus="this.placeholder='0~10000(ml)'"onblur="this.placeholder='Intake 20hrs~16hrs'" placeholder="Intake 20hrs~16hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="Intake_{{ 2 }}" onfocus="this.placeholder='0~10000(ml)'"onblur="this.placeholder='Intake 20hrs~16hrs'" placeholder="Intake 16hrs~12hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="Intake_{{ 3 }}" onfocus="this.placeholder='0~10000(ml)'"onblur="this.placeholder='Intake 20hrs~16hrs'" placeholder="Intake 12hrs~8hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="Intake_{{ 4 }}" onfocus="this.placeholder='0~10000(ml)'"onblur="this.placeholder='Intake 8hrs~4hrs'" placeholder="Intake 8hrs~4hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="Intake_{{ 5 }}" onfocus="this.placeholder='0~10000(ml)'"onblur="this.placeholder='Intake 4hrs~0hrs'" placeholder="Intake 4hrs~0hrs" style="text-align: center"></td>
+                                    <td><input type="text" name="Intake_{{ 5 }}" onfocus="this.placeholder='0~10000(ml)'"onblur="this.placeholder='Intake 4hrs~0hrs'" placeholder="Intake 4hrs~0hrs" style="width:10rem;text-align: center"></td>
                                 </tr>
                                 <tr>
                                     <td style="font-size: 1.5rem">Urine</td>
-                                    <td><input type="text" name="Urine_{{ 0 }}" onfocus="this.placeholder='0~10000(ml)'"onblur="this.placeholder='Urine 24hrs~20hrs'" placeholder="Urine 24hrs~20hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="Urine_{{ 1 }}" onfocus="this.placeholder='0~10000(ml)'"onblur="this.placeholder='Urine 20hrs~16hrs'" placeholder="Urine 20hrs~16hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="Urine_{{ 2 }}" onfocus="this.placeholder='0~10000(ml)'"onblur="this.placeholder='Urine 20hrs~16hrs'" placeholder="Urine 16hrs~12hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="Urine_{{ 3 }}" onfocus="this.placeholder='0~10000(ml)'"onblur="this.placeholder='Urine 20hrs~16hrs'" placeholder="Urine 12hrs~8hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="Urine_{{ 4 }}" onfocus="this.placeholder='0~10000(ml)'"onblur="this.placeholder='Urine 8hrs~4hrs'" placeholder="Urine 8hrs~4hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="Urine_{{ 5 }}" onfocus="this.placeholder='0~10000(ml)'"onblur="this.placeholder='Urine 4hrs~0hrs'" placeholder="Urine 4hrs~0hrs" style="text-align: center"></td>
+                                    <td><input type="text" name="Urine_{{ 5 }}" onfocus="this.placeholder='0~10000(ml)'"onblur="this.placeholder='Urine 4hrs~0hrs'" placeholder="Urine 4hrs~0hrs" style="width:10rem;text-align: center"></td>
 
                                 </tr>
                                 <tr>
                                     <td style="font-size: 1.5rem">pH</td>
-                                    <td><input type="text" name="pH_{{ 0 }}" onfocus="this.placeholder='6.8~7.8'"onblur="this.placeholder='pH 24hrs~20hrs'" placeholder="pH 24hrs~20hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="pH_{{ 1 }}" onfocus="this.placeholder='6.8~7.8'"onblur="this.placeholder='pH 20hrs~16hrs'" placeholder="pH 20hrs~16hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="pH_{{ 2 }}" onfocus="this.placeholder='6.8~7.8'"onblur="this.placeholder='pH 20hrs~16hrs'" placeholder="pH 16hrs~12hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="pH_{{ 3 }}" onfocus="this.placeholder='6.8~7.8'"onblur="this.placeholder='pH 20hrs~16hrs'" placeholder="pH 12hrs~8hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="pH_{{ 4 }}" onfocus="this.placeholder='6.8~7.8'"onblur="this.placeholder='pH 8hrs~4hrs'" placeholder="pH 8hrs~4hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="pH_{{ 5 }}" onfocus="this.placeholder='6.8~7.8'"onblur="this.placeholder='pH 4hrs~0hrs'" placeholder="pH 4hrs~0hrs" style="text-align: center"></td>
+                                    <td><input type="text" name="pH_{{ 5 }}" onfocus="this.placeholder='6.8~7.8'"onblur="this.placeholder='pH 4hrs~0hrs'" placeholder="pH 4hrs~0hrs" style="width:10rem;text-align: center"></td>
                                 </tr>
                                 <tr>
                                     <td style="font-size: 1.5rem">Hct</td>
-                                    <td><input type="text" name="Hct_{{ 0 }}" onfocus="this.placeholder='10~70(%)'"onblur="this.placeholder='Hct 24hrs~20hrs'" placeholder="Hct 24hrs~20hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="Hct_{{ 1 }}" onfocus="this.placeholder='10~70(%)'"onblur="this.placeholder='Hct 20hrs~16hrs'" placeholder="Hct 20hrs~16hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="Hct_{{ 2 }}" onfocus="this.placeholder='10~70(%)'"onblur="this.placeholder='Hct 20hrs~16hrs'" placeholder="Hct 16hrs~12hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="Hct_{{ 3 }}" onfocus="this.placeholder='10~70(%)'"onblur="this.placeholder='Hct 20hrs~16hrs'" placeholder="Hct 12hrs~8hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="Hct_{{ 4 }}" onfocus="this.placeholder='10~70(%)'"onblur="this.placeholder='Hct 8hrs~4hrs'" placeholder="Hct 8hrs~4hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="Hct_{{ 5 }}" onfocus="this.placeholder='10~70(%)'"onblur="this.placeholder='Hct 4hrs~0hrs'" placeholder="Hct 4hrs~0hrs" style="text-align: center"></td>
+                                    <td><input type="text" name="Hct_{{ 5 }}" onfocus="this.placeholder='10~70(%)'"onblur="this.placeholder='Hct 4hrs~0hrs'" placeholder="Hct 4hrs~0hrs" style="width:10rem;text-align: center"></td>
                                 </tr>
                                 <tr>
                                     <td style="font-size: 1.5rem">BUN</td>
-                                    <td><input type="text" name="BUN_{{ 0 }}" onfocus="this.placeholder='0~60(mg/dl)'"onblur="this.placeholder='BUN 24hrs~20hrs'" placeholder="BUN 24hrs~20hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="BUN_{{ 1 }}" onfocus="this.placeholder='0~60(mg/dl)'"onblur="this.placeholder='BUN 20hrs~16hrs'" placeholder="BUN 20hrs~16hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="BUN_{{ 2 }}" onfocus="this.placeholder='0~60(mg/dl)'"onblur="this.placeholder='BUN 20hrs~16hrs'" placeholder="BUN 16hrs~12hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="BUN_{{ 3 }}" onfocus="this.placeholder='0~60(mg/dl)'"onblur="this.placeholder='BUN 20hrs~16hrs'" placeholder="BUN 12hrs~8hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="BUN_{{ 4 }}" onfocus="this.placeholder='0~60(mg/dl)'"onblur="this.placeholder='BUN 8hrs~4hrs'" placeholder="BUN 8hrs~4hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="BUN_{{ 5 }}" onfocus="this.placeholder='0~60(mg/dl)'"onblur="this.placeholder='BUN 4hrs~0hrs'" placeholder="BUN 4hrs~0hrs" style="text-align: center"></td>
+                                    <td><input type="text" name="BUN_{{ 5 }}" onfocus="this.placeholder='0~60(mg/dl)'"onblur="this.placeholder='BUN 4hrs~0hrs'" placeholder="BUN 4hrs~0hrs" style="width:10rem;text-align: center"></td>
 
                                 </tr>
                                 <tr>
                                     <td style="font-size: 1.5rem">Na</td>
-                                    <td><input type="text" name="Na_{{ 0 }}" onfocus="this.placeholder='100~180(mmol/L)'"onblur="this.placeholder='Na 24hrs~20hrs'" placeholder="Na 24hrs~20hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="Na_{{ 1 }}" onfocus="this.placeholder='100~180(mmol/L)'"onblur="this.placeholder='Na 20hrs~16hrs'" placeholder="Na 20hrs~16hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="Na_{{ 2 }}" onfocus="this.placeholder='100~180(mmol/L)'"onblur="this.placeholder='Na 20hrs~16hrs'" placeholder="Na 16hrs~12hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="Na_{{ 3 }}" onfocus="this.placeholder='100~180(mmol/L)'"onblur="this.placeholder='Na 20hrs~16hrs'" placeholder="Na 12hrs~8hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="Na_{{ 4 }}" onfocus="this.placeholder='100~180(mmol/L)'"onblur="this.placeholder='Na 8hrs~4hrs'" placeholder="Na 8hrs~4hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="Na_{{ 5 }}" onfocus="this.placeholder='100~180(mmol/L)'"onblur="this.placeholder='Na 4hrs~0hrs'" placeholder="Na 4hrs~0hrs" style="text-align: center"></td>
+                                    <td><input type="text" name="Na_{{ 5 }}" onfocus="this.placeholder='100~180(mmol/L)'"onblur="this.placeholder='Na 4hrs~0hrs'" placeholder="Na 4hrs~0hrs" style="width:10rem;text-align: center"></td>
                                 </tr>
                                 <tr>
                                     <td style="font-size: 1.5rem">K</td>
-                                    <td><input type="text" name="K_{{ 0 }}" onfocus="this.placeholder='1~9(mmol/L)'"onblur="this.placeholder='K 24hrs~20hrs'" placeholder="K 24hrs~20hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="K_{{ 1 }}" onfocus="this.placeholder='1~9(mmol/L)'"onblur="this.placeholder='K 20hrs~16hrs'" placeholder="K 20hrs~16hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="K_{{ 2 }}" onfocus="this.placeholder='1~9(mmol/L)'"onblur="this.placeholder='K 20hrs~16hrs'" placeholder="K 16hrs~12hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="K_{{ 3 }}" onfocus="this.placeholder='1~9(mmol/L)'"onblur="this.placeholder='K 20hrs~16hrs'" placeholder="K 12hrs~8hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="K_{{ 4 }}" onfocus="this.placeholder='1~9(mmol/L)'"onblur="this.placeholder='K 8hrs~4hrs'" placeholder="K 8hrs~4hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="K_{{ 5 }}" onfocus="this.placeholder='1~9(mmol/L)'"onblur="this.placeholder='K 4hrs~0hrs'" placeholder="K 4hrs~0hrs" style="text-align: center"></td>
+                                    <td><input type="text" name="K_{{ 5 }}" onfocus="this.placeholder='1~9(mmol/L)'"onblur="this.placeholder='K 4hrs~0hrs'" placeholder="K 4hrs~0hrs" style="width:10rem;text-align: center"></td>
                                 </tr>
                                 <tr>
                                     <td style="font-size: 1.5rem">Temperature</td>
-                                    <td><input type="text" name="TP_{{ 0 }}" onfocus="this.placeholder='35~41(Celsius)'"onblur="this.placeholder='Temperature 24hrs~20hrs'" placeholder="Temperature 24hrs~20hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="TP_{{ 1 }}" onfocus="this.placeholder='35~41(Celsius)'"onblur="this.placeholder='Temperature 20hrs~16hrs'" placeholder="Temperature 20hrs~16hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="TP_{{ 2 }}" onfocus="this.placeholder='35~41(Celsius)'"onblur="this.placeholder='Temperature 20hrs~16hrs'" placeholder="Temperature 16hrs~12hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="TP_{{ 3 }}" onfocus="this.placeholder='35~41(Celsius)'"onblur="this.placeholder='Temperature 20hrs~16hrs'" placeholder="Temperature 12hrs~8hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="TP_{{ 4 }}" onfocus="this.placeholder='35~41(Celsius)'"onblur="this.placeholder='Temperature 8hrs~4hrs'" placeholder="Temperature 8hrs~4hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="TP_{{ 5 }}" onfocus="this.placeholder='35~41(Celsius)'"onblur="this.placeholder='Temperature 4hrs~0hrs'" placeholder="Temperature 4hrs~0hrs" style="text-align: center"></td>
+                                    <td><input type="text" name="TP_{{ 5 }}" onfocus="this.placeholder='35~41(Celsius)'"onblur="this.placeholder='Temperature 4hrs~0hrs'" placeholder="Temperature 4hrs~0hrs" style="width:10rem;text-align: center"></td>
                                 </tr>
                                 <tr>
                                     <td style="font-size: 1.5rem">Systolic BP</td>
-                                    <td><input type="text" name="SystolicBP_{{ 0 }}" onfocus="this.placeholder='<250(mmHg)'"onblur="this.placeholder='Systolic BP 24hrs~20hrs'" placeholder="Systolic BP 24hrs~20hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="SystolicBP_{{ 1 }}" onfocus="this.placeholder='<250(mmHg)'"onblur="this.placeholder='Systolic BP 20hrs~16hrs'" placeholder="Systolic BP 20hrs~16hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="SystolicBP_{{ 2 }}" onfocus="this.placeholder='<250(mmHg)'"onblur="this.placeholder='Systolic BP 20hrs~16hrs'" placeholder="Systolic BP 16hrs~12hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="SystolicBP_{{ 3 }}" onfocus="this.placeholder='<250mmHg)'"onblur="this.placeholder='Systolic BP 20hrs~16hrs'" placeholder="Systolic BP 12hrs~8hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="SystolicBP_{{ 4 }}" onfocus="this.placeholder='<250(mmHg)'"onblur="this.placeholder='Systolic BP 8hrs~4hrs'" placeholder="Systolic BP 8hrs~4hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="SystolicBP_{{ 5 }}" onfocus="this.placeholder='<250(mmHg)'"onblur="this.placeholder='Systolic BP 4hrs~0hrs'" placeholder="Systolic BP 4hrs~0hrs" style="text-align: center"></td>
+                                    <td><input type="text" name="SystolicBP_{{ 5 }}" onfocus="this.placeholder='<250(mmHg)'"onblur="this.placeholder='Systolic BP 4hrs~0hrs'" placeholder="Systolic BP 4hrs~0hrs" style="width:10rem;text-align: center"></td>
                                 </tr>
                                 <tr>
                                     <td style="font-size: 1.5rem">Mean BP</td>
-                                    <td><input type="text" name="MeanBP_{{ 0 }}" onfocus="this.placeholder='<200(mmHg)'"onblur="this.placeholder='Mean BP 24hrs~20hrs'" placeholder="Mean BP 24hrs~20hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="MeanBP_{{ 1 }}" onfocus="this.placeholder='<200(mmHg)'"onblur="this.placeholder='Mean BP 20hrs~16hrs'" placeholder="Mean BP 20hrs~16hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="MeanBP_{{ 2 }}" onfocus="this.placeholder='<200(mmHg)'"onblur="this.placeholder='Mean BP 20hrs~16hrs'" placeholder="Mean BP 16hrs~12hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="MeanBP_{{ 3 }}" onfocus="this.placeholder='<200(mmHg)'"onblur="this.placeholder='Mean BP 20hrs~16hrs'" placeholder="Mean BP 12hrs~8hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="MeanBP_{{ 4 }}" onfocus="this.placeholder='<200(mmHg)'"onblur="this.placeholder='Mean BP 8hrs~4hrs'" placeholder="Mean BP 8hrs~4hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="MeanBP_{{ 5 }}" onfocus="this.placeholder='<200(mmHg)'"onblur="this.placeholder='Mean BP 4hrs~0hrs'" placeholder="Mean BP 4hrs~0hrs" style="text-align: center"></td>
+                                    <td><input type="text" name="MeanBP_{{ 5 }}" onfocus="this.placeholder='<200(mmHg)'"onblur="this.placeholder='Mean BP 4hrs~0hrs'" placeholder="Mean BP 4hrs~0hrs" style="width:10rem;text-align: center"></td>
 
                                 </tr>
                                 <tr>
                                     <td style="font-size: 1.5rem">MSI</td>
-                                    <td><input type="text" name="MSI_{{ 0 }}" onfocus="this.placeholder='<230'"onblur="this.placeholder='MSI 24hrs~20hrs'" placeholder="MSI 24hrs~20hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="MSI_{{ 1 }}" onfocus="this.placeholder='<230'"onblur="this.placeholder='MSI 20hrs~16hrs'" placeholder="MSI 20hrs~16hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="MSI_{{ 2 }}" onfocus="this.placeholder='<230'"onblur="this.placeholder='MSI 20hrs~16hrs'" placeholder="MSI 16hrs~12hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="MSI_{{ 3 }}" onfocus="this.placeholder='<230'"onblur="this.placeholder='MSI 20hrs~16hrs'" placeholder="MSI 12hrs~8hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="MSI_{{ 4 }}" onfocus="this.placeholder='<230'"onblur="this.placeholder='MSI 8hrs~4hrs'" placeholder="MSI 8hrs~4hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="MSI_{{ 5 }}" onfocus="this.placeholder='<230'"onblur="this.placeholder='MSI 4hrs~0hrs'" placeholder="MSI 4hrs~0hrs" style="text-align: center"></td>
+                                    <td><input type="text" name="MSI_{{ 5 }}" onfocus="this.placeholder='<230'"onblur="this.placeholder='MSI 4hrs~0hrs'" placeholder="MSI 4hrs~0hrs" style="width:10rem;text-align: center"></td>
 
                                 </tr>
                                 <tr>
                                     <td style="font-size: 1.5rem">eGFR</td>
-                                    <td><input type="text" name="eGFR_{{ 0 }}" onfocus="this.placeholder='<180'"onblur="this.placeholder='Urine 24hrs~20hrs'" placeholder="eGFR 24hrs~20hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="eGFR_{{ 1 }}" onfocus="this.placeholder='<180'"onblur="this.placeholder='Urine 20hrs~16hrs'" placeholder="eGFR 20hrs~16hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="eGFR_{{ 2 }}" onfocus="this.placeholder='<180'"onblur="this.placeholder='Urine 20hrs~16hrs'" placeholder="eGFR 16hrs~12hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="eGFR_{{ 3 }}" onfocus="this.placeholder='<180'"onblur="this.placeholder='Urine 20hrs~16hrs'" placeholder="eGFR 12hrs~8hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="eGFR_{{ 4 }}" onfocus="this.placeholder='<180'"onblur="this.placeholder='Urine 8hrs~4hrs'" placeholder="eGFR 8hrs~4hrs" style="text-align: center"></td>
-                                    <td><input type="text" name="eGFR_{{ 5 }}" onfocus="this.placeholder='<180'"onblur="this.placeholder='Urine 4hrs~0hrs'" placeholder="eGFR 4hrs~0hrs" style="text-align: center"></td>
+                                    <td><input type="text" name="eGFR_{{ 5 }}" onfocus="this.placeholder='<180'"onblur="this.placeholder='Urine 4hrs~0hrs'" placeholder="eGFR 4hrs~0hrs" style="width:10rem;text-align: center"></td>
                                 </tr>
                                 </tbody>
                             </table>
-                        </span>
-                            <span style="position: fixed; bottom: 10px;">
-                        <div class="row" style="content:''; display: table;clear: both;width: 100%;padding: 0.5rem;">
+                       </table>
+                           </div>
+                       </span>
+                           </details>
+                           </div>
+                       <span style="position: fixed;top:34rem;">
+                       <div class="row" style="content:''; display: table;clear: both;width: 100%;padding: 0.5rem;">
                             <div class="column" style="float: left;width: 32%;padding: 0.3rem;">
                                 <label for="Age" style="font-size: 1.2rem;">Age:</label>
                                 <input type="text" name="Age" placeholder="Years" style="size: 30px;text-align: center">
@@ -384,10 +675,169 @@
                             </div>
                         </div>
                 <input type="submit" value="Submit" name="OnlyOneData"style="width: 97%; left: 250px;">
-
-                            </span>
-</span>
-    </form>
+                           </span>
+                   </form>
+{#                    <form action="/predictresultforinput/" method="post" style="height:30rem;width: 100%;overflow: scroll;">#}
+{#                            {% csrf_token %}#}
+{#                        <span style="display: flex; flex-direction: column;">#}
+{#                        <span style="">#}
+{#                            <table class="content-table" id="datatable" border="1" style="overflow: scroll;width: 115rem;padding: 5.5rem">#}
+{#                                <thead >#}
+{#                                <tr style="font-size: 1.5rem;">#}
+{#                                    <th >feature</th>#}
+{#                                    <th>24hrs~20hrs ago</th>#}
+{#                                    <th>20hrs~16hrs ago</th>#}
+{#                                    <th>16hrs~12hrs ago</th>#}
+{#                                    <th>12hrs~8hrs ago</th>#}
+{#                                    <th>8hrs~4hrs ago</th>#}
+{#                                    <th>4hrs~0hrs ago</th>#}
+{#                                </tr>#}
+{#                                </thead>#}
+{#                                <tbody>#}
+{#                                <tr>#}
+{#                                    <td style="font-size: 1.5rem">Creatinine</td>#}
+{#                                    <td><input type="text" name="Crt_{{ 0 }}" onfocus="this.placeholder='0.1~20(mg/dl)'" onblur="this.placeholder='Creatinine 24hrs~20hrs'" placeholder="Creatinine 24hrs~20hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="Crt_{{ 1 }}" onfocus="this.placeholder='0.1~20(mg/dl)'" onblur="this.placeholder='Creatinine 20hrs~16hrs'" placeholder="Creatinine 20hrs~16hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="Crt_{{ 2 }}" onfocus="this.placeholder='0.1~20(mg/dl)'" onblur="this.placeholder='Creatinine 20hrs~16hrs'" placeholder="Creatinine 16hrs~12hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="Crt_{{ 3 }}" onfocus="this.placeholder='0.1~20(mg/dl)'" onblur="this.placeholder='Creatinine 20hrs~16hrs'" placeholder="Creatinine 12hrs~8hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="Crt_{{ 4 }}" onfocus="this.placeholder='0.1~20(mg/dl)'" onblur="this.placeholder='Creatinine 8hrs~4hrs'" placeholder="Creatinine 8hrs~4hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="Crt_{{ 5 }}" onfocus="this.placeholder='0.1~20(mg/dl)'" onblur="this.placeholder='Creatinine 4hrs~0hrs'" placeholder="Creatinine 4hrs~0hrs" style="text-align: center"></td>#}
+{#                                </tr>#}
+{#                                <tr>#}
+{#                                    <td style="font-size: 1.5rem">Intake</td>#}
+{#                                    <td><input type="text" name="Intake_{{ 0 }}" onfocus="this.placeholder='0~10000(ml)'"onblur="this.placeholder='Intake 24hrs~20hrs'" placeholder="Intake 24hrs~20hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="Intake_{{ 1 }}" onfocus="this.placeholder='0~10000(ml)'"onblur="this.placeholder='Intake 20hrs~16hrs'" placeholder="Intake 20hrs~16hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="Intake_{{ 2 }}" onfocus="this.placeholder='0~10000(ml)'"onblur="this.placeholder='Intake 20hrs~16hrs'" placeholder="Intake 16hrs~12hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="Intake_{{ 3 }}" onfocus="this.placeholder='0~10000(ml)'"onblur="this.placeholder='Intake 20hrs~16hrs'" placeholder="Intake 12hrs~8hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="Intake_{{ 4 }}" onfocus="this.placeholder='0~10000(ml)'"onblur="this.placeholder='Intake 8hrs~4hrs'" placeholder="Intake 8hrs~4hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="Intake_{{ 5 }}" onfocus="this.placeholder='0~10000(ml)'"onblur="this.placeholder='Intake 4hrs~0hrs'" placeholder="Intake 4hrs~0hrs" style="text-align: center"></td>#}
+{#                                </tr>#}
+{#                                <tr>#}
+{#                                    <td style="font-size: 1.5rem">Urine</td>#}
+{#                                    <td><input type="text" name="Urine_{{ 0 }}" onfocus="this.placeholder='0~10000(ml)'"onblur="this.placeholder='Urine 24hrs~20hrs'" placeholder="Urine 24hrs~20hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="Urine_{{ 1 }}" onfocus="this.placeholder='0~10000(ml)'"onblur="this.placeholder='Urine 20hrs~16hrs'" placeholder="Urine 20hrs~16hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="Urine_{{ 2 }}" onfocus="this.placeholder='0~10000(ml)'"onblur="this.placeholder='Urine 20hrs~16hrs'" placeholder="Urine 16hrs~12hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="Urine_{{ 3 }}" onfocus="this.placeholder='0~10000(ml)'"onblur="this.placeholder='Urine 20hrs~16hrs'" placeholder="Urine 12hrs~8hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="Urine_{{ 4 }}" onfocus="this.placeholder='0~10000(ml)'"onblur="this.placeholder='Urine 8hrs~4hrs'" placeholder="Urine 8hrs~4hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="Urine_{{ 5 }}" onfocus="this.placeholder='0~10000(ml)'"onblur="this.placeholder='Urine 4hrs~0hrs'" placeholder="Urine 4hrs~0hrs" style="text-align: center"></td>#}
+{##}
+{#                                </tr>#}
+{#                                <tr>#}
+{#                                    <td style="font-size: 1.5rem">pH</td>#}
+{#                                    <td><input type="text" name="pH_{{ 0 }}" onfocus="this.placeholder='6.8~7.8'"onblur="this.placeholder='pH 24hrs~20hrs'" placeholder="pH 24hrs~20hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="pH_{{ 1 }}" onfocus="this.placeholder='6.8~7.8'"onblur="this.placeholder='pH 20hrs~16hrs'" placeholder="pH 20hrs~16hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="pH_{{ 2 }}" onfocus="this.placeholder='6.8~7.8'"onblur="this.placeholder='pH 20hrs~16hrs'" placeholder="pH 16hrs~12hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="pH_{{ 3 }}" onfocus="this.placeholder='6.8~7.8'"onblur="this.placeholder='pH 20hrs~16hrs'" placeholder="pH 12hrs~8hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="pH_{{ 4 }}" onfocus="this.placeholder='6.8~7.8'"onblur="this.placeholder='pH 8hrs~4hrs'" placeholder="pH 8hrs~4hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="pH_{{ 5 }}" onfocus="this.placeholder='6.8~7.8'"onblur="this.placeholder='pH 4hrs~0hrs'" placeholder="pH 4hrs~0hrs" style="text-align: center"></td>#}
+{#                                </tr>#}
+{#                                <tr>#}
+{#                                    <td style="font-size: 1.5rem">Hct</td>#}
+{#                                    <td><input type="text" name="Hct_{{ 0 }}" onfocus="this.placeholder='10~70(%)'"onblur="this.placeholder='Hct 24hrs~20hrs'" placeholder="Hct 24hrs~20hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="Hct_{{ 1 }}" onfocus="this.placeholder='10~70(%)'"onblur="this.placeholder='Hct 20hrs~16hrs'" placeholder="Hct 20hrs~16hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="Hct_{{ 2 }}" onfocus="this.placeholder='10~70(%)'"onblur="this.placeholder='Hct 20hrs~16hrs'" placeholder="Hct 16hrs~12hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="Hct_{{ 3 }}" onfocus="this.placeholder='10~70(%)'"onblur="this.placeholder='Hct 20hrs~16hrs'" placeholder="Hct 12hrs~8hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="Hct_{{ 4 }}" onfocus="this.placeholder='10~70(%)'"onblur="this.placeholder='Hct 8hrs~4hrs'" placeholder="Hct 8hrs~4hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="Hct_{{ 5 }}" onfocus="this.placeholder='10~70(%)'"onblur="this.placeholder='Hct 4hrs~0hrs'" placeholder="Hct 4hrs~0hrs" style="text-align: center"></td>#}
+{#                                </tr>#}
+{#                                <tr>#}
+{#                                    <td style="font-size: 1.5rem">BUN</td>#}
+{#                                    <td><input type="text" name="BUN_{{ 0 }}" onfocus="this.placeholder='0~60(mg/dl)'"onblur="this.placeholder='BUN 24hrs~20hrs'" placeholder="BUN 24hrs~20hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="BUN_{{ 1 }}" onfocus="this.placeholder='0~60(mg/dl)'"onblur="this.placeholder='BUN 20hrs~16hrs'" placeholder="BUN 20hrs~16hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="BUN_{{ 2 }}" onfocus="this.placeholder='0~60(mg/dl)'"onblur="this.placeholder='BUN 20hrs~16hrs'" placeholder="BUN 16hrs~12hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="BUN_{{ 3 }}" onfocus="this.placeholder='0~60(mg/dl)'"onblur="this.placeholder='BUN 20hrs~16hrs'" placeholder="BUN 12hrs~8hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="BUN_{{ 4 }}" onfocus="this.placeholder='0~60(mg/dl)'"onblur="this.placeholder='BUN 8hrs~4hrs'" placeholder="BUN 8hrs~4hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="BUN_{{ 5 }}" onfocus="this.placeholder='0~60(mg/dl)'"onblur="this.placeholder='BUN 4hrs~0hrs'" placeholder="BUN 4hrs~0hrs" style="text-align: center"></td>#}
+{##}
+{#                                </tr>#}
+{#                                <tr>#}
+{#                                    <td style="font-size: 1.5rem">Na</td>#}
+{#                                    <td><input type="text" name="Na_{{ 0 }}" onfocus="this.placeholder='100~180(mmol/L)'"onblur="this.placeholder='Na 24hrs~20hrs'" placeholder="Na 24hrs~20hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="Na_{{ 1 }}" onfocus="this.placeholder='100~180(mmol/L)'"onblur="this.placeholder='Na 20hrs~16hrs'" placeholder="Na 20hrs~16hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="Na_{{ 2 }}" onfocus="this.placeholder='100~180(mmol/L)'"onblur="this.placeholder='Na 20hrs~16hrs'" placeholder="Na 16hrs~12hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="Na_{{ 3 }}" onfocus="this.placeholder='100~180(mmol/L)'"onblur="this.placeholder='Na 20hrs~16hrs'" placeholder="Na 12hrs~8hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="Na_{{ 4 }}" onfocus="this.placeholder='100~180(mmol/L)'"onblur="this.placeholder='Na 8hrs~4hrs'" placeholder="Na 8hrs~4hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="Na_{{ 5 }}" onfocus="this.placeholder='100~180(mmol/L)'"onblur="this.placeholder='Na 4hrs~0hrs'" placeholder="Na 4hrs~0hrs" style="text-align: center"></td>#}
+{#                                </tr>#}
+{#                                <tr>#}
+{#                                    <td style="font-size: 1.5rem">K</td>#}
+{#                                    <td><input type="text" name="K_{{ 0 }}" onfocus="this.placeholder='1~9(mmol/L)'"onblur="this.placeholder='K 24hrs~20hrs'" placeholder="K 24hrs~20hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="K_{{ 1 }}" onfocus="this.placeholder='1~9(mmol/L)'"onblur="this.placeholder='K 20hrs~16hrs'" placeholder="K 20hrs~16hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="K_{{ 2 }}" onfocus="this.placeholder='1~9(mmol/L)'"onblur="this.placeholder='K 20hrs~16hrs'" placeholder="K 16hrs~12hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="K_{{ 3 }}" onfocus="this.placeholder='1~9(mmol/L)'"onblur="this.placeholder='K 20hrs~16hrs'" placeholder="K 12hrs~8hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="K_{{ 4 }}" onfocus="this.placeholder='1~9(mmol/L)'"onblur="this.placeholder='K 8hrs~4hrs'" placeholder="K 8hrs~4hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="K_{{ 5 }}" onfocus="this.placeholder='1~9(mmol/L)'"onblur="this.placeholder='K 4hrs~0hrs'" placeholder="K 4hrs~0hrs" style="text-align: center"></td>#}
+{#                                </tr>#}
+{#                                <tr>#}
+{#                                    <td style="font-size: 1.5rem">Temperature</td>#}
+{#                                    <td><input type="text" name="TP_{{ 0 }}" onfocus="this.placeholder='35~41(Celsius)'"onblur="this.placeholder='Temperature 24hrs~20hrs'" placeholder="Temperature 24hrs~20hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="TP_{{ 1 }}" onfocus="this.placeholder='35~41(Celsius)'"onblur="this.placeholder='Temperature 20hrs~16hrs'" placeholder="Temperature 20hrs~16hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="TP_{{ 2 }}" onfocus="this.placeholder='35~41(Celsius)'"onblur="this.placeholder='Temperature 20hrs~16hrs'" placeholder="Temperature 16hrs~12hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="TP_{{ 3 }}" onfocus="this.placeholder='35~41(Celsius)'"onblur="this.placeholder='Temperature 20hrs~16hrs'" placeholder="Temperature 12hrs~8hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="TP_{{ 4 }}" onfocus="this.placeholder='35~41(Celsius)'"onblur="this.placeholder='Temperature 8hrs~4hrs'" placeholder="Temperature 8hrs~4hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="TP_{{ 5 }}" onfocus="this.placeholder='35~41(Celsius)'"onblur="this.placeholder='Temperature 4hrs~0hrs'" placeholder="Temperature 4hrs~0hrs" style="text-align: center"></td>#}
+{#                                </tr>#}
+{#                                <tr>#}
+{#                                    <td style="font-size: 1.5rem">Systolic BP</td>#}
+{#                                    <td><input type="text" name="SystolicBP_{{ 0 }}" onfocus="this.placeholder='<250(mmHg)'"onblur="this.placeholder='Systolic BP 24hrs~20hrs'" placeholder="Systolic BP 24hrs~20hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="SystolicBP_{{ 1 }}" onfocus="this.placeholder='<250(mmHg)'"onblur="this.placeholder='Systolic BP 20hrs~16hrs'" placeholder="Systolic BP 20hrs~16hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="SystolicBP_{{ 2 }}" onfocus="this.placeholder='<250(mmHg)'"onblur="this.placeholder='Systolic BP 20hrs~16hrs'" placeholder="Systolic BP 16hrs~12hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="SystolicBP_{{ 3 }}" onfocus="this.placeholder='<250mmHg)'"onblur="this.placeholder='Systolic BP 20hrs~16hrs'" placeholder="Systolic BP 12hrs~8hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="SystolicBP_{{ 4 }}" onfocus="this.placeholder='<250(mmHg)'"onblur="this.placeholder='Systolic BP 8hrs~4hrs'" placeholder="Systolic BP 8hrs~4hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="SystolicBP_{{ 5 }}" onfocus="this.placeholder='<250(mmHg)'"onblur="this.placeholder='Systolic BP 4hrs~0hrs'" placeholder="Systolic BP 4hrs~0hrs" style="text-align: center"></td>#}
+{#                                </tr>#}
+{#                                <tr>#}
+{#                                    <td style="font-size: 1.5rem">Mean BP</td>#}
+{#                                    <td><input type="text" name="MeanBP_{{ 0 }}" onfocus="this.placeholder='<200(mmHg)'"onblur="this.placeholder='Mean BP 24hrs~20hrs'" placeholder="Mean BP 24hrs~20hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="MeanBP_{{ 1 }}" onfocus="this.placeholder='<200(mmHg)'"onblur="this.placeholder='Mean BP 20hrs~16hrs'" placeholder="Mean BP 20hrs~16hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="MeanBP_{{ 2 }}" onfocus="this.placeholder='<200(mmHg)'"onblur="this.placeholder='Mean BP 20hrs~16hrs'" placeholder="Mean BP 16hrs~12hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="MeanBP_{{ 3 }}" onfocus="this.placeholder='<200(mmHg)'"onblur="this.placeholder='Mean BP 20hrs~16hrs'" placeholder="Mean BP 12hrs~8hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="MeanBP_{{ 4 }}" onfocus="this.placeholder='<200(mmHg)'"onblur="this.placeholder='Mean BP 8hrs~4hrs'" placeholder="Mean BP 8hrs~4hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="MeanBP_{{ 5 }}" onfocus="this.placeholder='<200(mmHg)'"onblur="this.placeholder='Mean BP 4hrs~0hrs'" placeholder="Mean BP 4hrs~0hrs" style="text-align: center"></td>#}
+{##}
+{#                                </tr>#}
+{#                                <tr>#}
+{#                                    <td style="font-size: 1.5rem">MSI</td>#}
+{#                                    <td><input type="text" name="MSI_{{ 0 }}" onfocus="this.placeholder='<230'"onblur="this.placeholder='MSI 24hrs~20hrs'" placeholder="MSI 24hrs~20hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="MSI_{{ 1 }}" onfocus="this.placeholder='<230'"onblur="this.placeholder='MSI 20hrs~16hrs'" placeholder="MSI 20hrs~16hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="MSI_{{ 2 }}" onfocus="this.placeholder='<230'"onblur="this.placeholder='MSI 20hrs~16hrs'" placeholder="MSI 16hrs~12hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="MSI_{{ 3 }}" onfocus="this.placeholder='<230'"onblur="this.placeholder='MSI 20hrs~16hrs'" placeholder="MSI 12hrs~8hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="MSI_{{ 4 }}" onfocus="this.placeholder='<230'"onblur="this.placeholder='MSI 8hrs~4hrs'" placeholder="MSI 8hrs~4hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="MSI_{{ 5 }}" onfocus="this.placeholder='<230'"onblur="this.placeholder='MSI 4hrs~0hrs'" placeholder="MSI 4hrs~0hrs" style="text-align: center"></td>#}
+{##}
+{#                                </tr>#}
+{#                                <tr>#}
+{#                                    <td style="font-size: 1.5rem">eGFR</td>#}
+{#                                    <td><input type="text" name="eGFR_{{ 0 }}" onfocus="this.placeholder='<180'"onblur="this.placeholder='Urine 24hrs~20hrs'" placeholder="eGFR 24hrs~20hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="eGFR_{{ 1 }}" onfocus="this.placeholder='<180'"onblur="this.placeholder='Urine 20hrs~16hrs'" placeholder="eGFR 20hrs~16hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="eGFR_{{ 2 }}" onfocus="this.placeholder='<180'"onblur="this.placeholder='Urine 20hrs~16hrs'" placeholder="eGFR 16hrs~12hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="eGFR_{{ 3 }}" onfocus="this.placeholder='<180'"onblur="this.placeholder='Urine 20hrs~16hrs'" placeholder="eGFR 12hrs~8hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="eGFR_{{ 4 }}" onfocus="this.placeholder='<180'"onblur="this.placeholder='Urine 8hrs~4hrs'" placeholder="eGFR 8hrs~4hrs" style="text-align: center"></td>#}
+{#                                    <td><input type="text" name="eGFR_{{ 5 }}" onfocus="this.placeholder='<180'"onblur="this.placeholder='Urine 4hrs~0hrs'" placeholder="eGFR 4hrs~0hrs" style="text-align: center"></td>#}
+{#                                </tr>#}
+{#                                </tbody>#}
+{#                            </table>#}
+{#                        </span>#}
+{#                            <span style="position: fixed; bottom: 10px;">#}
+{#                        <div class="row" style="content:''; display: table;clear: both;width: 100%;padding: 0.5rem;">#}
+{#                            <div class="column" style="float: left;width: 32%;padding: 0.3rem;">#}
+{#                                <label for="Age" style="font-size: 1.2rem;">Age:</label>#}
+{#                                <input type="text" name="Age" placeholder="Years" style="size: 30px;text-align: center">#}
+{#                            </div>#}
+{#                            <div class="column" style="float: left;width: 32%;padding: 0.3rem;">#}
+{#                                <label for="Weight" style="font-size: 1.2rem;">Weight:</label>#}
+{#                                <input type="text" name="Weight" placeholder="kg" style="size: 30px;text-align: center">#}
+{#                            </div>#}
+{#                            <div class="column" style="float: left;width: 32%;padding: 0.3rem;">#}
+{#                                <label for="Gender" style="font-size: 1.2rem;">Gender:</label>#}
+{#                                <input type="text" name="Gender" placeholder="F / M" style="size: 30px;text-align: center">#}
+{#                            </div>#}
+{#                        </div>#}
+{#                <input type="submit" value="Submit" name="OnlyOneData"style="width: 97%; left: 250px;">#}
+{##}
+{#                            </span>#}
+{#</span>#}
+{#    </form>#}
                 </article>
 
 {#                #end of article#}
@@ -405,13 +855,4 @@
 			<script src="/static/assets/js/util.js"></script>
 			<script src="/static/assets/js/main.js"></script>
     </body>
-
-<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
-<script type="text/javascript">
-$(function(){
-  $("tr.parent").click(function(){
-    $(this).toggleClass('selected').siblings('.child_'+this.id).toggle();
-  })
-})
-</script>
 </html>

@@ -296,6 +296,34 @@ def predictresultforfile(request):
     Y = Xgb_model.predict(X)
     # Y = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
     File_df['AKI'] = Y
+    numberPatient = []
+    i = 0
+    while i < len(Y):
+        if Y[i] == 1:
+            pair = [i+1,"AKI"]
+        else:
+            pair = [i + 1, "No AKI"]
+        if (i+1) < len(Y) and Y[i + 1] == 1:
+            pair.append(i+2)
+            pair.append("AKI")
+        elif (i+1) < len(Y) and Y[i + 1] == 0:
+            pair.append(i + 2)
+            pair.append("No AKI")
+        if (i+2) < len(Y) and Y[i + 2] == 1:
+            pair.append(i+3)
+            pair.append("AKI")
+        elif (i+2) < len(Y) and Y[i + 2] == 0:
+            pair.append(i + 3)
+            pair.append("No AKI")
+        if (i+3) < len(Y) and Y[i + 3] == 1:
+            pair.append(i+4)
+            pair.append("AKI")
+        elif (i+3) < len(Y) and Y[i + 3] == 0:
+            pair.append(i + 4)
+            pair.append("No AKI")
+        i += 4
+        numberPatient.append(pair)
+
     res = []
     for i in range(0, len(File_df)):
         DictTemp = {
@@ -336,6 +364,8 @@ def predictresultforfile(request):
 
     context = {
         'contacts': contacts,
+        'all':Y,
+        'count':numberPatient,
     }
     return render(request, "PredictResultForFile.html", context)
 
