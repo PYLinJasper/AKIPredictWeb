@@ -14,11 +14,11 @@
 <div class="header" style="justify-content: center;vertical-align:center;">
         <a class="home" href="/homepage/"style="height: 42px;text-align-all: center;"><i class="fa fa-home" style="margin-top:0px;color:white;font-size:42px" title="home"></i></a>
     </div>
-<article style="height: 20rem;width: 65rem;">
-    <details>
+<article style="height: 30rem;width: 65rem;">
+{#    <details>#}
 <summary style="font-size: 2rem;">病患資料一覽表</summary>
-    <div style="height: 17rem;overflow: scroll;">
-<table class="content-table" id="datatable" border="1" style="background-color: rgba(168,216,185,85);font-size:20px;overflow: scroll;">
+    <div style="height: 17rem;">
+<table class="content-table" id="datatable" border="1" style="background-color: rgba(168,216,185,85);font-size:20px;">
         <thead>
             <tr>
                 <th>Patient order</th>
@@ -35,16 +35,21 @@
     {% for data in count %}
         <tr>
         {% for unit in data %}
-        <td style="text-align: center;">{{ unit }}</td>
+            {% if unit != 'AKI' and unit != 'No AKI' %}
+                <td><a href="?page={{ unit }}">{{ unit }}</a></td>
+            {% else %}
+                <td>{{ unit }}</td>
+            {% endif %}
         {% endfor %}
         </tr>
     {% endfor %}
     </tbody>
 </table>
     </div>
-</details>
+
+{#</details>#}
 </article>
-<article style="top: 15%;position: relative;height: 50rem;width: 65rem;">
+<article style="top:15%;position: relative;height: 50rem;width: 65rem;">
 <details>
 <summary style="font-size: 2rem;">個別病患資料</summary>
     <h1 align="center">Predict Result:</h1>
@@ -62,23 +67,7 @@
 
     {% endfor  %}
 
-<div class="pagination"style="text-align: center;margin-bottom: 20px;size: 50px;">
-        <span class="step-links" >
-            {% if contacts.has_previous %}
-                <a href="?page=1"><i class="fa fa-arrow-circle-up"style="font-size:35px;color: #f9f9f9;alignment: center"></i></a>
-                <a href="?page={{ contacts.previous_page_number }}"><i class="fa fa-arrow-circle-left"style="font-size:35px;color: #f9f9f9;alignment: center"></i></a>
-            {% endif %}
 
-            <span class="current"style="font-size:35px;color: #919699;alignment: center">
-                Page {{ contacts.number }} of {{ contacts.paginator.num_pages }}
-            </span>
-
-            {% if contacts.has_next %}
-                <a href="?page={{ contacts.next_page_number }}"><i class="fa fa-arrow-circle-right"style="font-size:35px;color: #f9f9f9;alignment: center"></i></a>
-                <a href="?page={{ contacts.paginator.num_pages }}"><i class="fa fa-arrow-circle-down"style="font-size:35px;color: #f9f9f9;alignment: center"></i></a>
-            {% endif %}
-        </span>
-    </div>
 <details>
 <summary style="font-size: 2rem;">病患詳細檢測資料</summary>
     <table class="content-table" id="datatable" border="1" style="background-color: rgba(129,199,212,55);width: 100%">

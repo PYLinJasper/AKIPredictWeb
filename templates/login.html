@@ -11,6 +11,13 @@
 </head>
 
 <body class="is-preload">
+
+    <script>
+        function  ClickRegister() {
+            window.location.href='/register/'
+        }
+    </script>
+
     <div id="wrapper" >
 {#        <img src="/static/images/kidneyw.png" width="50"/>#}
 
@@ -24,6 +31,7 @@
                 <label for="password">用戶密碼:</label>
                 <input type="password" name="password" value="" id="password"> <br />
                 <input type="submit" value="登入" style="font-size:20px;"/>
+                <input type="button" onclick="ClickRegister()" value="註冊" style="font-size:20px;"/>
 {#                <input type="image" src="/static/images/kidneyw.png" width="50" style="alignment: center" onClick="document.createEvent(onsubmit);"/>#}
             </fieldset>
         </form>

@@ -4,7 +4,9 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 import pandas as pd
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import User
 from django.core.files.storage import FileSystemStorage
+from django.contrib import messages
 
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
@@ -55,6 +57,16 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return render(request, "logout.html")
+
+def register(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = User.objects.create_user(username=username, password=password)
+        user.save()
+        return HttpResponseRedirect('/login/')
+    else:
+        return render(request, "register.html")
 
 @login_required
 def predictsingle(req):
@@ -364,8 +376,8 @@ def predictresultforfile(request):
 
     context = {
         'contacts': contacts,
-        'all':Y,
-        'count':numberPatient,
+        'all': Y,
+        'count': numberPatient,
     }
     return render(request, "PredictResultForFile.html", context)
 

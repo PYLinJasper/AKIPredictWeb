@@ -33,6 +33,7 @@ urlpatterns = [
     path('test/', views.testunflod),
     path('login/', views.login),
     path('logout/', views.logout),
+    path('register/', views.register),
     path('homepage/', views.homepage),
     path('predictsingle/', views.predictsingle),
     path('predictfile/', views.predictfile),
