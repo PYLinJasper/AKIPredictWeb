@@ -293,13 +293,13 @@ def predictresultforfile(request):
     if request.method == 'POST':
         if 'Upload' in request.POST:
             state = 'Upload'
+            for filename in os.listdir("./static/media"):
+                file = "./static/media/" + filename
+                os.remove(file)
             UploadFile = request.FILES['document']
             fs = FileSystemStorage()
             fs.save('./static/media/File', UploadFile)
-            for filename in os.listdir("./static/media"):
-                if (filename != "File"):
-                    file = "./static/media/" + filename
-                    os.remove(file)
+
     File_df = pd.read_csv('./static/media/File', sep=',', header=0, encoding='utf-8')
     test = File_df.fillna(-10000)
     X = test.to_numpy()
