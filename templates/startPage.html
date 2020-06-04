@@ -11,16 +11,10 @@
 </head>
 
 <body class="is-preload">
-    <div id="wrapper" >
-{#        <img src="/static/images/kidneyw.png" width="50"/>#}
-{#        <a herf="/login/"><img src="/static/images/kidneyw.png" width="50"/></a>#}
-{#        <button style="background-image: url('/static/images/kidneyw.png');height: 50rem;" ></button>#}
-        <form action="/login/" method="post" style="position: fixed;margin-top: 15%;">
+    <div id="wrapper" style="display: flex;justify-content: center;align-items: center; ">
+        <form action="/login/" method="post" style="justify-content: center;align-items: center;">
             {% csrf_token %}
-{#            <button style="background-image: url('/static/images/kidneyw.png');height: 830px;width: 980px;" ></button>#}
-{#                <input type="image" src="/static/images/kidneyw.png" width="50" style="alignment: center" onClick="document.createEvent(onsubmit);"/>#}
-{#            <input type="image" src="/static/images/kidneyw.png" style="margin-left: 40%;margin-top: 10%; width:20%;" onClick="document.createEvent(onsubmit);"/>#}
-            <input type="image" src="https://img.icons8.com/plasticine/100/000000/treatment-plan.png" style="margin-left: 40%;margin-top: 10%; size: 100px;" onClick="document.createEvent(onsubmit);"/>
+            <input type="image" src="/static/images/mainIcon.png" height="600vh" onClick="document.createEvent(onsubmit);"/>
         </form>
 
     </div>

@@ -5,7 +5,7 @@
     {% load static %}
     <meta charset="UTF-8">
     <title>LogoutPage</title>
-    <meta http-equiv="refresh" content="5;url=/" />
+    <meta http-equiv="refresh" content="3;url=/" />
     <meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" type="text/css" href='/static/assets/css/main.css'>
@@ -14,12 +14,11 @@
 
 <body class="is-preload">
     <div id="wrapper">
-{#        <div id="header" style="align-content: center;transform: translate(-1%, -300%)">#}
        <span style="top:45%; position:fixed;color : cornsilk;text-valign: center;text-align: center; ">
-           <h1>GoodBye and wish you a Good Day</h1>
-           <h2> Redirect to Login Page in <span id="countdowntimer">5 </span> Seconds</h2>
+           <h1>Goodbye and wish you a good day !</h1>
+           <h2> Redirect to Login Page in <span id="countdowntimer">3 </span> Seconds</h2>
            <script type="text/javascript">
-               var timeleft = 5;
+               var timeleft = 3;
                var downloadTimer = setInterval(function(){
                    timeleft--;
                    document.getElementById("countdowntimer").textContent = timeleft;
@@ -27,7 +26,6 @@
                        clearInterval(downloadTimer);},1000);
            </script>
        </span>
-{#            </div>#}
         </div>
 
 <div id="bg"></div>

@@ -19,21 +19,20 @@
     </script>
 
 
-    <div id="wrapper" >
-{#        <img src="/static/images/kidneyw.png" width="50"/>#}
+    <div id="wrapper" style="justify-content: center;align-items: center;">
 
-        <form action="" method="post" style="position: fixed;top: 35%;">
+        <form action="" method="post">
             {% csrf_token %}
             <fieldset>
-                <legend><h1><span style="text-align: center;font-family: Helvetica; ">智腎關鍵 AKI Helper  </span></h1></legend>
-                <span style="text-align: center;color: navy;font-family: Helvetica; "><h3>人工智慧即時預測急性腎衰竭</h3></span>
+                <legend><h1><span style="text-align: center;font-family: 'Noto Sans SC', sans-serif; ">智腎關鍵 AKI Helper  </span></h1></legend>
+                <span style="text-align: center;color: navy;font-family: 'Noto Sans SC', sans-serif; "><h3>人工智慧即時預測急性腎衰竭</h3></span>
                 <label for="username">用戶名稱:</label>
                 <input type="text" name="username" value="" id="username"> <br />
                 <label for="password">用戶密碼:</label>
                 <input type="password" name="password" value="" id="password"> <br />
                 <input type="submit" value="登入" style="font-size:20px;"/>
                 <input type="button" onclick="ClickRegister()" value="註冊" style="font-size:20px;"/>
-{#                <input type="image" src="/static/images/kidneyw.png" width="50" style="alignment: center" onClick="document.createEvent(onsubmit);"/>#}
+
             </fieldset>
         </form>
 

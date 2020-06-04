@@ -14,11 +14,11 @@
 <div class="header" style="justify-content: center;vertical-align:center;">
         <a class="home" href="/homepage/"style="height: 42px;text-align-all: center;"><i class="fa fa-home" style="margin-top:0px;color:white;font-size:42px" title="home"></i></a>
     </div>
-<article style="height: 30rem;width: 65rem;">
+<summary style="font-size: 2rem;color:rgba(81,110,65,85); ">病患資料一覽表</summary>
+<article style="height: 30rem;width: 65rem;overflow: scroll;">
 {#    <details>#}
-<summary style="font-size: 2rem;">病患資料一覽表</summary>
-    <div style="height: 17rem;">
-<table class="content-table" id="datatable" border="1" style="background-color: rgba(168,216,185,85);font-size:20px;">
+    <div style="height: 16.5rem;">
+<table class="content-table" id="datatable" border="1" style="overflow: scroll;background-color: rgba(81,110,65,85);font-size:20px;">
         <thead>
             <tr>
                 <th>Patient order</th>
@@ -38,7 +38,12 @@
             {% if unit != 'AKI' and unit != 'No AKI' %}
                 <td><a href="?page={{ unit }}">{{ unit }}</a></td>
             {% else %}
-                <td>{{ unit }}</td>
+                {% if unit == 'AKI' %}
+                    <td style="color: lightpink;">{{ unit }}</td>
+                {% endif %}
+               {% if unit == 'No AKI' %}
+                    <td>{{ unit }}</td>
+                {% endif %}
             {% endif %}
         {% endfor %}
         </tr>
@@ -50,27 +55,24 @@
 {#</details>#}
 </article>
 <article style="top:15%;position: relative;height: 50rem;width: 65rem;">
-<details>
-<summary style="font-size: 2rem;">個別病患資料</summary>
-    <h1 align="center">Predict Result:</h1>
+    {% for contact in contacts %}
+        <h1 style="color: rgba(74,89,61,0.85);">Patient : {{ contact.number }}</h1>
+    {% endfor  %}
+<h1 align="center">Predict Result:</h1>
     {% for contact in contacts %}
         {% if contact.aki == 1 %}
-            <h1 align="center">AKI</h1>
+            <h1 align="center" style="color: plum">AKI</h1>
         {% endif %}
         {% if contact.aki == 0 %}
             <h1 align="center">No AKI</h1>
         {% endif %}
     {% endfor  %}
-
-{% for contact in contacts %}
+    {% for contact in contacts %}
     <p style="text-align: center;font-size: 30px">Age : {{ contact.age  }} (Years) , Weight : {{ contact.weight }} (kg) , Gender : {{ contact.gender }}</p>
-
     {% endfor  %}
-
-
 <details>
 <summary style="font-size: 2rem;">病患詳細檢測資料</summary>
-    <table class="content-table" id="datatable" border="1" style="background-color: rgba(129,199,212,55);width: 100%">
+    <table class="content-table" id="datatable" border="1" style="font-size: 1.2rem;font-weight: bold;background-color:rgba(46,92,110,0.85);width: 100%">
         <thead>
             <tr>
                 <th>feature</th>
@@ -87,86 +89,151 @@
             <tr>
                 <td>Creatinine (mg/dl)</td>
                 {% for data in contact.crt %}
-                    <td>{{ data }}</td>
+                    {% if data != -10000 %}
+                        <td>{{ data }}</td>
+                    {% endif %}
+                    {% if data == -10000 %}
+                        <td style="background-color: rgba(129,199,212,55)"></td>
+                    {% endif %}
                 {% endfor %}
             </tr>
             <tr>
                 <td>Intake (ml)</td>
                 {% for data in contact.intake %}
-                    <td>{{ data }}</td>
+                    {% if data != -10000 %}
+                        <td>{{ data }}</td>
+                    {% endif %}
+                    {% if data == -10000 %}
+                        <td style="background-color: rgba(129,199,212,55)"></td>
+                    {% endif %}
                 {% endfor %}
             </tr>
             <tr>
                 <td>Urine (ml)</td>
                 {% for data in contact.urine %}
-                    <td>{{ data }}</td>
+                    {% if data != -10000 %}
+                        <td>{{ data }}</td>
+                    {% endif %}
+                    {% if data == -10000 %}
+                        <td style="background-color: rgba(129,199,212,55)"></td>
+                    {% endif %}
                 {% endfor %}
             </tr>
             <tr>
                 <td>pH</td>
                 {% for data in contact.pH %}
-                    <td>{{ data }}</td>
+                    {% if data != -10000 %}
+                        <td>{{ data }}</td>
+                    {% endif %}
+                    {% if data == -10000 %}
+                        <td style="background-color: rgba(129,199,212,55)"></td>
+                    {% endif %}
                 {% endfor %}
             </tr>
             <tr>
                 <td>Hct (%)</td>
                 {% for data in contact.Hct %}
-                    <td>{{ data }}</td>
+                    {% if data != -10000 %}
+                        <td>{{ data }}</td>
+                    {% endif %}
+                    {% if data == -10000 %}
+                        <td style="background-color: rgba(129,199,212,55)"></td>
+                    {% endif %}
                 {% endfor %}
             </tr>
             <tr>
                 <td>BUN (mg/dl)</td>
                 {% for data in contact.BUN %}
-                    <td>{{ data }}</td>
+                    {% if data != -10000 %}
+                        <td>{{ data }}</td>
+                    {% endif %}
+                    {% if data == -10000 %}
+                        <td style="background-color: rgba(129,199,212,55)"></td>
+                    {% endif %}
                 {% endfor %}
             </tr>
             <tr>
                 <td>Na (mmol/L)</td>
                 {% for data in contact.Na %}
-                    <td>{{ data }}</td>
+                    {% if data != -10000 %}
+                        <td>{{ data }}</td>
+                    {% endif %}
+                    {% if data == -10000 %}
+                        <td style="background-color: rgba(129,199,212,55)"></td>
+                    {% endif %}
                 {% endfor %}
             </tr>
             <tr>
                 <td>K (mmol/L)</td>
                 {% for data in contact.K %}
-                    <td>{{ data }}</td>
+                    {% if data != -10000 %}
+                        <td>{{ data }}</td>
+                    {% endif %}
+                    {% if data == -10000 %}
+                        <td style="background-color: rgba(129,199,212,55)"></td>
+                    {% endif %}
                 {% endfor %}
             </tr>
             <tr>
                 <td>Temperature (Celsius)</td>
                 {% for data in contact.TP %}
-                    <td>{{ data }}</td>
+                    {% if data != -10000 %}
+                        <td>{{ data }}</td>
+                    {% endif %}
+                    {% if data == -10000 %}
+                        <td style="background-color: rgba(129,199,212,55)"></td>
+                    {% endif %}
                 {% endfor %}
             </tr>
             <tr>
                 <td>Systolic BP (mmHg)</td>
                 {% for data in contact.systolicBP %}
-                    <td>{{ data }}</td>
+                    {% if data != -10000 %}
+                        <td>{{ data }}</td>
+                    {% endif %}
+                    {% if data == -10000 %}
+                        <td style="background-color: rgba(129,199,212,55)"></td>
+                    {% endif %}
                 {% endfor %}
             </tr>
             <tr>
                 <td>Mean BP (mmHg)</td>
                 {% for data in contact.meanBP %}
-                    <td>{{ data }}</td>
+                    {% if data != -10000 %}
+                        <td>{{ data }}</td>
+                    {% endif %}
+                    {% if data == -10000 %}
+                        <td style="background-color: rgba(129,199,212,55)"></td>
+                    {% endif %}
                 {% endfor %}
             </tr>
             <tr>
                 <td>MSI</td>
                  {% for data in contact.MSI %}
-                    <td>{{ data }}</td>
+                    {% if data != -10000 %}
+                        <td>{{ data }}</td>
+                    {% endif %}
+                    {% if data == -10000 %}
+                        <td style="background-color: rgba(129,199,212,55)"></td>
+                    {% endif %}
                 {% endfor %}
             </tr>
             <tr>
                 <td>eGFR</td>
                 {% for data in contact.eGFR %}
-                    <td>{{ data }}</td>
+                    {% if data != -10000 %}
+                        <td>{{ data }}</td>
+                    {% endif %}
+                    {% if data == -10000 %}
+                        <td style="background-color: rgba(129,199,212,55)"></td>
+                    {% endif %}
                 {% endfor %}
             </tr>
         {% endfor %}
         </tbody>
     </table>
 </details>
-</details>
+
 </article>
 </div>
         </div>
