@@ -341,10 +341,9 @@ def lstmpredictresultforinput(request):
             InputData = pd.DataFrame(feature)
             InputData['gender'] = InputData['gender'].map({'F': '0', 'M': '1'})
             InputData = InputData.replace(r'^\s*$', np.nan, regex=True)
-            InputData = InputData.fillna(-10000)
             InputData = InputData.astype('float64')
-
-            test_norm = normalize(InputData.drop(columns=['icustay_id']))
+            
+            test_norm = normalize(InputData)
             test_norm = test_norm.fillna(-1)
             X_test = buildTrain(test_norm, 1, 1, 24)
 
