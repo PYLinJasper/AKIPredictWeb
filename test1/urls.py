@@ -41,7 +41,5 @@ urlpatterns = [
     path('lstmpredictresultforfile/', views.lstmpredictresultforfile),
     path('predictresultforinput/', views.predictresultforinput),
     path('lstmpredictresultforinput/', views.lstmpredictresultforinput),
-    path('predict/', views.predict),
-    path('overview/', views.overview),
-# path('predict/', views.predict),
+
 ]

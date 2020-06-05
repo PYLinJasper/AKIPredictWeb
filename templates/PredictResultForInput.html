@@ -23,7 +23,7 @@
             <h1 align="center">No AKI</h1>
         {% endif %}
 
-<p style="text-align: center;font-size: 30px">Age : {{ Agestr }} (Years) , Weight : {{ Weightstr }} (kg) , Gender : {{ Genderstr }}</p>
+<p style="text-align: center;font-size: 30px">Age : {{ feature.age }} (Years) , Weight : {{ feature.weight }} (kg) , Gender : {{ feature.gender }}</p>
 <details style="overflow: scroll;">
 <summary>病患詳細檢測資料</summary>
     <table class="content-table" id="datatable" border="1" style="background-color: rgba(129,199,212,55);font-size:20px;width: 100%;overflow: scroll;">
@@ -42,143 +42,130 @@
 
             <tr>
                 <td>Creatinine (mg/dl)</td>
-                {% for data in Crt %}
-                    {% if data != -10000 %}
+                {% for data in feature.creatinine %}
+                    {% if data != '' %}
                         <td>{{ data }}</td>
-                    {% endif %}
-                    {% if data == -10000 %}
+                    {% else %}
                         <td style="background-color: rgba(46,169,223,0.85)"></td>
                     {% endif %}
                 {% endfor %}
             </tr>
             <tr>
                 <td>Intake (ml)</td>
-                {% for data in Intake %}
-                    {% if data != -10000 %}
+                {% for data in feature.intake %}
+                    {% if data != '' %}
                         <td>{{ data }}</td>
-                    {% endif %}
-                    {% if data == -10000 %}
+                    {% else %}
                         <td style="background-color: rgba(46,169,223,0.85)"></td>
                     {% endif %}
                 {% endfor %}
             </tr>
             <tr>
                 <td>Urine (ml)</td>
-                {% for data in Urine %}
-                    {% if data != -10000 %}
+                {% for data in feature.urine %}
+                    {% if data != '' %}
                         <td>{{ data }}</td>
-                    {% endif %}
-                    {% if data == -10000 %}
+                    {% else %}
                         <td style="background-color: rgba(46,169,223,0.85)"></td>
                     {% endif %}
                 {% endfor %}
             </tr>
             <tr>
                 <td>pH</td>
-                {% for data in pH %}
-                    {% if data != -10000 %}
+                {% for data in feature.pH %}
+                    {% if data != '' %}
                         <td>{{ data }}</td>
-                    {% endif %}
-                    {% if data == -10000 %}
+                    {% else %}
                         <td style="background-color: rgba(46,169,223,0.85)"></td>
                     {% endif %}
                 {% endfor %}
             </tr>
             <tr>
                 <td>Hct (%)</td>
-                {% for data in Hct %}
-                    {% if data != -10000 %}
+                {% for data in feature.Hct %}
+                    {% if data != '' %}
                         <td>{{ data }}</td>
-                    {% endif %}
-                    {% if data == -10000 %}
+                    {% else %}
                         <td style="background-color: rgba(46,169,223,0.85)"></td>
                     {% endif %}
                 {% endfor %}
             </tr>
             <tr>
                 <td>BUN (mg/dl)</td>
-                {% for data in BUN %}
-                    {% if data != -10000 %}
+                {% for data in feature.BUN %}
+                    {% if data != '' %}
                         <td>{{ data }}</td>
-                    {% endif %}
-                    {% if data == -10000 %}
+                    {% else %}
                         <td style="background-color: rgba(46,169,223,0.85)"></td>
                     {% endif %}
                 {% endfor %}
             </tr>
             <tr>
                 <td>Na (mmol/L)</td>
-                {% for data in Na %}
-                    {% if data != -10000 %}
+                {% for data in feature.Na %}
+                    {% if data != '' %}
                         <td>{{ data }}</td>
-                    {% endif %}
-                    {% if data == -10000 %}
+                    {% else %}
                         <td style="background-color: rgba(46,169,223,0.85)"></td>
                     {% endif %}
                 {% endfor %}
             </tr>
             <tr>
                 <td>K (mmol/L)</td>
-                {% for data in K %}
-                    {% if data != -10000 %}
+                {% for data in feature.K %}
+                    {% if data != '' %}
                         <td>{{ data }}</td>
-                    {% endif %}
-                    {% if data == -10000 %}
+                    {% else %}
                         <td style="background-color: rgba(46,169,223,0.85)"></td>
                     {% endif %}
                 {% endfor %}
             </tr>
             <tr>
                 <td>Temperature (Celsius)</td>
-                {% for data in TP %}
-                    {% if data != -10000 %}
+                {% for data in feature.TP %}
+                    {% if data != '' %}
                         <td>{{ data }}</td>
-                    {% endif %}
-                    {% if data == -10000 %}
+                    {% else %}
                         <td style="background-color: rgba(46,169,223,0.85)"></td>
                     {% endif %}
                 {% endfor %}
             </tr>
             <tr>
                 <td>Systolic BP (mmHg)</td>
-                {% for data in SystolicBP %}
-                    {% if data != -10000 %}
+                {% for data in feature.systolicBP %}
+                    {% if data != '' %}
                         <td>{{ data }}</td>
-                    {% endif %}
-                    {% if data == -10000 %}
+                    {% else %}
                         <td style="background-color: rgba(46,169,223,0.85)"></td>
                     {% endif %}
                 {% endfor %}
             </tr>
             <tr>
                 <td>Mean BP (mmHg)</td>
-                {% for data in MeanBP %}
-                    {% if data != -10000 %}
+                {% for data in feature.meanBP %}
+                    {% if data != '' %}
                         <td>{{ data }}</td>
-                    {% endif %}
-                    {% if data == -10000 %}
+                    {% else %}
                         <td style="background-color: rgba(46,169,223,0.85)"></td>
                     {% endif %}
                 {% endfor %}
             </tr>
             <tr>
                 <td>MSI</td>
-                 {% for data in MSI %}
-                    {% if data != -10000 %}
+                 {% for data in feature.MSI %}
+                    {% if data != '' %}
                         <td>{{ data }}</td>
-                    {% endif %}
-                    {% if data == -10000 %}
+                    {% else %}
                         <td style="background-color: rgba(46,169,223,0.85)"></td>
                     {% endif %}
                 {% endfor %}
             </tr>
             <tr>
                 <td>eGFR</td>
-                {% for data in eGFR %}
-                    {% if data != -10000 %}
+                {% for data in feature.eGFR %}
+                    {% if data != '' %}
                         <td>{{ data }}</td>
-                    {% endif %}
-                    {% if data == -10000 %}
+                    {% else %}
                         <td style="background-color: rgba(46,169,223,0.85)"></td>
                     {% endif %}
                 {% endfor %}

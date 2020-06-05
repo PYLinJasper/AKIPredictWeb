@@ -21,34 +21,31 @@
 <table class="content-table" id="datatable" border="1" style="overflow: scroll;background-color: rgba(81,110,65,85);font-size:20px;">
         <thead>
             <tr>
-                <th>Patient order</th>
+                <th>Patient ID</th>
                 <th>Predict Result</th>
-                <th>Patient order</th>
+                <th>Patient ID</th>
                 <th>Predict Result</th>
-                <th>Patient order</th>
+                <th>Patient ID</th>
                 <th>Predict Result</th>
-                <th>Patient order</th>
+                <th>Patient ID</th>
                 <th>Predict Result</th>
             </tr>
         </thead>
-    <tbody>
-    {% for data in count %}
-        <tr>
-        {% for unit in data %}
-            {% if unit != 'AKI' and unit != 'No AKI' %}
-                <td><a href="?page={{ unit }}">{{ unit }}</a></td>
-            {% else %}
-                {% if unit == 'AKI' %}
-                    <td style="color: lightpink;">{{ unit }}</td>
-                {% endif %}
-               {% if unit == 'No AKI' %}
-                    <td>{{ unit }}</td>
-                {% endif %}
-            {% endif %}
-        {% endfor %}
-        </tr>
-    {% endfor %}
-    </tbody>
+        <tbody>
+            {% for data in ViewTable %}
+                <tr>
+                    {% for element in data %}
+                        <td><a href="?page={{ element.2 }}">{{ element.1 }}</a></td>
+                        {% if element.0 == 1 %}
+                            <td style="color: lightpink;">AKI</td>
+                        {% else %}
+                            <td>No AKI</td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+
+        </tbody>
 </table>
     </div>
 
@@ -56,7 +53,7 @@
 </article>
 <article style="top:15%;position: relative;height: 50rem;width: 65rem;">
     {% for contact in contacts %}
-        <h1 style="color: rgba(74,89,61,0.85);">Patient : {{ contact.number }}</h1>
+        <h1 style="color: rgba(74,89,61,0.85);">Patient : {{ contact.patientID }}</h1>
     {% endfor  %}
 <h1 align="center">Predict Result:</h1>
     {% for contact in contacts %}
@@ -68,7 +65,13 @@
         {% endif %}
     {% endfor  %}
     {% for contact in contacts %}
-    <p style="text-align: center;font-size: 30px">Age : {{ contact.age  }} (Years) , Weight : {{ contact.weight }} (kg) , Gender : {{ contact.gender }}</p>
+    <p style="text-align: center;font-size: 30px">
+    {% if contact.gender == 1 %}
+        Age : {{ contact.age  }} (Years) , Weight : {{ contact.weight }} (kg) , Gender : M
+    {% else %}
+        Age : {{ contact.age  }} (Years) , Weight : {{ contact.weight }} (kg) , Gender : F
+    {% endif %}
+    </p>
     {% endfor  %}
 <details>
 <summary style="font-size: 2rem;">病患詳細檢測資料</summary>
@@ -235,6 +238,7 @@
 </details>
 
 </article>
+
 </div>
         </div>
         <div id="bg"></div>

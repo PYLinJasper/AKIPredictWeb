@@ -12,27 +12,115 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.http import HttpResponseRedirect
 from tensorflow.python.keras.models import load_model
+
+from tensorflow.python.keras.losses import BinaryCrossentropy
+from tensorflow.keras.metrics import Accuracy
 from django.contrib import auth
 import xgboost as xgb
 from xgboost import XGBClassifier
 import os
 import numpy as np
 import pickle
-import glob
 
 
-def ReplaceNan(l):
-    for i,data in enumerate(l):
-        if(data == ''):
-            l[i] = '-10000'
-    return l
+
+def chunks(lst, n):
+    """Yield successive n-sized chunks from lst."""
+    for i in range(0, len(lst), n):
+        yield lst[i:i + n]
 
 
-# Create your views here.
+def ConvertFormat(Input):
+    creatinine = pd.DataFrame()
+    intake = pd.DataFrame()
+    urine = pd.DataFrame()
+    pH = pd.DataFrame()
+    Hct = pd.DataFrame()
+    BUN = pd.DataFrame()
+    Na = pd.DataFrame()
+    K = pd.DataFrame()
+    TP = pd.DataFrame()
+    systolicBP = pd.DataFrame()
+    meanBP = pd.DataFrame()
+    MSI = pd.DataFrame()
+    eGFR = pd.DataFrame()
+
+    age = Input.groupby(Input.index // 6)['age'].nth(0)
+    # day=Input.groupby(Input.index//6)['day'].nth(0)
+    weight = Input.groupby(Input.index // 6)['weight'].nth(0)
+    gender = Input.groupby(Input.index // 6)['gender'].nth(0)
+    for i in range(0, 6):
+        creatinine['creatinine_seq_' + str(i)] = Input.groupby(Input.index // 6)['creatinine'].nth(i)
+        intake['intake_seq_' + str(i)] = Input.groupby(Input.index // 6)['intake'].nth(i)
+        urine['urine_seq_' + str(i)] = Input.groupby(Input.index // 6)['urine'].nth(i)
+        pH['pH_seq_' + str(i)] = Input.groupby(Input.index // 6)['pH'].nth(i)
+        Hct['Hct_seq_' + str(i)] = Input.groupby(Input.index // 6)['Hct'].nth(i)
+        BUN['Bun_seq_' + str(i)] = Input.groupby(Input.index // 6)['BUN'].nth(i)
+        Na['Na_seq_' + str(i)] = Input.groupby(Input.index // 6)['Na'].nth(i)
+        K['K_seq_' + str(i)] = Input.groupby(Input.index // 6)['K'].nth(i)
+        TP['TP_seq_' + str(i)] = Input.groupby(Input.index // 6)['TP'].nth(i)
+        systolicBP['systolicBP_seq_' + str(i)] = Input.groupby(Input.index // 6)['systolicBP'].nth(i)
+        meanBP['meanBP_seq_' + str(i)] = Input.groupby(Input.index // 6)['meanBP'].nth(i)
+        MSI['MSI_seq_' + str(i)] = Input.groupby(Input.index // 6)['MSI'].nth(i)
+        eGFR['eGFR_seq_' + str(i)] = Input.groupby(Input.index // 6)['eGFR'].nth(i)
+
+    xgb_input = pd.DataFrame()
+    xgb_input['age'] = age
+    # xgb_input['day']=day
+    xgb_input['weight'] = weight
+    xgb_input['gender'] = gender
+    xgb_input = pd.concat(
+        [xgb_input, creatinine, intake, urine, pH, Hct, BUN, Na, K, TP, systolicBP, meanBP, MSI, eGFR], axis=1)
+    return xgb_input
+
+def PrepareOutput(Input,PredictRes):
+    res=[]
+    for i in range(0,len(Input),6):
+        DictTemp = {
+            'patientID':Input['icustay_id'][i],
+            'age':round(Input['age'][i],2).tolist(),
+            # 'day':round(Input['day'][i]).tolist(),
+            'weight':round(Input['weight'][i],2).tolist(),
+            'gender':Input['gender'][i].tolist(),
+            'crt':round(Input['creatinine'][i:i+6],2).tolist(),
+            'intake':round(Input['intake'][i:i+6],2).tolist(),
+            'urine':round(Input['urine'][i:i+6],2).tolist(),
+            'pH':round(Input['pH'][i:i+6],2).tolist(),
+            'Hct':round(Input['Hct'][i:i+6],2).tolist(),
+            'BUN':round(Input['BUN'][i:i+6],2).tolist(),
+            'Na':round(Input['Na'][i:i+6],2).tolist(),
+            'K':round(Input['K'][i:i+6],2).tolist(),
+            'TP':round(Input['TP'][i:i+6],2).tolist(),
+            'systolicBP':round(Input['systolicBP'][i:i+6],2).tolist(),
+            'meanBP':round(Input['meanBP'][i:i+6],2).tolist(),
+            'MSI':round(Input['MSI'][i:i+6],2).tolist(),
+            'eGFR':round(Input['eGFR'][i:i+6],2).tolist(),
+            'aki':PredictRes[int(i/6)],
+        }
+        res.append(DictTemp)
+    return res
+
+def buildTrain(train, pastDay, futureDay, hours):
+    # 處理時序性Data
+    X_train = []
+    print(train.shape[0])
+    train_data = np.array(train)
+    #train_x_list=train_data.tolist()#list
+    data = []
+    index = 0
+    for i in range(int(len(train_data)/int(hours/4))):
+        small_data = []
+        for j in range(int(hours/4)):
+            small_data.append(train_data[index])
+            index = index + 1
+        data.append(small_data)
+    return np.array(data)
 
 def normalize(train):
     train_norm = train.apply(lambda x: (x - np.mean(x)) / (np.max(x) - np.min(x)))
     return train_norm
+
+
 
 def packageData(train_norm,period):
     dataunit = []
@@ -110,111 +198,6 @@ def predictfile(req):
     return render(req, 'predictFile.html')
 
 @login_required
-def predict(request):
-    Crt = []
-    Intake = []
-    Urine = []
-    pH = []
-    Hct = []
-    BUN = []
-    Na = []
-    K = []
-    TP = []
-    SystolicBP = []
-    MeanBP = []
-    MSI = []
-    eGFR = []
-
-    Age = []
-    Weight = []
-    Gender = ""
-    temp = []
-    PredictRes = ""
-
-    Agestr = ""
-    Weightstr = ""
-    Genderstr = ""
-
-    filename = 'static/Xgboost_Seq.sav'
-    Xgb_model = pickle.load(open(filename, 'rb'))
-    if request.method == 'POST':
-        if 'OnlyOneData' in request.POST:
-            state = 'OnlyOneData'
-            Age = request.POST['Age']
-            Agestr = request.POST['Age']
-            Weight = request.POST['Weight']
-            Weightstr = request.POST['Weight']
-            Gender = request.POST['Gender']
-            Genderstr = request.POST['Gender']
-            for i in range(0, 6):
-                Crtstr = 'Crt_' + str(i)
-                Intakestr = 'Intake_' + str(i)
-                Urinestr = 'Urine_' + str(i)
-                pHstr = 'pH_' + str(i)
-                Hctstr = 'Hct_' + str(i)
-                BUNstr = 'BUN_' + str(i)
-                Nastr = 'Na_' + str(i)
-                Kstr = 'K_' + str(i)
-                TPstr = 'TP_' + str(i)
-                SystolicBPstr = 'SystolicBP_' + str(i)
-                MeanBPstr = 'MeanBP_' + str(i)
-                MSIstr = 'MSI_' + str(i)
-                eGFRstr = 'eGFR_' + str(i)
-
-                Crt.append(request.POST[Crtstr])
-                Intake.append(request.POST[Intakestr])
-                Urine.append(request.POST[Urinestr])
-                pH.append(request.POST[pHstr])
-                Hct.append(request.POST[Hctstr])
-                BUN.append(request.POST[BUNstr])
-                Na.append(request.POST[Nastr])
-                K.append(request.POST[Kstr])
-                TP.append(request.POST[TPstr])
-                SystolicBP.append(request.POST[SystolicBPstr])
-                MeanBP.append(request.POST[MeanBPstr])
-                MSI.append(request.POST[MSIstr])
-                eGFR.append(request.POST[eGFRstr])
-
-            Crt = list(map(float, ReplaceNan(Crt)))
-            Intake = list(map(float, ReplaceNan(Intake)))
-            Urine = list(map(float, ReplaceNan(Urine)))
-            pH = list(map(float, ReplaceNan(pH)))
-            Hct = list(map(float, ReplaceNan(Hct)))
-            BUN = list(map(float, ReplaceNan(BUN)))
-            Na = list(map(float, ReplaceNan(Na)))
-            K = list(map(float, ReplaceNan(K)))
-            TP = list(map(float, ReplaceNan(TP)))
-            SystolicBP = list(map(float, ReplaceNan(SystolicBP)))
-            MeanBP = list(map(float, ReplaceNan(MeanBP)))
-            MSI = list(map(float, ReplaceNan(MSI)))
-            eGFR = list(map(float, ReplaceNan(eGFR)))
-            if (Gender == 'F'):
-                Gender = '0'
-            if (Gender == 'M'):
-                Gender = '1'
-            if (Gender == ''):
-                Gender = '-10000'
-            if (Weight == ''):
-                Weight = '-10000'
-            if (Age == ''):
-                Age = '-10000'
-
-            X = np.array([Crt, Intake, Urine, pH, Hct, BUN, Na, K, TP, SystolicBP, MeanBP, MSI, eGFR])
-            X = X.reshape(1, -1)
-            X = np.insert(X, 0, float(Gender), axis=1)
-            X = np.insert(X, 0, float(Weight), axis=1)
-            X = np.insert(X, 0, float(Age), axis=1)
-            Y = Xgb_model.predict(X)
-
-    context = {
-        'PredictRes': PredictRes,
-        'Crt': Crt, 'Intake': Intake, 'Urine': Urine, 'pH': pH, 'Hct': Hct, 'BUN': BUN,
-        'Na': Na, 'K': K, 'TP': TP, 'SystolicBP': SystolicBP, 'MeanBP': MeanBP, 'MSI': MSI, 'eGFR': eGFR,
-        'Agestr': Agestr, 'Weightstr': Weightstr, 'Genderstr': Genderstr,
-    }
-    return render(request, "prfip.html", context)
-
-@login_required
 def predictresultforinput(request):
     Crt = []
     Intake = []
@@ -232,25 +215,16 @@ def predictresultforinput(request):
 
     Age = []
     Weight = []
-    Gender = ""
-    temp = []
-    PredictRes = ""
+    Gender = []
 
-    Agestr = ""
-    Weightstr = ""
-    Genderstr = ""
-
-    filename = 'static/Xgboost_Seq.sav'
+    filename = 'static/Xgboost_Seq0606.sav'
     Xgb_model = pickle.load(open(filename, 'rb'))
     if request.method == 'POST':
         if 'OnlyOneData' in request.POST:
             state = 'OnlyOneData'
             Age = request.POST['Age']
-            Agestr = request.POST['Age']
             Weight = request.POST['Weight']
-            Weightstr = request.POST['Weight']
             Gender = request.POST['Gender']
-            Genderstr = request.POST['Gender']
             for i in range(0, 6):
                 Crtstr = 'Crt_' + str(i)
                 Intakestr = 'Intake_' + str(i)
@@ -280,44 +254,26 @@ def predictresultforinput(request):
                 MSI.append(request.POST[MSIstr])
                 eGFR.append(request.POST[eGFRstr])
 
-            Crt = list(map(float, ReplaceNan(Crt)))
-            Intake = list(map(float, ReplaceNan(Intake)))
-            Urine = list(map(float, ReplaceNan(Urine)))
-            pH = list(map(float, ReplaceNan(pH)))
-            Hct = list(map(float, ReplaceNan(Hct)))
-            BUN = list(map(float, ReplaceNan(BUN)))
-            Na = list(map(float, ReplaceNan(Na)))
-            K = list(map(float, ReplaceNan(K)))
-            TP = list(map(float, ReplaceNan(TP)))
-            SystolicBP = list(map(float, ReplaceNan(SystolicBP)))
-            MeanBP = list(map(float, ReplaceNan(MeanBP)))
-            MSI = list(map(float, ReplaceNan(MSI)))
-            eGFR = list(map(float, ReplaceNan(eGFR)))
-            if (Gender == 'F'):
-                Gender = '0'
-            if (Gender == 'M'):
-                Gender = '1'
-            if (Gender == ''):
-                Gender = '-10000'
-            if (Weight == ''):
-                Weight = '-10000'
-            if (Age == ''):
-                Age = '-10000'
+            feature = {'age': Age, 'weight': Weight, 'gender': Gender,
+                      'creatinine': Crt, 'intake': Intake, 'urine': Urine,
+                      'pH': pH, 'Hct': Hct, 'BUN': BUN, 'Na': Na, 'K': K,
+                       'TP': TP, 'systolicBP': SystolicBP, 'meanBP': MeanBP,
+                       'MSI': MSI, 'eGFR': eGFR}
 
-            X = np.array([Crt, Intake, Urine, pH, Hct, BUN, Na, K, TP, SystolicBP, MeanBP, MSI, eGFR])
-            X = X.reshape(1, -1)
-            X = np.insert(X, 0, float(Gender), axis=1)
-            X = np.insert(X, 0, float(Weight), axis=1)
-            X = np.insert(X, 0, float(Age), axis=1)
-            Y = Xgb_model.predict(X)
-            print(X)
-    context = {
-        'PredictRes': PredictRes,
-        'aki' : Y,
-        'Crt': Crt, 'Intake': Intake, 'Urine': Urine, 'pH': pH, 'Hct': Hct, 'BUN': BUN,
-        'Na': Na, 'K': K, 'TP': TP, 'SystolicBP': SystolicBP, 'MeanBP': MeanBP, 'MSI': MSI, 'eGFR': eGFR,
-        'Agestr': Agestr, 'Weightstr': Weightstr, 'Genderstr': Genderstr,
-    }
+            InputData = pd.DataFrame(feature)
+            InputData['gender'] = InputData['gender'].map({'F': '0', 'M': '1'})
+            InputData = InputData.replace(r'^\s*$', np.nan, regex=True)
+            InputData = InputData.fillna(-10000)
+            InputData = InputData.astype('float64')
+            X_test = ConvertFormat(InputData)
+            Y = Xgb_model.predict(X_test.to_numpy())
+            Y = Y.tolist()
+            print(Y)
+
+        context = {
+            'aki': Y[0],
+            'feature': feature,
+        }
     return render(request, "PredictResultForInput.html", context)
 
 @login_required
@@ -338,24 +294,15 @@ def lstmpredictresultforinput(request):
 
     Age = []
     Weight = []
-    Gender = ""
-    temp = []
-    PredictRes = ""
+    Gender = []
 
-    Agestr = ""
-    Weightstr = ""
-    Genderstr = ""
-
-    lstm_model = load_model('static/rnn_test.h5')
+    lstm_model = load_model('./static/rnn_test.h5')
     if request.method == 'POST':
         if 'OnlyOneData' in request.POST:
             state = 'OnlyOneData'
             Age = request.POST['Age']
-            Agestr = request.POST['Age']
             Weight = request.POST['Weight']
-            Weightstr = request.POST['Weight']
             Gender = request.POST['Gender']
-            Genderstr = request.POST['Gender']
             for i in range(0, 6):
                 Crtstr = 'Crt_' + str(i)
                 Intakestr = 'Intake_' + str(i)
@@ -385,117 +332,43 @@ def lstmpredictresultforinput(request):
                 MSI.append(request.POST[MSIstr])
                 eGFR.append(request.POST[eGFRstr])
 
-            Crt = list(map(float, ReplaceNan(Crt)))
-            Intake = list(map(float, ReplaceNan(Intake)))
-            Urine = list(map(float, ReplaceNan(Urine)))
-            pH = list(map(float, ReplaceNan(pH)))
-            Hct = list(map(float, ReplaceNan(Hct)))
-            BUN = list(map(float, ReplaceNan(BUN)))
-            Na = list(map(float, ReplaceNan(Na)))
-            K = list(map(float, ReplaceNan(K)))
-            TP = list(map(float, ReplaceNan(TP)))
-            SystolicBP = list(map(float, ReplaceNan(SystolicBP)))
-            MeanBP = list(map(float, ReplaceNan(MeanBP)))
-            MSI = list(map(float, ReplaceNan(MSI)))
-            eGFR = list(map(float, ReplaceNan(eGFR)))
-            if (Gender == 'F'):
-                Gender = '0'
-            if (Gender == 'M'):
-                Gender = '1'
-            # if (Gender == ''):
-            #     Gender = '-10000'
-            # if (Weight == ''):
-            #     Weight = '-10000'
-            # if (Age == ''):
-            #     Age = '-10000'
+            feature = {'age': Age, 'weight': Weight, 'gender': Gender,
+                      'creatinine': Crt, 'intake': Intake, 'urine': Urine,
+                      'pH': pH, 'Hct': Hct, 'BUN': BUN, 'Na': Na, 'K': K,
+                       'TP': TP, 'systolicBP': SystolicBP, 'meanBP': MeanBP,
+                       'MSI': MSI, 'eGFR': eGFR}
 
-            i = 0
-            crt = Crt
-            intake = Intake.copy()
-            urine = Urine.copy()
-            ph = pH.copy()
-            hct = Hct.copy()
-            bUN = BUN.copy()
-            na = Na.copy()
-            k = K.copy()
-            tP = TP.copy()
-            systolicBP = SystolicBP.copy()
-            meanBP = MeanBP.copy()
-            mSI = MSI.copy()
-            EGFR = eGFR.copy()
-            while  i < 6:
-                if (crt[i] == -10000):
-                    crt[i] = None
-                if (intake[i] == -10000):
-                    intake[i] = None
-                if (urine[i] == -10000):
-                    urine[i] = None
-                if (ph[i] == -10000):
-                    ph[i] = None
-                if (hct[i] == -10000):
-                    hct[i] = None
-                if (bUN[i] == -10000):
-                    bUN[i] = None
-                if (na[i] == -10000):
-                    na[i] = None
-                if (k[i] == -10000):
-                    k[i] = None
-                if (tP[i] == -10000):
-                    tP[i] = None
-                if (systolicBP[i] == -10000):
-                    systolicBP[i] = None
-                if (meanBP[i] == -10000):
-                    meanBP[i] = None
-                if (mSI[i] == -10000):
-                    mSI[i] = None
-                if (EGFR[i] == -10000):
-                    EGFR[i] = None
-                i += 1
-            X = pd.DataFrame()
-            i = 0
-            age = []
-            weight = []
-            gender = []
-            while i < 6:
-                age.append(Age)
-                weight.append(Weight)
-                gender.append(Gender)
-                i+=1
+            InputData = pd.DataFrame(feature)
+            InputData['gender'] = InputData['gender'].map({'F': '0', 'M': '1'})
+            InputData = InputData.replace(r'^\s*$', np.nan, regex=True)
+            InputData = InputData.fillna(-10000)
+            InputData = InputData.astype('float64')
 
-            X['age'] = float(age)
-            X['weight'] = float(weight)
-            X['gender'] = float(gender)
-            X['crt'] = float(crt)
-            X['Intake'] = float(intake)
-            X['Urine'] = float(urine)
-            X['pH'] = float(ph)
-            X['Hct'] = float(hct)
-            X['BUN'] = float(bUN)
-            X['Na'] = float(na)
-            X['K'] = float(k)
-            X['TP'] = float(tP)
-            X['SystolicBP'] = float(systolicBP)
-            X['MeanBP'] = float(meanBP)
-            X['MSI'] = float(mSI)
-            X['eGFR'] = float(EGFR)
+            test_norm = normalize(InputData.drop(columns=['icustay_id']))
+            test_norm = test_norm.fillna(-1)
+            X_test = buildTrain(test_norm, 1, 1, 24)
 
-            X = normalize(X)
-            X = X.fillna(-10)
-            # Y = lstm_model.predict(X)
-            print(X)
-    context = {
-        'PredictRes': PredictRes,
-        # 'aki' : Y,
-        'Crt': Crt, 'Intake': Intake, 'Urine': Urine, 'pH': pH, 'Hct': Hct, 'BUN': BUN,
-        'Na': Na, 'K': K, 'TP': TP, 'SystolicBP': SystolicBP, 'MeanBP': MeanBP, 'MSI': MSI, 'eGFR': eGFR,
-        'Agestr': Agestr, 'Weightstr': Weightstr, 'Genderstr': Genderstr,
-    }
+
+            Y_test = lstm_model.predict(X_test)
+            Y = []
+            for i in range(0, Y_test.shape[0]):
+                if (Y_test[i][5][0] > 0.5):
+                    Y.append(1)
+                else:
+                    Y.append(0)
+            Y = Y.tolist()
+
+
+
+        context = {
+            'aki': Y[0],
+            'feature': feature,
+        }
     return render(request, "PredictResultForInput.html", context)
 
 
 @login_required
 def predictresultforfile(request):
-    # Xgb_model = xgb.Booster(model_file=filename)
     if request.method == 'POST':
         if 'Upload' in request.POST:
             state = 'Upload'
@@ -507,82 +380,22 @@ def predictresultforfile(request):
             fs.save('./static/media/File', UploadFile)
 
     File_df = pd.read_csv('./static/media/File', sep=',', header=0, encoding='utf-8')
-    test = File_df.fillna(-10000)
-    File_df = File_df.fillna(-10000)
-    print(File_df)
-    X = test.to_numpy()
-    filename = './static/Xgboost_Seq.sav'
+    icustay_id = File_df.groupby(File_df.index // 6)['icustay_id'].nth(0).tolist()
+    X_test = ConvertFormat(File_df)
+    X_test= X_test.fillna(-10000)
+
+    filename = './static/Xgboost_Seq0606.sav'
     Xgb_model = pickle.load(open(filename, 'rb'))
-    Y = Xgb_model.predict(X)
-    # Y = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-    File_df['AKI'] = Y
-    numberPatient = []
-    i = 0
-    while i < len(Y):
-        if Y[i] == 1:
-            pair = [i+1,"AKI"]
-        else:
-            pair = [i + 1, "No AKI"]
-        if (i+1) < len(Y) and Y[i + 1] == 1:
-            pair.append(i+2)
-            pair.append("AKI")
-        elif (i+1) < len(Y) and Y[i + 1] == 0:
-            pair.append(i + 2)
-            pair.append("No AKI")
-        if (i+2) < len(Y) and Y[i + 2] == 1:
-            pair.append(i+3)
-            pair.append("AKI")
-        elif (i+2) < len(Y) and Y[i + 2] == 0:
-            pair.append(i + 3)
-            pair.append("No AKI")
-        if (i+3) < len(Y) and Y[i + 3] == 1:
-            pair.append(i+4)
-            pair.append("AKI")
-        elif (i+3) < len(Y) and Y[i + 3] == 0:
-            pair.append(i + 4)
-            pair.append("No AKI")
-        i += 4
-        numberPatient.append(pair)
-    number = []
-    i = 0
-    while i < len(Y):
-        number.append(i + 1)
-        i += 1
-    File_df['patientNo'] = number
-    res = []
-    for i in range(0, len(File_df)):
-        DictTemp = {
-            'number': File_df['patientNo'][i],
-            'age': round(File_df['age'][i],2),
-            'weight': round(File_df['weight'][i],2),
-            'gender': File_df['gender'].map({1: "M", 0: "F"})[i],
-            'crt': round(File_df.loc[
-                i, ['creatinine_seq_0', 'creatinine_seq_1', 'creatinine_seq_2', 'creatinine_seq_3', 'creatinine_seq_4',
-                    'creatinine_seq_5']],2).tolist(),
-            'intake': round(File_df.loc[i, ['intake_seq_0', 'intake_seq_1', 'intake_seq_2', 'intake_seq_3', 'intake_seq_4',
-                                      'intake_seq_5']],2).tolist(),
-            'urine': round(File_df.loc[
-                i, ['urine_seq_0', 'urine_seq_1', 'urine_seq_2', 'urine_seq_3', 'urine_seq_4', 'urine_seq_5']],2).tolist(),
-            'pH': round(File_df.loc[i, ['pH_seq_0', 'pH_seq_1', 'pH_seq_2', 'pH_seq_3', 'pH_seq_4', 'pH_seq_5']],2).tolist(),
-            'Hct': round(File_df.loc[
-                i, ['Hct_seq_0', 'Hct_seq_1', 'Hct_seq_2', 'Hct_seq_3', 'Hct_seq_4', 'Hct_seq_5']],2).tolist(),
-            'BUN': round(File_df.loc[
-                i, ['BUN_seq_0', 'BUN_seq_1', 'BUN_seq_2', 'BUN_seq_3', 'BUN_seq_4', 'BUN_seq_5']],2).tolist(),
-            'Na': round(File_df.loc[i, ['Na_seq_0', 'Na_seq_1', 'Na_seq_2', 'Na_seq_3', 'Na_seq_4', 'Na_seq_5']],2).tolist(),
-            'K': round(File_df.loc[i, ['K_seq_0', 'K_seq_1', 'K_seq_2', 'K_seq_3', 'K_seq_4', 'K_seq_5']],2).tolist(),
-            'TP': round(File_df.loc[i, ['TP_seq_0', 'TP_seq_1', 'TP_seq_2', 'TP_seq_3', 'TP_seq_4', 'TP_seq_5']],2).tolist(),
-            'systolicBP': round(File_df.loc[
-                i, ['systolicBP_seq_0', 'systolicBP_seq_1', 'systolicBP_seq_2', 'systolicBP_seq_3', 'systolicBP_seq_4',
-                    'systolicBP_seq_5']],2).tolist(),
-            'meanBP': round(File_df.loc[i, ['meanBP_seq_0', 'meanBP_seq_1', 'meanBP_seq_2', 'meanBP_seq_3', 'meanBP_seq_4',
-                                      'meanBP_seq_5']],2).tolist(),
-            'MSI': round(File_df.loc[
-                i, ['MSI_seq_0', 'MSI_seq_1', 'MSI_seq_2', 'MSI_seq_3', 'MSI_seq_4', 'MSI_seq_5']],2).tolist(),
-            'eGFR': round(File_df.loc[
-                i, ['eGFR_seq_0', 'eGFR_seq_1', 'eGFR_seq_2', 'eGFR_seq_3', 'eGFR_seq_4', 'eGFR_seq_5']],2).tolist(),
-            'aki': File_df['AKI'][i],
-        }
-        res.append(DictTemp)
+    Y = Xgb_model.predict(X_test.to_numpy())
+    Y = Y.tolist()
+    res = PrepareOutput(File_df, Y)
+    pageNo = np.arange(1, len(Y) + 1).tolist()
+    temp = np.array([Y, icustay_id, pageNo])
+    ViewTable = []
+    for i in range(0, temp.shape[1]):
+        ViewTable.append(temp[:, i].tolist())
+    ViewTable = list(chunks(ViewTable, 4))
+
 
     paginator = Paginator(res, 1)
     page = request.GET.get('page')
@@ -591,7 +404,7 @@ def predictresultforfile(request):
     context = {
         'contacts': contacts,
         'all': Y,
-        'count': numberPatient,
+        'ViewTable': ViewTable,
     }
     return render(request, "PredictResultForFile.html", context)
 
@@ -607,85 +420,30 @@ def lstmpredictresultforfile(request):
             fs.save('./static/media/File', UploadFile)
 
     File_df = pd.read_csv('./static/media/File', sep=',', header=0, encoding='utf-8')
-    # test = File_df.fillna(-1000000)
-    test = File_df.copy()
-    test = test.replace(-1, 'nan', inplace=True)
-    print(File_df)
-    test = normalize(File_df)
-    File_df = File_df.fillna(-1000000)
-    X = test.fillna(-1)
-    X = packageData(X,6)
-    lstm_model = load_model('static/rnn_test.h5')
-    Y = lstm_model.predict(X)
-    # Y = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-    File_df['AKI'] = Y
-    numberPatient = []
-    i = 0
-    while i < len(Y):
-        if Y[i] == 1:
-            pair = [i+1,"AKI"]
+    icustay_id = File_df.groupby(File_df.index // 6)['icustay_id'].nth(0).tolist()
+    test_norm = normalize(File_df.drop(columns=['icustay_id']))
+    test_norm = test_norm.fillna(-1)
+    X_test = buildTrain(test_norm, 1, 1, 24)
+
+
+    lstm_model = load_model('./static/rnn_test.h5')
+    Y_test = lstm_model.predict(X_test)
+    Y = []
+    for i in range(0, Y_test.shape[0]):
+        if (Y_test[i][5][0] > 0.5):
+            Y.append(1)
         else:
-            pair = [i + 1, "No AKI"]
-        if (i+1) < len(Y) and Y[i + 1] == 1:
-            pair.append(i+2)
-            pair.append("AKI")
-        elif (i+1) < len(Y) and Y[i + 1] == 0:
-            pair.append(i + 2)
-            pair.append("No AKI")
-        if (i+2) < len(Y) and Y[i + 2] == 1:
-            pair.append(i+3)
-            pair.append("AKI")
-        elif (i+2) < len(Y) and Y[i + 2] == 0:
-            pair.append(i + 3)
-            pair.append("No AKI")
-        if (i+3) < len(Y) and Y[i + 3] == 1:
-            pair.append(i+4)
-            pair.append("AKI")
-        elif (i+3) < len(Y) and Y[i + 3] == 0:
-            pair.append(i + 4)
-            pair.append("No AKI")
-        i += 4
-        numberPatient.append(pair)
-    number = []
-    i = 0
-    while i < len(Y):
-        number.append(i + 1)
-        i += 1
-    File_df['patientNo'] = number
-    res = []
-    for i in range(0, len(File_df)):
-        DictTemp = {
-            'number': File_df['patientNo'][i],
-            'age': round(File_df['age'][i],2),
-            'weight': round(File_df['weight'][i],2),
-            'gender': File_df['gender'].map({1: "M", 0: "F"})[i],
-            'crt': round(File_df.loc[
-                i, ['creatinine_seq_0', 'creatinine_seq_1', 'creatinine_seq_2', 'creatinine_seq_3', 'creatinine_seq_4',
-                    'creatinine_seq_5']],2).tolist(),
-            'intake': round(File_df.loc[i, ['intake_seq_0', 'intake_seq_1', 'intake_seq_2', 'intake_seq_3', 'intake_seq_4',
-                                      'intake_seq_5']],2).tolist(),
-            'urine': round(File_df.loc[
-                i, ['urine_seq_0', 'urine_seq_1', 'urine_seq_2', 'urine_seq_3', 'urine_seq_4', 'urine_seq_5']],2).tolist(),
-            'pH': round(File_df.loc[i, ['pH_seq_0', 'pH_seq_1', 'pH_seq_2', 'pH_seq_3', 'pH_seq_4', 'pH_seq_5']],2).tolist(),
-            'Hct': round(File_df.loc[
-                i, ['Hct_seq_0', 'Hct_seq_1', 'Hct_seq_2', 'Hct_seq_3', 'Hct_seq_4', 'Hct_seq_5']],2).tolist(),
-            'BUN': round(File_df.loc[
-                i, ['BUN_seq_0', 'BUN_seq_1', 'BUN_seq_2', 'BUN_seq_3', 'BUN_seq_4', 'BUN_seq_5']],2).tolist(),
-            'Na': round(File_df.loc[i, ['Na_seq_0', 'Na_seq_1', 'Na_seq_2', 'Na_seq_3', 'Na_seq_4', 'Na_seq_5']],2).tolist(),
-            'K': round(File_df.loc[i, ['K_seq_0', 'K_seq_1', 'K_seq_2', 'K_seq_3', 'K_seq_4', 'K_seq_5']],2).tolist(),
-            'TP': round(File_df.loc[i, ['TP_seq_0', 'TP_seq_1', 'TP_seq_2', 'TP_seq_3', 'TP_seq_4', 'TP_seq_5']],2).tolist(),
-            'systolicBP': round(File_df.loc[
-                i, ['systolicBP_seq_0', 'systolicBP_seq_1', 'systolicBP_seq_2', 'systolicBP_seq_3', 'systolicBP_seq_4',
-                    'systolicBP_seq_5']],2).tolist(),
-            'meanBP': round(File_df.loc[i, ['meanBP_seq_0', 'meanBP_seq_1', 'meanBP_seq_2', 'meanBP_seq_3', 'meanBP_seq_4',
-                                      'meanBP_seq_5']],2).tolist(),
-            'MSI': round(File_df.loc[
-                i, ['MSI_seq_0', 'MSI_seq_1', 'MSI_seq_2', 'MSI_seq_3', 'MSI_seq_4', 'MSI_seq_5']],2).tolist(),
-            'eGFR': round(File_df.loc[
-                i, ['eGFR_seq_0', 'eGFR_seq_1', 'eGFR_seq_2', 'eGFR_seq_3', 'eGFR_seq_4', 'eGFR_seq_5']],2).tolist(),
-            'aki': File_df['AKI'][i],
-        }
-        res.append(DictTemp)
+            Y.append(0)
+    Y = Y.tolist()
+    res = PrepareOutput(File_df, Y)
+    pageNo = np.arange(1, len(Y) + 1).tolist()
+    temp = np.array([Y, icustay_id, pageNo])
+    ViewTable = []
+    for i in range(0, temp.shape[1]):
+        print(i)
+        ViewTable.append(temp[:, i].tolist())
+    ViewTable = list(chunks(ViewTable, 4))
+
 
     paginator = Paginator(res, 1)
     page = request.GET.get('page')
@@ -694,77 +452,8 @@ def lstmpredictresultforfile(request):
     context = {
         'contacts': contacts,
         'all': Y,
-        'count': numberPatient,
+        'ViewTable': ViewTable,
     }
+
     return render(request, "PredictResultForFile.html", context)
 
-@login_required
-def overview(request):
-    # Xgb_model = xgb.Booster(model_file=filename)
-    if request.method == 'POST':
-        if 'Upload' in request.POST:
-            state = 'Upload'
-            UploadFile = request.FILES['document']
-            fs = FileSystemStorage()
-            fs.save('./static/media/File', UploadFile)
-            for filename in os.listdir("./static/media"):
-                if (filename != "File"):
-                    file = "./static/media/" + filename
-                    os.remove(file)
-    File_df = pd.read_csv('./static/media/File', sep=',', header=0, encoding='utf-8')
-    test = File_df.fillna(-10000)
-    X = test.to_numpy()
-    filename = './static/Xgboost_Seq.sav'
-    Xgb_model = pickle.load(open(filename, 'rb'))
-    Y = Xgb_model.predict(X)
-    # Y = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-    File_df['AKI'] = Y
-    i=0
-    number = []
-    while i < len(Y):
-        number.append(i + 1)
-        i += 1
-    File_df['number'] = number
-    res = []
-    for i in range(0, len(File_df)):
-        DictTemp = {
-            'number' : File_df['number'][i],
-            'age': File_df['age'][i],
-            'weight': File_df['weight'][i],
-            'gender': File_df['gender'].map({1: "M", 0: "F"})[i],
-            'crt': File_df.loc[
-                i, ['creatinine_seq_0', 'creatinine_seq_1', 'creatinine_seq_2', 'creatinine_seq_3', 'creatinine_seq_4',
-                    'creatinine_seq_5']].tolist(),
-            'intake': File_df.loc[i, ['intake_seq_0', 'intake_seq_1', 'intake_seq_2', 'intake_seq_3', 'intake_seq_4',
-                                      'intake_seq_5']].tolist(),
-            'urine': File_df.loc[
-                i, ['urine_seq_0', 'urine_seq_1', 'urine_seq_2', 'urine_seq_3', 'urine_seq_4', 'urine_seq_5']].tolist(),
-            'pH': File_df.loc[i, ['pH_seq_0', 'pH_seq_1', 'pH_seq_2', 'pH_seq_3', 'pH_seq_4', 'pH_seq_5']].tolist(),
-            'Hct': File_df.loc[
-                i, ['Hct_seq_0', 'Hct_seq_1', 'Hct_seq_2', 'Hct_seq_3', 'Hct_seq_4', 'Hct_seq_5']].tolist(),
-            'BUN': File_df.loc[
-                i, ['BUN_seq_0', 'BUN_seq_1', 'BUN_seq_2', 'BUN_seq_3', 'BUN_seq_4', 'BUN_seq_5']].tolist(),
-            'Na': File_df.loc[i, ['Na_seq_0', 'Na_seq_1', 'Na_seq_2', 'Na_seq_3', 'Na_seq_4', 'Na_seq_5']].tolist(),
-            'K': File_df.loc[i, ['K_seq_0', 'K_seq_1', 'K_seq_2', 'K_seq_3', 'K_seq_4', 'K_seq_5']].tolist(),
-            'TP': File_df.loc[i, ['TP_seq_0', 'TP_seq_1', 'TP_seq_2', 'TP_seq_3', 'TP_seq_4', 'TP_seq_5']].tolist(),
-            'systolicBP': File_df.loc[
-                i, ['systolicBP_seq_0', 'systolicBP_seq_1', 'systolicBP_seq_2', 'systolicBP_seq_3', 'systolicBP_seq_4',
-                    'systolicBP_seq_5']].tolist(),
-            'meanBP': File_df.loc[i, ['meanBP_seq_0', 'meanBP_seq_1', 'meanBP_seq_2', 'meanBP_seq_3', 'meanBP_seq_4',
-                                      'meanBP_seq_5']].tolist(),
-            'MSI': File_df.loc[
-                i, ['MSI_seq_0', 'MSI_seq_1', 'MSI_seq_2', 'MSI_seq_3', 'MSI_seq_4', 'MSI_seq_5']].tolist(),
-            'eGFR': File_df.loc[
-                i, ['eGFR_seq_0', 'eGFR_seq_1', 'eGFR_seq_2', 'eGFR_seq_3', 'eGFR_seq_4', 'eGFR_seq_5']].tolist(),
-            'aki': File_df['AKI'][i],
-        }
-        res.append(DictTemp)
-
-    paginator = Paginator(res, 1)
-    page = request.GET.get('page')
-    contacts = paginator.get_page(page)
-
-    context = {
-        'contacts': contacts,
-    }
-    return render(request, "overview.html", context)
