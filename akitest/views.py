@@ -12,7 +12,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.http import HttpResponseRedirect
 from tensorflow.python.keras.models import load_model
-
+from tensorflow.python.keras.layers import Input, CuDNNLSTM
 from tensorflow.python.keras.losses import BinaryCrossentropy
 from tensorflow.keras.metrics import Accuracy
 from django.contrib import auth
@@ -22,12 +22,18 @@ import os
 import numpy as np
 import pickle
 
-
+import tensorflow as tf
 
 def chunks(lst, n):
     """Yield successive n-sized chunks from lst."""
     for i in range(0, len(lst), n):
         yield lst[i:i + n]
+
+def HandleMissingVal(Input):
+    HandledMissingValCol = ['creatinine','pH', 'Hct', 'BUN', 'Na', 'K', 'TP','systolicBP', 'meanBP','MSI', 'eGFR']
+    for feature in HandledMissingValCol:
+        Input[feature] = Input.groupby(Input.index//6)[feature].bfill()
+        Input[feature] = Input.groupby(Input.index//6)[feature].ffill()
 
 
 def ConvertFormat(Input):
@@ -71,6 +77,7 @@ def ConvertFormat(Input):
     xgb_input['gender'] = gender
     xgb_input = pd.concat(
         [xgb_input, creatinine, intake, urine, pH, Hct, BUN, Na, K, TP, systolicBP, meanBP, MSI, eGFR], axis=1)
+
     return xgb_input
 
 def PrepareOutput(Input,PredictRes):
@@ -79,7 +86,6 @@ def PrepareOutput(Input,PredictRes):
         DictTemp = {
             'patientID':Input['icustay_id'][i],
             'age':round(Input['age'][i],2).tolist(),
-            # 'day':round(Input['day'][i]).tolist(),
             'weight':round(Input['weight'][i],2).tolist(),
             'gender':Input['gender'][i].tolist(),
             'crt':round(Input['creatinine'][i:i+6],2).tolist(),
@@ -103,7 +109,6 @@ def PrepareOutput(Input,PredictRes):
 def buildTrain(train, pastDay, futureDay, hours):
     # 處理時序性Data
     X_train = []
-    print(train.shape[0])
     train_data = np.array(train)
     #train_x_list=train_data.tolist()#list
     data = []
@@ -120,34 +125,6 @@ def normalize(train):
     train_norm = train.apply(lambda x: (x - np.mean(x)) / (np.max(x) - np.min(x)))
     return train_norm
 
-
-
-def packageData(train_norm,period):
-    dataunit = []
-    time_line = []
-    newdata = []
-    row = 0
-    #period = 4 #how many time period in 24hr
-    while row < len(train_norm.index.values)-1:
-        offset = 0
-        time_line = []
-        pair = []
-        #take pt's feature in every time period -> time_line : [vector t1,vector t2...]
-        while offset < period:
-            dataunit = []
-            #take pt's feature in one time period -> dataunit : vector t
-            for column in train_norm.columns:
-                dataunit.append(train_norm.iloc[row + offset]['%s'%column])
-            time_line.append(dataunit)
-            offset += 1
-            # pair : [[vector t1,vector t2...], aki]
-        pair.append(time_line)
-        pair.append('')
-        #newdata : [[[vector t1,vector t2...], aki] , [[vector t1,vector t2...], aki] ....]
-        newdata.append(pair)
-        row += period
-    print("how many patients : ",len(newdata))
-    return newdata
 
 def startpage(req):
     return render(req, 'startPage.html')
@@ -263,12 +240,13 @@ def predictresultforinput(request):
             InputData = pd.DataFrame(feature)
             InputData['gender'] = InputData['gender'].map({'F': '0', 'M': '1'})
             InputData = InputData.replace(r'^\s*$', np.nan, regex=True)
-            InputData = InputData.fillna(-10000)
             InputData = InputData.astype('float64')
+            HandleMissingVal(InputData)
+            InputData = InputData.fillna(-10000)
             X_test = ConvertFormat(InputData)
             Y = Xgb_model.predict(X_test.to_numpy())
             Y = Y.tolist()
-            print(Y)
+
 
         context = {
             'aki': Y[0],
@@ -296,7 +274,7 @@ def lstmpredictresultforinput(request):
     Weight = []
     Gender = []
 
-    lstm_model = load_model('./static/rnn_test.h5')
+    lstm_model = load_model('./static/rnn_test_notGPU.h5',custom_objects=None, compile=False)
     if request.method == 'POST':
         if 'OnlyOneData' in request.POST:
             state = 'OnlyOneData'
@@ -342,11 +320,12 @@ def lstmpredictresultforinput(request):
             InputData['gender'] = InputData['gender'].map({'F': '0', 'M': '1'})
             InputData = InputData.replace(r'^\s*$', np.nan, regex=True)
             InputData = InputData.astype('float64')
-            
+            HandleMissingVal(InputData)
             test_norm = normalize(InputData)
             test_norm = test_norm.fillna(-1)
             X_test = buildTrain(test_norm, 1, 1, 24)
 
+            tf.test.gpu_device_name()
 
             Y_test = lstm_model.predict(X_test)
             Y = []
@@ -355,7 +334,6 @@ def lstmpredictresultforinput(request):
                     Y.append(1)
                 else:
                     Y.append(0)
-            Y = Y.tolist()
 
 
 
@@ -380,6 +358,8 @@ def predictresultforfile(request):
 
     File_df = pd.read_csv('./static/media/File', sep=',', header=0, encoding='utf-8')
     icustay_id = File_df.groupby(File_df.index // 6)['icustay_id'].nth(0).tolist()
+    Orgin_File_df = File_df.copy()
+    HandleMissingVal(File_df)
     X_test = ConvertFormat(File_df)
     X_test= X_test.fillna(-10000)
 
@@ -387,7 +367,7 @@ def predictresultforfile(request):
     Xgb_model = pickle.load(open(filename, 'rb'))
     Y = Xgb_model.predict(X_test.to_numpy())
     Y = Y.tolist()
-    res = PrepareOutput(File_df, Y)
+    res = PrepareOutput(Orgin_File_df, Y)
     pageNo = np.arange(1, len(Y) + 1).tolist()
     temp = np.array([Y, icustay_id, pageNo])
     ViewTable = []
@@ -420,12 +400,15 @@ def lstmpredictresultforfile(request):
 
     File_df = pd.read_csv('./static/media/File', sep=',', header=0, encoding='utf-8')
     icustay_id = File_df.groupby(File_df.index // 6)['icustay_id'].nth(0).tolist()
+    Origin_File_df = File_df.copy()
+    HandleMissingVal(File_df)
     test_norm = normalize(File_df.drop(columns=['icustay_id']))
     test_norm = test_norm.fillna(-1)
     X_test = buildTrain(test_norm, 1, 1, 24)
 
 
-    lstm_model = load_model('./static/rnn_test.h5')
+    lstm_model = load_model('./static/rnn_test_notGPU.h5',custom_objects=None, compile=False)
+
     Y_test = lstm_model.predict(X_test)
     Y = []
     for i in range(0, Y_test.shape[0]):
@@ -433,13 +416,12 @@ def lstmpredictresultforfile(request):
             Y.append(1)
         else:
             Y.append(0)
-    Y = Y.tolist()
-    res = PrepareOutput(File_df, Y)
+
+    res = PrepareOutput(Origin_File_df, Y)
     pageNo = np.arange(1, len(Y) + 1).tolist()
     temp = np.array([Y, icustay_id, pageNo])
     ViewTable = []
     for i in range(0, temp.shape[1]):
-        print(i)
         ViewTable.append(temp[:, i].tolist())
     ViewTable = list(chunks(ViewTable, 4))
 

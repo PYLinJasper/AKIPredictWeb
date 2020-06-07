@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load filter %}
     {% load static %}
     <title>AKI Helper PredictPage</title>
     <meta charset="utf-8" />
@@ -92,10 +93,9 @@
             <tr>
                 <td>Creatinine (mg/dl)</td>
                 {% for data in contact.crt %}
-                    {% if data != -10000 %}
+                    {% if data|IsNan != -10000 %}
                         <td>{{ data }}</td>
-                    {% endif %}
-                    {% if data == -10000 %}
+                    {% else %}
                         <td style="background-color: rgba(129,199,212,55)"></td>
                     {% endif %}
                 {% endfor %}
@@ -103,10 +103,9 @@
             <tr>
                 <td>Intake (ml)</td>
                 {% for data in contact.intake %}
-                    {% if data != -10000 %}
+                    {% if data|IsNan != -10000 %}
                         <td>{{ data }}</td>
-                    {% endif %}
-                    {% if data == -10000 %}
+                    {% else %}
                         <td style="background-color: rgba(129,199,212,55)"></td>
                     {% endif %}
                 {% endfor %}
@@ -114,10 +113,9 @@
             <tr>
                 <td>Urine (ml)</td>
                 {% for data in contact.urine %}
-                    {% if data != -10000 %}
+                    {% if data|IsNan != -10000 %}
                         <td>{{ data }}</td>
-                    {% endif %}
-                    {% if data == -10000 %}
+                    {% else %}
                         <td style="background-color: rgba(129,199,212,55)"></td>
                     {% endif %}
                 {% endfor %}
@@ -125,10 +123,9 @@
             <tr>
                 <td>pH</td>
                 {% for data in contact.pH %}
-                    {% if data != -10000 %}
+                    {% if data|IsNan != -10000 %}
                         <td>{{ data }}</td>
-                    {% endif %}
-                    {% if data == -10000 %}
+                    {% else %}
                         <td style="background-color: rgba(129,199,212,55)"></td>
                     {% endif %}
                 {% endfor %}
@@ -136,10 +133,9 @@
             <tr>
                 <td>Hct (%)</td>
                 {% for data in contact.Hct %}
-                    {% if data != -10000 %}
+                    {% if data|IsNan != -10000 %}
                         <td>{{ data }}</td>
-                    {% endif %}
-                    {% if data == -10000 %}
+                    {% else %}
                         <td style="background-color: rgba(129,199,212,55)"></td>
                     {% endif %}
                 {% endfor %}
@@ -147,10 +143,9 @@
             <tr>
                 <td>BUN (mg/dl)</td>
                 {% for data in contact.BUN %}
-                    {% if data != -10000 %}
+                    {% if data|IsNan != -10000 %}
                         <td>{{ data }}</td>
-                    {% endif %}
-                    {% if data == -10000 %}
+                    {% else %}
                         <td style="background-color: rgba(129,199,212,55)"></td>
                     {% endif %}
                 {% endfor %}
@@ -158,10 +153,9 @@
             <tr>
                 <td>Na (mmol/L)</td>
                 {% for data in contact.Na %}
-                    {% if data != -10000 %}
+                    {% if data|IsNan != -10000 %}
                         <td>{{ data }}</td>
-                    {% endif %}
-                    {% if data == -10000 %}
+                    {% else %}
                         <td style="background-color: rgba(129,199,212,55)"></td>
                     {% endif %}
                 {% endfor %}
@@ -169,10 +163,9 @@
             <tr>
                 <td>K (mmol/L)</td>
                 {% for data in contact.K %}
-                    {% if data != -10000 %}
+                    {% if data|IsNan != -10000 %}
                         <td>{{ data }}</td>
-                    {% endif %}
-                    {% if data == -10000 %}
+                    {% else %}
                         <td style="background-color: rgba(129,199,212,55)"></td>
                     {% endif %}
                 {% endfor %}
@@ -180,10 +173,9 @@
             <tr>
                 <td>Temperature (Celsius)</td>
                 {% for data in contact.TP %}
-                    {% if data != -10000 %}
+                    {% if data|IsNan != -10000 %}
                         <td>{{ data }}</td>
-                    {% endif %}
-                    {% if data == -10000 %}
+                    {% else %}
                         <td style="background-color: rgba(129,199,212,55)"></td>
                     {% endif %}
                 {% endfor %}
@@ -191,10 +183,9 @@
             <tr>
                 <td>Systolic BP (mmHg)</td>
                 {% for data in contact.systolicBP %}
-                    {% if data != -10000 %}
+                    {% if data|IsNan != -10000 %}
                         <td>{{ data }}</td>
-                    {% endif %}
-                    {% if data == -10000 %}
+                    {% else %}
                         <td style="background-color: rgba(129,199,212,55)"></td>
                     {% endif %}
                 {% endfor %}
@@ -202,10 +193,9 @@
             <tr>
                 <td>Mean BP (mmHg)</td>
                 {% for data in contact.meanBP %}
-                    {% if data != -10000 %}
+                    {% if data|IsNan != -10000 %}
                         <td>{{ data }}</td>
-                    {% endif %}
-                    {% if data == -10000 %}
+                    {% else %}
                         <td style="background-color: rgba(129,199,212,55)"></td>
                     {% endif %}
                 {% endfor %}
@@ -213,10 +203,9 @@
             <tr>
                 <td>MSI</td>
                  {% for data in contact.MSI %}
-                    {% if data != -10000 %}
+                    {% if data|IsNan != -10000 %}
                         <td>{{ data }}</td>
-                    {% endif %}
-                    {% if data == -10000 %}
+                    {% else %}
                         <td style="background-color: rgba(129,199,212,55)"></td>
                     {% endif %}
                 {% endfor %}
@@ -224,10 +213,9 @@
             <tr>
                 <td>eGFR</td>
                 {% for data in contact.eGFR %}
-                    {% if data != -10000 %}
+                    {% if data|IsNan != -10000 %}
                         <td>{{ data }}</td>
-                    {% endif %}
-                    {% if data == -10000 %}
+                    {% else %}
                         <td style="background-color: rgba(129,199,212,55)"></td>
                     {% endif %}
                 {% endfor %}

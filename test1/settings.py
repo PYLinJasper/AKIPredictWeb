@@ -65,9 +65,13 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries':{
+                'filter': 'akitest.templatetags.filter',
+            },
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'test1.wsgi.application'
 
