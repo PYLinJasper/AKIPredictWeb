@@ -129,9 +129,6 @@ def normalize(train):
 def startpage(req):
     return render(req, 'startPage.html')
 
-def testunflod(req):
-    return render(req, 'testUnflod.html')
-
 @login_required
 def homepage(req):
     return render(req, 'homepage.html')
@@ -162,6 +159,7 @@ def register(request):
         password = request.POST['password']
         user = User.objects.create_user(username=username, password=password)
         user.save()
+        messages.success(request, "註冊成功!")
         return HttpResponseRedirect('/login/')
     else:
         return render(request, "register.html")
@@ -240,19 +238,23 @@ def predictresultforinput(request):
             InputData = pd.DataFrame(feature)
             InputData['gender'] = InputData['gender'].map({'F': '0', 'M': '1'})
             InputData = InputData.replace(r'^\s*$', np.nan, regex=True)
-            InputData = InputData.astype('float64')
-            HandleMissingVal(InputData)
-            InputData = InputData.fillna(-10000)
-            X_test = ConvertFormat(InputData)
-            Y = Xgb_model.predict(X_test.to_numpy())
-            Y = Y.tolist()
+            try:
+                InputData = InputData.astype('float64')
+                HandleMissingVal(InputData)
+                InputData = InputData.fillna(-10000)
+                X_test = ConvertFormat(InputData)
+                Y = Xgb_model.predict(X_test.to_numpy())
+                Y = Y.tolist()
 
 
-        context = {
-            'aki': Y[0],
-            'feature': feature,
-        }
-    return render(request, "PredictResultForInput.html", context)
+                context = {
+                    'aki': Y[0],
+                    'feature': feature,
+                }
+                return render(request, "PredictResultForInput.html", context)
+            except:
+                messages.success(request, "輸入格式有誤，請重新輸入")
+                return HttpResponseRedirect('/homepage/')
 
 @login_required
 def lstmpredictresultforinput(request):
@@ -319,30 +321,31 @@ def lstmpredictresultforinput(request):
             InputData = pd.DataFrame(feature)
             InputData['gender'] = InputData['gender'].map({'F': '0', 'M': '1'})
             InputData = InputData.replace(r'^\s*$', np.nan, regex=True)
-            InputData = InputData.astype('float64')
-            HandleMissingVal(InputData)
-            test_norm = normalize(InputData)
-            test_norm = test_norm.fillna(-1)
-            X_test = buildTrain(test_norm, 1, 1, 24)
+            try:
+                InputData = InputData.astype('float64')
+                HandleMissingVal(InputData)
+                test_norm = normalize(InputData)
+                test_norm = test_norm.fillna(-1)
+                X_test = buildTrain(test_norm, 1, 1, 24)
 
-            tf.test.gpu_device_name()
+                tf.test.gpu_device_name()
 
-            Y_test = lstm_model.predict(X_test)
-            Y = []
-            for i in range(0, Y_test.shape[0]):
-                if (Y_test[i][5][0] > 0.5):
-                    Y.append(1)
-                else:
-                    Y.append(0)
+                Y_test = lstm_model.predict(X_test)
+                Y = []
+                for i in range(0, Y_test.shape[0]):
+                    if (Y_test[i][5][0] > 0.5):
+                        Y.append(1)
+                    else:
+                        Y.append(0)
 
-
-
-        context = {
-            'aki': Y[0],
-            'feature': feature,
-        }
-    return render(request, "PredictResultForInput.html", context)
-
+                context = {
+                    'aki': Y[0],
+                    'feature': feature,
+                }
+                return render(request, "PredictResultForInput.html", context)
+            except:
+                messages.success(request,"輸入格式有誤，請重新輸入")
+                return HttpResponseRedirect('/homepage/')
 
 @login_required
 def predictresultforfile(request):
@@ -357,35 +360,39 @@ def predictresultforfile(request):
             fs.save('./static/media/File', UploadFile)
 
     File_df = pd.read_csv('./static/media/File', sep=',', header=0, encoding='utf-8')
-    icustay_id = File_df.groupby(File_df.index // 6)['icustay_id'].nth(0).tolist()
-    Orgin_File_df = File_df.copy()
-    HandleMissingVal(File_df)
-    X_test = ConvertFormat(File_df)
-    X_test= X_test.fillna(-10000)
+    try:
+        icustay_id = File_df.groupby(File_df.index // 6)['icustay_id'].nth(0).tolist()
+        Orgin_File_df = File_df.copy()
+        HandleMissingVal(File_df)
+        X_test = ConvertFormat(File_df)
+        X_test= X_test.fillna(-10000)
 
-    filename = './static/Xgboost_Seq0606.sav'
-    Xgb_model = pickle.load(open(filename, 'rb'))
-    Y = Xgb_model.predict(X_test.to_numpy())
-    Y = Y.tolist()
-    res = PrepareOutput(Orgin_File_df, Y)
-    pageNo = np.arange(1, len(Y) + 1).tolist()
-    temp = np.array([Y, icustay_id, pageNo])
-    ViewTable = []
-    for i in range(0, temp.shape[1]):
-        ViewTable.append(temp[:, i].tolist())
-    ViewTable = list(chunks(ViewTable, 4))
+        filename = './static/Xgboost_Seq0606.sav'
+        Xgb_model = pickle.load(open(filename, 'rb'))
+        Y = Xgb_model.predict(X_test.to_numpy())
+        Y = Y.tolist()
+        res = PrepareOutput(Orgin_File_df, Y)
+        pageNo = np.arange(1, len(Y) + 1).tolist()
+        temp = np.array([Y, icustay_id, pageNo])
+        ViewTable = []
+        for i in range(0, temp.shape[1]):
+            ViewTable.append(temp[:, i].tolist())
+        ViewTable = list(chunks(ViewTable, 4))
 
 
-    paginator = Paginator(res, 1)
-    page = request.GET.get('page')
-    contacts = paginator.get_page(page)
+        paginator = Paginator(res, 1)
+        page = request.GET.get('page')
+        contacts = paginator.get_page(page)
 
-    context = {
-        'contacts': contacts,
-        'all': Y,
-        'ViewTable': ViewTable,
-    }
-    return render(request, "PredictResultForFile.html", context)
+        context = {
+            'contacts': contacts,
+            'all': Y,
+            'ViewTable': ViewTable,
+        }
+        return render(request, "PredictResultForFile.html", context)
+    except:
+        messages.success(request, "檔案格式有誤，請重新上傳檔案")
+        return HttpResponseRedirect('/homepage/')
 
 def lstmpredictresultforfile(request):
     if request.method == 'POST':
@@ -399,42 +406,46 @@ def lstmpredictresultforfile(request):
             fs.save('./static/media/File', UploadFile)
 
     File_df = pd.read_csv('./static/media/File', sep=',', header=0, encoding='utf-8')
-    icustay_id = File_df.groupby(File_df.index // 6)['icustay_id'].nth(0).tolist()
-    Origin_File_df = File_df.copy()
-    HandleMissingVal(File_df)
-    test_norm = normalize(File_df.drop(columns=['icustay_id']))
-    test_norm = test_norm.fillna(-1)
-    X_test = buildTrain(test_norm, 1, 1, 24)
+    try:
+        icustay_id = File_df.groupby(File_df.index // 6)['icustay_id'].nth(0).tolist()
+        Origin_File_df = File_df.copy()
+        HandleMissingVal(File_df)
+        test_norm = normalize(File_df.drop(columns=['icustay_id']))
+        test_norm = test_norm.fillna(-1)
+        X_test = buildTrain(test_norm, 1, 1, 24)
 
 
-    lstm_model = load_model('./static/rnn_test_notGPU.h5',custom_objects=None, compile=False)
+        lstm_model = load_model('./static/rnn_test_notGPU.h5',custom_objects=None, compile=False)
 
-    Y_test = lstm_model.predict(X_test)
-    Y = []
-    for i in range(0, Y_test.shape[0]):
-        if (Y_test[i][5][0] > 0.5):
-            Y.append(1)
-        else:
-            Y.append(0)
+        Y_test = lstm_model.predict(X_test)
+        Y = []
+        for i in range(0, Y_test.shape[0]):
+            if (Y_test[i][5][0] > 0.5):
+                Y.append(1)
+            else:
+                Y.append(0)
 
-    res = PrepareOutput(Origin_File_df, Y)
-    pageNo = np.arange(1, len(Y) + 1).tolist()
-    temp = np.array([Y, icustay_id, pageNo])
-    ViewTable = []
-    for i in range(0, temp.shape[1]):
-        ViewTable.append(temp[:, i].tolist())
-    ViewTable = list(chunks(ViewTable, 4))
+        res = PrepareOutput(Origin_File_df, Y)
+        pageNo = np.arange(1, len(Y) + 1).tolist()
+        temp = np.array([Y, icustay_id, pageNo])
+        ViewTable = []
+        for i in range(0, temp.shape[1]):
+            ViewTable.append(temp[:, i].tolist())
+        ViewTable = list(chunks(ViewTable, 4))
 
 
-    paginator = Paginator(res, 1)
-    page = request.GET.get('page')
-    contacts = paginator.get_page(page)
+        paginator = Paginator(res, 1)
+        page = request.GET.get('page')
+        contacts = paginator.get_page(page)
 
-    context = {
-        'contacts': contacts,
-        'all': Y,
-        'ViewTable': ViewTable,
-    }
+        context = {
+            'contacts': contacts,
+            'all': Y,
+            'ViewTable': ViewTable,
+        }
 
-    return render(request, "PredictResultForFile.html", context)
+        return render(request, "PredictResultForFile.html", context)
+    except:
+        messages.success(request, "檔案格式有誤，請重新上傳檔案")
+        return HttpResponseRedirect('/homepage/')
 

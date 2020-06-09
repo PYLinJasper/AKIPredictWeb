@@ -9,6 +9,13 @@
 		<noscript><link rel="stylesheet" type="text/css" href="/static/assets/css/noscript.css" /></noscript>
 	</head>
     <body class="is-preload">
+        {% if messages %}
+            <script>
+                {% for msg in messages %}
+                    alert('{{ msg.message }}');
+                {% endfor %}
+            </script>
+        {% endif %}
         <div id="wrapper" style="width: 100%;">
             <header id="header">
                 <div class="logo" style="background-color: transparent;">
@@ -101,7 +108,8 @@
 {#                    <span class="image main"><img src="/static/images/pic02.jpg" alt="" /></span>#}
                     <h3>Input Feature Introduction</h3>
                     <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本網頁提供兩種預測方式，其一為單位病人資料預測，透過填入&nbsp;Single Patient&nbsp;表單的方式，在送出表單後自動呈現預測結果，
-                        其二為以檔案輸入的方式，透過&nbsp;csv&nbsp;檔可一次預測多個病人，惟輸入之csv檔其欄位名稱以及時序性安排須遵照我們所提供的順序才能準確預測。</p>
+                        其二為以檔案輸入的方式，透過&nbsp;csv&nbsp;檔可一次預測多個病人，惟輸入之csv檔其欄位名稱以及時序性安排(每位病人有6個時段的資料，由上至下
+                        ，每增加一列代表一個新的時段) 須遵照我們所提供的順序才能準確預測。</p>
                     <details>
                         <summary>欄位順序與詳細介紹</summary>
                     <table class="content-table" id="datatable" border="1" style="width: 100%;">

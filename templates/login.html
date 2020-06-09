@@ -17,7 +17,13 @@
             window.location.href='/register/'
         }
     </script>
-
+    {% if messages %}
+        <script>
+            {% for msg in messages %}
+                alert('{{ msg.message }}');
+            {% endfor %}
+        </script>
+    {% endif %}
 
     <div id="wrapper" style="justify-content: center;align-items: center;">
 

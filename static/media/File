@@ -1,4 +1,4 @@
-icustay_id,age,weight,gender,creatinine,intake,urine,pH,Hct,BUN,Na,K,TP,systolicBP,meanBP,MSI,eGFR
+icustay_id,age,weight,gender,creatinine,intakeds,urine,pH,Hct,BUN,Na,K,TP,systolicBP,meanBP,MSI,eGFR
 200006,54.0723,82.4,1,,0,0,,,,,,,,,,
 200006,54.0723,82.4,1,,0,0,,,,,,,,,,
 200006,54.0723,82.4,1,1.1,0,0,,35.9,13,135,4.2,,,,,75.66471483

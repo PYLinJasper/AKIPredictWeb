@@ -30,7 +30,6 @@ urlpatterns = [
     re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATICFILES_DIRS}),
     path('admin/', admin.site.urls),
     path('', views.startpage),
-    path('test/', views.testunflod),
     path('login/', views.login),
     path('logout/', views.logout),
     path('register/', views.register),
