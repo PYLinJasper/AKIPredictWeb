@@ -8,3 +8,22 @@
 - Output Data:
     - MIMIC_LSTM_Input.csv
     - MIMIC_Xgboost_Input.csv
+## 網頁
+- 登入/註冊
+![](https://i.imgur.com/hp7lOok.png)
+- 首頁
+![](https://i.imgur.com/As0wcUR.png)
+- 簡介
+![](https://i.imgur.com/iiBZlac.png)
+- 使用資料庫簡介
+![](https://i.imgur.com/MUL6WjQ.png)
+- 模型簡介
+![](https://i.imgur.com/OReu7nO.png)
+- 輸入資料方式
+![](https://i.imgur.com/fEPXNAO.png)
+- 手動輸入
+![](https://i.imgur.com/FS89Ev9.png)
+- 檔案輸入
+![](https://i.imgur.com/aLkvZUw.png)
+- 預測結果
+![](https://i.imgur.com/FTcXB9j.png)
