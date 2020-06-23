@@ -1,4 +1,4 @@
-# AKI
+# AKI Project
 ## MIMIC_Preprocessing.py
 - 這份code是用來處理MIMIC的資料集，包括從已建好的資料庫中抓不同feature的資料、處理缺失值、處理LSTM及Xgboost模型的input資料的格式
 - 參數設定:
