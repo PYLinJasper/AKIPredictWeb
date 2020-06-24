@@ -8,6 +8,13 @@
 - Output Data:
     - MIMIC_LSTM_Input.csv
     - MIMIC_Xgboost_Input.csv
+## AKIHelper_LSTM_model
+該檔案為訓練LSTM模型的程式碼以及分析模型成效，程式語言為Python，編譯環境為Colab
+- GRUModel: LSTM架構模型
+- 分析方式包含
+    - ROC Curve
+    - loss隨epoch的分布圖
+    - Threshold與Accuracy間的分布圖
 ## 網頁
 - 登入/註冊
 ![](https://i.imgur.com/hp7lOok.png)
