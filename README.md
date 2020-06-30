@@ -1,6 +1,6 @@
 # AKI Project
 ## 資料前處理
-- 在`code/MIMIC_Preprocessing.py`中的這份程式碼是用來處理MIMIC的資料集，包括從已建好的資料庫中抓不同feature的資料、處理缺失值、處理LSTM及Xgboost模型的input資料格式
+- 在`code/MIMIC_Preprocessing.py`中的這份程式碼是用來處理MIMIC的資料集，包括從已建好的資料庫中抓不同feature的資料、處理缺失值、處理LSTM及Xgboost模型的input資料格式。
 - 參數設定:
     1. 設定要連接的資料庫:必須設定這五項參數:host, database, user, password, port。
     2. 抓取資料的時間範圍:可更改Main function中的TimeOffset的值，24代表抓取24小時的資料。
@@ -35,7 +35,7 @@
             - creatinine:![](https://i.imgur.com/5fY1uHD.png)
             - urine:![](https://i.imgur.com/NJ4B834.png)
             - BUM:![](https://i.imgur.com/xvp18Wa.png)
-        3. 缺值的多寡可能也有影響        
+        3. 缺值的多寡可能也有影響。
 
 ## AKIHelper_LSTM_model
 該檔案為訓練LSTM模型的程式碼以及分析模型成效，程式語言為Python，編譯環境為Colab
