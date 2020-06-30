@@ -29,6 +29,13 @@
         - confusion matrix:
         
         ![](https://i.imgur.com/F6xmsQK.png)
+    - 分析:
+        1. sensitivity非常低，機率跟亂猜一樣。
+        2. 兩個資料集的分布差異(舉幾個feature為例):
+            - creatinine:![](https://i.imgur.com/5fY1uHD.png)
+            - urine:![](https://i.imgur.com/NJ4B834.png)
+            - BUM:![](https://i.imgur.com/xvp18Wa.png)
+        3. 缺值的多寡可能也有影響        
 
 ## AKIHelper_LSTM_model
 該檔案為訓練LSTM模型的程式碼以及分析模型成效，程式語言為Python，編譯環境為Colab
