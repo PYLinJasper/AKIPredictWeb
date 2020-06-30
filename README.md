@@ -8,6 +8,26 @@
 - Output Data:
     - MIMIC_LSTM_Input.csv
     - MIMIC_Xgboost_Input.csv
+
+## Xgboost_model
+- 在`code/Xgboost_model.ipynb`中的這份程式碼是用Xgboost模型來預測病患有無AKI，主要會有各項feature的重要性、預測正確率，以及使用外部資料做validation的結果。
+- feature重要性:
+![](https://i.imgur.com/nRNgy8O.png)
+- 預測結果(test_size設0.25):
+    - acc:0.85
+    - sensitivity:0.85
+    - specificity:0.85
+    - confusion matrix:
+    ![](https://i.imgur.com/G1Ax1qa.png)
+- external validation:
+    - 使用eICU資料做validation
+    - 結果:
+        - acc:0.66
+        - sensitivity:0.5
+        - specificity:0.82
+        - confusion matrix:
+        ![](https://i.imgur.com/F6xmsQK.png)
+
 ## AKIHelper_LSTM_model
 該檔案為訓練LSTM模型的程式碼以及分析模型成效，程式語言為Python，編譯環境為Colab
 - GRUModel: LSTM架構模型
