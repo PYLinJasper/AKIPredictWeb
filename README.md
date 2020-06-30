@@ -24,7 +24,9 @@
         - acc:0.66
         - sensitivity:0.5
         - specificity:0.82
-        - confusion matrix:![](https://i.imgur.com/F6xmsQK.png)
+        - confusion matrix:
+        
+        ![](https://i.imgur.com/F6xmsQK.png)
 
 ## AKIHelper_LSTM_model
 該檔案為訓練LSTM模型的程式碼以及分析模型成效，程式語言為Python，編譯環境為Colab
