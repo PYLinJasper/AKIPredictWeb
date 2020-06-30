@@ -17,7 +17,9 @@
     - acc:0.85
     - sensitivity:0.85
     - specificity:0.85
-    - confusion matrix:![](https://i.imgur.com/G1Ax1qa.png)
+    - confusion matrix:
+    
+    ![](https://i.imgur.com/G1Ax1qa.png)
 - external validation:
     - 使用eICU資料做validation
     - 結果:
