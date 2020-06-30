@@ -10,7 +10,7 @@
     - MIMIC_Xgboost_Input.csv
 
 ## Xgboost_model
-- 在`code/Xgboost_model.ipynb`中的這份程式碼是用Xgboost模型來預測病患有無AKI，主要會有各項feature的重要性、預測正確率，以及使用外部資料做validation的結果。
+- 在`code/Xgboost_model.ipynb`中的這份程式碼是用Xgboost模型來預測病患有無AKI，主要會有各項feature的重要性、預測結果，以及使用外部資料做validation的結果。
 - feature重要性:
 ![](https://i.imgur.com/nRNgy8O.png)
 - 預測結果(test_size設0.25):
