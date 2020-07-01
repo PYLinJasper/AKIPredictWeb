@@ -34,7 +34,7 @@
         2. 兩個資料集的分布差異(舉幾個feature為例):
             - creatinine:![](https://i.imgur.com/5fY1uHD.png)
             - urine:![](https://i.imgur.com/NJ4B834.png)
-            - BUM:![](https://i.imgur.com/xvp18Wa.png)
+            - BUN:![](https://i.imgur.com/xvp18Wa.png)
         3. 缺值的多寡可能也有影響。
 
 ## AKIHelper_LSTM_model
