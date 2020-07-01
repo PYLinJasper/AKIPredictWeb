@@ -37,13 +37,33 @@
             - BUN:![](https://i.imgur.com/xvp18Wa.png)
         3. 缺值的多寡可能也有影響。
 
-## AKIHelper_LSTM_model
+## AKI Helper
+### AKIHelper_LSTM_model
 該檔案為訓練LSTM模型的程式碼以及分析模型成效，程式語言為Python，編譯環境為Colab
+- 資料前處理
+    - 將資料每六筆(row)集合成一個list，丟入模型中訓練
+    - Input Shape為 [(None, 6, 16)]
+        - 表6個時段，16個特徵
 - GRUModel: LSTM架構模型
-- 分析方式包含
+- 分析方式
     - ROC Curve
     - loss隨epoch的分布圖
     - Threshold與Accuracy間的分布圖
+- ACC計算方式
+    - 將6個時段預測出來的機率平均，大於Threshold判為1，反之則0，再與正確答案做比對得到Accuracy
+- 成效
+
+| 預測方式 | Sensitivity | Specificity | ACC |
+| -------- | -------- | -------- | --------- |
+| 以6個時段平均計算|0.69|0.815|0.76|
+| 以最後一個時段計算|0.754| 0.874|==0.824==|
+| 拿最後一個時段機率|0.79|0.8|0.79|
+| 單看斜率| 0.79|0.65|0.73|
+| 斜率+6個時段任一機率>0.8設有AKI;<0.2設無AKI|0.84|0.61|0.74|
+| 斜率+6個時段任一機率>0.85設有AKI;<0.15設無AKI|0.82|0.63|0.74|
+| 斜率+6個時段任一機率>0.9設有AKI;<0.1設無AKI|0.81|0.64|0.74|
+
+![](https://i.imgur.com/U4P0rUK.png)
 ## 網頁
 - 登入/註冊
 ![](https://i.imgur.com/hp7lOok.png)
