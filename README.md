@@ -63,7 +63,7 @@
 | 斜率+6個時段任一機率>0.9設有AKI;<0.1設無AKI|0.81|0.64|0.74|
 
 ![](https://i.imgur.com/U4P0rUK.png)
-## 網頁
+## 網頁(http://140.116.247.169:8217/)
 - 登入/註冊
 ![](https://i.imgur.com/hp7lOok.png)
 - 首頁
