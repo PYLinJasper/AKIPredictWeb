@@ -37,8 +37,7 @@
             - BUN:![](https://i.imgur.com/xvp18Wa.png)
         3. 缺值的多寡可能也有影響。
 
-## AKI Helper
-### AKIHelper_LSTM_model
+## AKIHelper_LSTM_model
 該檔案為訓練LSTM模型的程式碼以及分析模型成效，程式語言為Python，編譯環境為Colab
 - 資料前處理
     - 將資料每六筆(row)集合成一個list，丟入模型中訓練
