@@ -339,8 +339,8 @@ def GenerateRes(sqlstr,sqlstr_Time,originInICU,fill_type):
 
 
 if __name__== "__main__":
-    conn = psycopg2.connect(host="140.116.247.169",database="mimic"
-    , user="postgres", password="ThisIsIIR110Password",port="5432")
+    conn = psycopg2.connect(host="",database=""
+    , user="", password="",port="")
     cur = conn.cursor()
 
 
