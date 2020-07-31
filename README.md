@@ -72,13 +72,13 @@
 ![](https://i.imgur.com/iiBZlac.png)
 - 使用資料庫簡介
 ![](https://i.imgur.com/MUL6WjQ.png)
-- 模型簡介
+- 模型簡介（預測檔案範例提供下載）
 ![](https://i.imgur.com/OReu7nO.png)
 - 輸入資料方式
 ![](https://i.imgur.com/fEPXNAO.png)
-- 手動輸入
+- 手動輸入（分別展開六個時間區間填入資料）
 ![](https://i.imgur.com/FS89Ev9.png)
-- 檔案輸入
+- 檔案輸入（在模型介紹有提供範例格式）
 ![](https://i.imgur.com/aLkvZUw.png)
 - 預測結果
 ![](https://i.imgur.com/FTcXB9j.png)
