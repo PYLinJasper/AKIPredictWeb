@@ -1,4 +1,5 @@
 # AKI Project
+- 目標是為能達成隨時間變化進行預測的模型，所以最終採用Long Short Term Memory 這系列有時間（序）性概念的模型，而先使用XGBoost模型訓練則是為了使用其能力--篩選特徵重要性，進而選出對AKI判斷影響顯著的特徵進行下一步訓練，同時也期望能降低所需要的特徵數量，提供未來預測使用時的方便性。
 ## 資料前處理
 - 在`code/MIMIC_Preprocessing.py`中的這份程式碼是用來處理MIMIC的資料集，包括從已建好的資料庫中抓不同feature的資料、處理缺失值、處理LSTM及Xgboost模型的input資料格式。
 - 參數設定:
@@ -36,9 +37,10 @@
             - urine:![](https://i.imgur.com/NJ4B834.png)
             - BUN:![](https://i.imgur.com/xvp18Wa.png)
         3. 缺值的多寡可能也有影響。
+        4. 因為醫院來源不同，其AKI之判斷方法、量測數值精度等皆會有差異。
 
 ## AKIHelper_LSTM_model
-該檔案為訓練LSTM模型的程式碼以及分析模型成效，程式語言為Python，編譯環境為Colab
+該檔案為訓練LSTM模型的程式碼以及分析模型成效，程式語言為Python，編譯環境為Google提供之Colab，使用GPU進行訓練。
 - 資料前處理
     - 將資料每六筆(row)集合成一個list，丟入模型中訓練
     - Input Shape為 [(None, 6, 16)]
