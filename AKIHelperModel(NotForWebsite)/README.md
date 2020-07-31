@@ -65,22 +65,3 @@
 | 斜率+6個時段任一機率>0.9設有AKI;<0.1設無AKI|0.81|0.64|0.74|
 
 ![](https://i.imgur.com/U4P0rUK.png)
-## 網頁(http://140.116.247.169:8217/)
-- 登入/註冊
-![](https://i.imgur.com/hp7lOok.png)
-- 首頁
-![](https://i.imgur.com/As0wcUR.png)
-- 簡介
-![](https://i.imgur.com/iiBZlac.png)
-- 使用資料庫簡介
-![](https://i.imgur.com/MUL6WjQ.png)
-- 模型簡介（預測檔案範例提供下載）
-![](https://i.imgur.com/OReu7nO.png)
-- 輸入資料方式
-![](https://i.imgur.com/fEPXNAO.png)
-- 手動輸入（分別展開六個時間區間填入資料）
-![](https://i.imgur.com/FS89Ev9.png)
-- 檔案輸入（在模型介紹有提供範例格式）
-![](https://i.imgur.com/aLkvZUw.png)
-- 預測結果
-![](https://i.imgur.com/FTcXB9j.png)
