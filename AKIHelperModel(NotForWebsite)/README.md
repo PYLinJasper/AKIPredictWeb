@@ -1,7 +1,7 @@
 # AKI Project
 - 目標是為能達成隨時間變化進行預測的模型，所以最終採用Long Short Term Memory 這系列有時間（序）性概念的模型，而先使用XGBoost模型訓練則是為了使用其能力--篩選特徵重要性，進而選出對AKI判斷影響顯著的特徵進行下一步訓練，同時也期望能降低所需要的特徵數量，提供未來預測使用時的方便性。
 ## 資料前處理
-- 在`code/MIMIC_Preprocessing.py`中的這份程式碼是用來處理MIMIC的資料集，包括從已建好的資料庫中抓不同feature的資料、處理缺失值、處理LSTM及Xgboost模型的input資料格式。
+- 在`MIMIC/code/MIMIC_Preprocessing.py`中的這份程式碼是用來處理MIMIC的資料集，包括從已建好的資料庫中抓不同feature的資料、處理缺失值、處理LSTM及Xgboost模型的input資料格式。
 - 參數設定:
     1. 設定要連接的資料庫:必須設定這五項參數:host, database, user, password, port。
     2. 抓取資料的時間範圍:可更改Main function中的TimeOffset的值，24代表抓取24小時的資料。
@@ -11,7 +11,7 @@
     - MIMIC_Xgboost_Input.csv
 
 ## Xgboost_model
-- 在`code/Xgboost_model.ipynb`中的這份程式碼是用Xgboost模型來預測病患有無AKI，主要會有各項feature的重要性、預測結果，以及使用外部資料做validation的結果。
+- 在`MIMIC/code/Xgboost_model.ipynb`中的這份程式碼是用Xgboost模型來預測病患有無AKI，主要會有各項feature的重要性、預測結果，以及使用外部資料做validation的結果。
 - feature重要性:
 ![](https://i.imgur.com/nRNgy8O.png)
 - 預測結果(test_size設0.25):
